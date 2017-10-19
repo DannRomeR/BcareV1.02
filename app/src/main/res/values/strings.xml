@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">BcareV1.0</string>
+    <string name="title_activity_fast2">Fast2</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- Slide 1-->
+    <string name="slide_1_title">FACE (cara)</string>
+    <string name="slide_1_desc">¿Un lado de la cara se cae?, Trate de sonreir y observe sí su cara es simétrica. </string>
+
+    <!-- Slide 2-->
+    <string name="slide_2_title">ARMS (brazos)</string>
+    <string name="slide_2_desc">¿Siente algún brazo débil o entumecido?, Levante ambos brazos y observe sí alguno de los brazos cae. </string>
+
+
+    <!-- Slide 3-->
+    <string name="slide_3_title">SPEECH (habla)</string>
+    <string name="slide_3_desc">¿Siente alguna dificultad para hablar?, Trate de repetir una sentencia u oración</string>
+
+    <!-- Slide 4-->
+    <string name="slide_4_title">TIME (tiempo)</string>
+    <string name="slide_4_desc">Sí muestra alguno de los síntomas anteriores, incluso sí los síntomas desaparece muy rápído, ¡Llame a una ambulancia! </string>
+    <string name="my_preference" />
+    <string name="my_preference_key" />
+
+</resources>

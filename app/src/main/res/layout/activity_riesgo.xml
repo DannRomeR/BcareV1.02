@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.romeg.bcarev10.Riesgo"
+    android:background="@drawable/b4">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tituloExp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calculadora de Riesgo"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="#ffff"
+                android:gravity="center"
+                android:layout_margin="20dp"
+                />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Género"
+                android:textColor="#ffff"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                />
+
+            <RadioGroup android:layout_height="wrap_content" android:id="@+id/gender_group"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbfemenino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Femenino"
+                        android:textColor="#ffff" />
+
+                    <RadioButton
+                        android:id="@+id/rbmasculino"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="onClickChk"
+                        android:text="Masculino"
+                        android:textColor="#ffff" />
+
+                </LinearLayout>
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/edtedad"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Edad"
+                android:paddingLeft="10dp"
+                android:textColorHint="#ffff"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/borde"
+                android:textColor="#ffff"
+                />
+
+
+            <EditText
+                android:id="@+id/edtcolesterol1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="number"
+                android:text=""
+                android:hint="Colesterol Total"
+                android:paddingLeft="10dp"
+                android:textColorHint="#ffff"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/borde"
+                android:textColor="#ffff"/>
+
+            <EditText
+                android:id="@+id/edtcolesterolHDL"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="number"
+                android:text=""
+                android:hint="Colesterol HDL"
+                android:paddingLeft="10dp"
+                android:textColorHint="#ffff"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/borde"
+                android:textColor="#ffff"/>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fumador"
+                android:textColor="#ffff"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"/>
+
+            <Spinner
+                android:id="@+id/spFumador"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColorHint="#ffff"
+                android:hint="-Seleccione-"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/borde"
+                android:textColor="#ffff"/>
+
+
+            <EditText
+                android:id="@+id/edtpresion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="number"
+                android:text=""
+                android:textColorHint="#ffff"
+                android:hint="Presión"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/borde"
+                android:textColor="#ffff"/>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Diabetes"
+                android:textColor="#ffff"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"/>
+
+
+            <Spinner
+                android:id="@+id/spDiabetes"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="-Seleccione-"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/borde"
+                android:textColor="#ffff"/>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="calcular Riesgo"
+                android:onClick="calcular"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/borde"
+                android:textColor="#ffff"
+                />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

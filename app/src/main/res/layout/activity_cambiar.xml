@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/b4"
+    tools:context="com.example.romeg.bcarev10.Cambiar">
+
+    <ImageView
+        android:id="@+id/imgcambiar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/userunlocked"
+        />
+
+    <TextView
+        android:id="@+id/tvcambiar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cambiar Contraseña"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="#ffff"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:layout_below="@+id/imgcambiar"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/tvcambiar">
+
+        <EditText
+            android:id="@+id/passw1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint=" Contraseña"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:textColorHint="#ffff"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/borde"
+            android:textColor="#ffff"/>
+        <EditText
+            android:id="@+id/passw2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint=" Nueva Contraseña"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:textColorHint="#ffff"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/borde"
+            android:textColor="#ffff"/>
+
+        <Button
+            android:id="@+id/btncambiar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/borde"
+            android:onClick="onCambiarClick"
+            android:text="Cambiar"
+            android:textColor="#ffff" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

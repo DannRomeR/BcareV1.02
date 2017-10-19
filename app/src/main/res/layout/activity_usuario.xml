@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/b4"
+    tools:context="com.example.romeg.bcarev10.Usuario">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/bie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Bienvenido"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="#ffff"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/bieuser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text=""
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="#ffff"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+    <TextView
+        android:id="@+id/tituloMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Menú Principal"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="#ffff"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:id="@+id/firstr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tituloMenu"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btndatospersonalesmenu"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/info2"
+            android:onClick="onMenuClick" />
+        <Button
+            android:id="@+id/btnfastmenu"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="30dp"
+            android:onClick="loadSlides"
+            android:background="@drawable/stethoscope"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/secondr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/firstr"
+        android:layout_marginBottom="20dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/DatosMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:text="Datos Personales"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"
+
+            />
+        <TextView
+            android:id="@+id/FastMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="10dp"
+            android:text="F.A.S.T"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/thirdr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/secondr"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnexpedientemenu"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/report"
+            android:onClick="onMenuClick" />
+
+        <Button
+            android:id="@+id/btnemergenciamenu"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/ambulance"
+            android:onClick="onMenuClick" />
+</LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/forthr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/thirdr"
+        android:layout_marginBottom="20dp"
+        android:gravity="center">
+
+    <TextView
+        android:id="@+id/ExpMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="10dp"
+        android:text="Expediente"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#ffff"
+
+        />
+    <TextView
+        android:id="@+id/EmerMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="10dp"
+        android:text="Emergencia"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#ffff"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fifthr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/forthr"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnvincularmenu"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/smartwatch"
+            android:onClick="onMenuClick" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sixth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/fifthr"
+        android:layout_marginBottom="20dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/VincularMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="10dp"
+            android:text="Vincular"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"
+            />
+
+    </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
