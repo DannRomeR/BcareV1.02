@@ -1,5 +1,6 @@
 package com.example.romeg.bcarev10;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +10,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Riesgo extends AppCompatActivity {
-
+    DBHelper helper = new DBHelper(this);
     public RadioButton jrbfemenino,jrbmasculino;
     public Spinner jspfumador,jspdiabetes;
+    TextView edadCal, generCal, usercalcul;
 
     public EditText jgenero,jedad,jcolesterolt,jcolesterolh,jpresion;
 
@@ -23,10 +26,22 @@ public class Riesgo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riesgo);
 
-        jrbfemenino=(RadioButton)findViewById(R.id.rbfemenino) ;
-        jrbmasculino=(RadioButton)findViewById(R.id.rbmasculino) ;
+        String usern = getIntent().getStringExtra("Username");
+        String name = getIntent().getStringExtra("Name");
+        String edad = getIntent().getStringExtra("Edad");
+        String gene = getIntent().getStringExtra("Gen");
+
+        usercalcul = (TextView) findViewById(R.id.UserCalcu);
+        usercalcul.setText(usern);
+        edadCal = (TextView) findViewById(R.id.textEdad);
+        edadCal.setText(edad);
+        generCal = (TextView) findViewById(R.id.textGenero);
+        generCal.setText(gene);
+
+        //jrbfemenino=(RadioButton)findViewById(R.id.rbfemenino) ;
+        //jrbmasculino=(RadioButton)findViewById(R.id.rbmasculino) ;
         //jgenero=(EditText)findViewById(R.id.edtgenero);
-        jedad=(EditText)findViewById(R.id.edtedad);
+        edadCal=(TextView)findViewById(R.id.textEdad);
         jcolesterolt=(EditText)findViewById(R.id.edtcolesterol1);
         jcolesterolh=(EditText)findViewById(R.id.edtcolesterolHDL);
         jspfumador=(Spinner) findViewById(R.id.spFumador);
@@ -41,28 +56,29 @@ public class Riesgo extends AppCompatActivity {
 
     public void calcular(View v){
         int riesgo,porcentaje=0;
-        //String gen=jgenero.getText().toString();
+        String geneC = generCal.getText().toString();
 
+        String str = usercalcul.getText().toString();
+        String gend = helper.searchgen(str);
 
-
-
-        if(jrbmasculino.isChecked()) {
-
+        if(gend.equals(geneC))//(genC=="Masculino")
+        {
             riesgo=calcularHombre();
             porcentaje=calcularPorcentajeHombre(riesgo);
             Toast.makeText(this, "Sexo: Masculino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
 
-        }else if(jrbfemenino.isChecked()){
-            //jcbmasculino.setEnabled(false);
+        }else if (gend.equals(geneC))
+        {
             riesgo=calcularMujer();
             porcentaje=calcularPorcentajeMujer(riesgo);
             Toast.makeText(this, "Sexo: Femenino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
-
         }
+
     }
     public int calcularHombre(){
+        String edadC = edadCal.getText().toString();
         int riesgo=0;
-        int edad= Integer.parseInt(jedad.getText().toString());
+        int edad= Integer.parseInt(edadC);
         if (edad<=35){
             riesgo= -1;
         }else if(edad>=35&&edad<40){
@@ -152,8 +168,9 @@ public class Riesgo extends AppCompatActivity {
 
 
     public int calcularMujer(){
+        String edadC = edadCal.getText().toString();
         int riesgo=0;
-        int edad= Integer.parseInt(jedad.getText().toString());
+        int edad= Integer.parseInt(edadC);
         if (edad<=35){
             riesgo=-9;
         }else if(edad>=35&&edad<40){
@@ -323,10 +340,30 @@ public class Riesgo extends AppCompatActivity {
         return porcentaje;
 
     }
+    public void onBackPressed()
+    {
+        String str = usercalcul.getText().toString();
+        String userna = helper.searchPass(str);
+        String named = helper.searchname(str);
+        String edadd = helper.searchedad(str);
+        String emaild = helper.searchemail(str);
+        String teld = helper.searchtel(str);
+        String cont1d = helper.searchcont1(str);
+        String cont2d = helper.searchcont2(str);
+        String gend = helper.searchgen(str);
 
-    private boolean flagmale = false;
-    private boolean flagfemale = false;
-
+        Intent i = new Intent(Riesgo.this, Expediente.class);
+        i.putExtra("Username", str);
+        i.putExtra("Name", named);
+        i.putExtra("Edad", edadd);
+        i.putExtra("Email", emaild);
+        i.putExtra("Tel", teld);
+        i.putExtra("Cont1", cont1d);
+        i.putExtra("Cont2", cont2d);
+        i.putExtra("Gen", gend);
+        startActivity(i);
+        finish();
+    }
 
 
 

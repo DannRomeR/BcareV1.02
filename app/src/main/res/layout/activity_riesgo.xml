@@ -18,6 +18,17 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/UserCalcu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calculadora de Riesgo"
+                android:textSize="10dp"
+                android:textColor="#ffff"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:visibility="invisible"
+                />
+            <TextView
                 android:id="@+id/tituloExp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,7 +44,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Género"
+                android:text="Género:"
                 android:textColor="#ffff"
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
@@ -41,50 +52,40 @@
                 android:layout_marginRight="30dp"
                 />
 
-            <RadioGroup android:layout_height="wrap_content" android:id="@+id/gender_group"
+            <TextView
+                android:id="@+id/textGenero"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rbfemenino"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Femenino"
-                        android:textColor="#ffff" />
-
-                    <RadioButton
-                        android:id="@+id/rbmasculino"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="onClickChk"
-                        android:text="Masculino"
-                        android:textColor="#ffff" />
-
-                </LinearLayout>
-
-            </RadioGroup>
-
-            <EditText
-                android:id="@+id/edtedad"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:ems="10"
-                android:inputType="number"
-                android:hint="Edad"
-                android:paddingLeft="10dp"
-                android:textColorHint="#ffff"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/borde"
+                android:layout_height="wrap_content"
+                android:text=""
                 android:textColor="#ffff"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edad:"
+                android:textColor="#ffff"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                />
+            <TextView
+                android:id="@+id/textEdad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#ffff"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 />
 
 
