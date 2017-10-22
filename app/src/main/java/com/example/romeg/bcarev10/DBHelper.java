@@ -112,7 +112,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return a;
     }
 
-
     public String searchname(String uname)
     {
         db = this.getReadableDatabase();
@@ -273,6 +272,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return b;
     }
+
 
 
     public String actualizarData(String use, String uname,String name, int edad, String email, int tel, int cont1, int cont2,String gener)

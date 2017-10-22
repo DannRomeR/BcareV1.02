@@ -52,7 +52,6 @@
             android:textStyle="bold"
             android:textColor="#ffff"
             android:gravity="center"
-            android:layout_margin="5dp"
             android:visibility="invisible"
             />
 

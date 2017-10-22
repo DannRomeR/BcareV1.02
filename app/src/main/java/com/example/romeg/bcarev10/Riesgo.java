@@ -15,8 +15,8 @@ import android.widget.Toast;
 
 public class Riesgo extends AppCompatActivity {
     DBHelper helper = new DBHelper(this);
-    public RadioButton jrbfemenino,jrbmasculino;
-    public Spinner jspfumador,jspdiabetes;
+
+    public Spinner jspfumador,jspdiabetes, spcolesterolTot, spcolesterolHDL, spPresion;
     TextView edadCal, generCal, usercalcul;
 
     public EditText jgenero,jedad,jcolesterolt,jcolesterolh,jpresion;
@@ -30,6 +30,10 @@ public class Riesgo extends AppCompatActivity {
         String name = getIntent().getStringExtra("Name");
         String edad = getIntent().getStringExtra("Edad");
         String gene = getIntent().getStringExtra("Gen");
+        String[] colesteroTot = {"-seleccione-","<160","160-199","200-239","240-279",">=280"};
+        String[] colesterolHDL = {"-seleccione-",">=60","50-59","40-49","30-39","<30"};
+        String[] BPsistolica = {"-seleccione-","<120","120-129","130-139","140-159",">=160"};
+
 
         usercalcul = (TextView) findViewById(R.id.UserCalcu);
         usercalcul.setText(usern);
@@ -37,19 +41,20 @@ public class Riesgo extends AppCompatActivity {
         edadCal.setText(edad);
         generCal = (TextView) findViewById(R.id.textGenero);
         generCal.setText(gene);
-
-        //jrbfemenino=(RadioButton)findViewById(R.id.rbfemenino) ;
-        //jrbmasculino=(RadioButton)findViewById(R.id.rbmasculino) ;
-        //jgenero=(EditText)findViewById(R.id.edtgenero);
+        spcolesterolTot = (Spinner) findViewById(R.id.spcolesterol1);
+        spcolesterolTot.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colesteroTot));
+        spcolesterolHDL = (Spinner) findViewById(R.id.spcolesterolHDL);
+        spcolesterolHDL.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colesterolHDL));
+        spPresion = (Spinner) findViewById(R.id.sppresion);
+        spPresion.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, BPsistolica));
         edadCal=(TextView)findViewById(R.id.textEdad);
-        jcolesterolt=(EditText)findViewById(R.id.edtcolesterol1);
-        jcolesterolh=(EditText)findViewById(R.id.edtcolesterolHDL);
+
         jspfumador=(Spinner) findViewById(R.id.spFumador);
-        String[] valoresfumador = {"si","no"};
+        String[] valoresfumador = {"-seleccione-","sí","no"};
         jspfumador.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, valoresfumador));
-        jpresion=(EditText)findViewById(R.id.edtpresion);
+
         jspdiabetes=(Spinner) findViewById(R.id.spDiabetes);
-        String[] valoresDiabetes = {"si","no"};
+        String[] valoresDiabetes = {"-seleccione-","sí","no"};
         jspdiabetes.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, valoresDiabetes));
     }
 
@@ -98,55 +103,68 @@ public class Riesgo extends AppCompatActivity {
         }else if(edad>70){
             riesgo=7;
         }else{
-            Toast.makeText(this, "Edad no valida", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Edad no valida", Toast.LENGTH_SHORT).show();
         }
 
 
         //********************************COLESTEROL TOTAL*****************************************
-        int colesteroltotal=Integer.parseInt(jcolesterolt.getText().toString());
-        if(colesteroltotal<160){
+        //int colesteroltotal=Integer.parseInt(jcolesterolt.getText().toString());
+        String colesterol = (spcolesterolTot.getSelectedItem().toString());
+        if (colesterol.equals("-seleccione-")) {
+            Toast.makeText(this, "Seleccione un valor de Colesterol Total", Toast.LENGTH_SHORT).show();
+        } else if(colesterol.equals("<160")){
             riesgo=riesgo+(-3);
-        }else if(colesteroltotal>=160&&colesteroltotal<200){
+        }else if(colesterol.equals("160-199")){
             riesgo=riesgo+(0);
-        }else if(colesteroltotal>=200&&colesteroltotal<240){
+        }else if(colesterol.equals("200-239")){
             riesgo=riesgo+(1);
-        }else if(colesteroltotal>=240&&colesteroltotal<280){
+        }else if(colesterol.equals("240-279")){
             riesgo=riesgo+(2);
-        }else if(colesteroltotal>=280) {
+        }else if(colesterol.equals(">=280")) {
             riesgo = riesgo + (3);
         }
 
         //********************************COLESTEROL HDL*****************************************
-        int colesterolHDL=Integer.parseInt(jcolesterolh.getText().toString());
-        if(colesterolHDL<35) {
-            riesgo=riesgo+(2);
-        }else if(colesterolHDL>=35&&colesterolHDL<45){
-            riesgo=riesgo+(1);
-        }else if(colesterolHDL>=45&&colesterolHDL<50){
-            riesgo=riesgo+(0);
-        }else if(colesterolHDL>=50&&colesterolHDL<60){
-            riesgo=riesgo+(0);
-        }else if(colesterolHDL>=60){
-            riesgo=riesgo+(-2);
+        //int colesterolHDL=Integer.parseInt(jcolesterolh.getText().toString());
+        String colesteHDL = (spcolesterolHDL.getSelectedItem().toString());
+        if (colesteHDL.equals("-seleccione-")) {
+            Toast.makeText(this, "Seleccione un valor de Colesterol HDL", Toast.LENGTH_SHORT).show();
         }
+        else if (colesteHDL.equals("<30")){
+            riesgo=riesgo+(5);
+        }else if(colesteHDL.equals("30-39")) { //30
+            riesgo=riesgo+(2);
+        }else if(colesteHDL.equals("40-49")){//colesterolHDL>=35&&colesterolHDL<45){
+            riesgo=riesgo+(1);
+        }else if(colesteHDL.equals("50-59")){//colesterolHDL>=45&&colesterolHDL<50){
+            riesgo=riesgo+(0);
+        }else if(colesteHDL.equals(">=60")){//colesterolHDL>=50&&colesterolHDL<60){
+            riesgo=riesgo+(-2);
+        }//colesterolHDL>=60){
 
         //********************************PRESION SISTOLICA*****************************************
-        int presion=Integer.parseInt(jpresion.getText().toString());
-        if (presion<120){
+        //int presion=Integer.parseInt(jpresion.getText().toString());
+        String presionBP = (spPresion.getSelectedItem().toString());
+        if (presionBP.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un valor de Presión", Toast.LENGTH_SHORT).show();
+        } else if (presionBP.equals("<120")){//presion<120){
             riesgo=riesgo+(0);
-        }else if(presion>=120&& presion<130){
+        }else if(presionBP.equals("120-129")){//presion>=120&& presion<130){
             riesgo=riesgo+(0);
-        }else if(presion>=130&& presion<140){
+        }else if(presionBP.equals("130-139")){//presion>=130&& presion<140){
             riesgo=riesgo+(1);
-        }else if(presion>=140&& presion<160){
+        }else if(presionBP.equals("140-159")){//presion>=140&& presion<160){
             riesgo=riesgo+(2);
-        }else if(presion>=160){
+        }else if(presionBP.equals(">=160")){//presion>=160){
             riesgo=riesgo+3;
         }
 
         //********************************FUMADOR*****************************************
         String fumador=(jspfumador.getSelectedItem().toString());
-        if(fumador.equals("si")){
+        if (fumador.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un campo de Fumador", Toast.LENGTH_SHORT).show();
+        }
+        else if(fumador.equals("si")){
             riesgo=riesgo+(2);
         }else if(fumador.equals("no")){
             riesgo=riesgo+(0);
@@ -154,7 +172,10 @@ public class Riesgo extends AppCompatActivity {
 
         //********************************DIABETES*****************************************
         String diabetes=(jspdiabetes.getSelectedItem().toString());
-        if(diabetes.equals("si")){
+        if (diabetes.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un campo de Medicamento", Toast.LENGTH_SHORT).show();
+        }
+        else if(diabetes.equals("si")){
             riesgo=riesgo+(2);
         }else if(diabetes.equals("no")){
             riesgo=riesgo+(0);
@@ -162,10 +183,6 @@ public class Riesgo extends AppCompatActivity {
 
         return riesgo;
     }
-
-
-
-
 
     public int calcularMujer(){
         String edadC = edadCal.getText().toString();
@@ -190,55 +207,70 @@ public class Riesgo extends AppCompatActivity {
         }else if(edad>=70){
             riesgo=8;
         }else{
-            Toast.makeText(this, "Edad no valida", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Edad no valida", Toast.LENGTH_SHORT).show();
         }
 
 
         //********************************COLESTEROL TOTAL*****************************************
-        int colesteroltotal=Integer.parseInt(jcolesterolt.getText().toString());
-        if(colesteroltotal<160){
+        //int colesteroltotal=Integer.parseInt(jcolesterolt.getText().toString());
+        String colesterol = (spcolesterolTot.getSelectedItem().toString());
+        if (colesterol.equals("-seleccione")){
+            Toast.makeText(this, "Seleccione un valor de Colesterol Total", Toast.LENGTH_SHORT).show();
+        }
+        else if(colesterol.equals("<160")){//colesteroltotal<160){
             riesgo=riesgo+(-2);
-        }else if(colesteroltotal>160&&colesteroltotal<200){
+        }else if(colesterol.equals("160-199")){//colesteroltotal>160&&colesteroltotal<200){
             riesgo=riesgo+(0);
-        }else if(colesteroltotal>200&&colesteroltotal<240){
+        }else if(colesterol.equals("200-239")){//colesteroltotal>200&&colesteroltotal<240){
             riesgo=riesgo+(1);
-        }else if(colesteroltotal>240&&colesteroltotal<280){
+        }else if(colesterol.equals("240-279")){//colesteroltotal>240&&colesteroltotal<280){
             riesgo=riesgo+(1);
-        }else if(colesteroltotal>280) {
+        }else if(colesterol.equals(">=280")){//colesteroltotal>280) {
             riesgo=riesgo+(3);
         }
 
         //********************************COLESTEROL HDL*****************************************
-        int colesterolHDL=Integer.parseInt(jcolesterolh.getText().toString());
-        if(colesterolHDL<35) {
+        //int colesterolHDL=Integer.parseInt(jcolesterolh.getText().toString());
+        String colesteHDL = (spcolesterolHDL.getSelectedItem().toString());
+        if (colesteHDL.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un valor de Colesterol HDL", Toast.LENGTH_SHORT).show();
+        }
+        else if(colesteHDL.equals("<30")){//colesterolHDL<35) {
             riesgo=riesgo+(5);
-        }else if(colesterolHDL>35&&colesterolHDL<45){
+        }else if(colesteHDL.equals("30-39")){//colesterolHDL>35&&colesterolHDL<45){
             riesgo=riesgo+(2);
-        }else if(colesterolHDL>45&&colesterolHDL<50){
+        }else if(colesteHDL.equals("40-49")){//colesterolHDL>45&&colesterolHDL<50){
             riesgo=riesgo+(1);
-        }else if(colesterolHDL>50&&colesterolHDL<60){
+        }else if(colesteHDL.equals("50-59")){//colesterolHDL>50&&colesterolHDL<60){
             riesgo=riesgo+(0);
-        }else if(colesterolHDL>60){
+        }else if(colesteHDL.equals(">=60")){//colesterolHDL>60){
             riesgo=riesgo+(-3);
         }
 
         //********************************PRESION SISTOLICA*****************************************
-        int presion=Integer.parseInt(jpresion.getText().toString());
-        if (presion<120){
+        //int presion=Integer.parseInt(jpresion.getText().toString());
+        String BPpresion = (spPresion.getSelectedItem().toString());
+        if (BPpresion.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un valor de Presión", Toast.LENGTH_SHORT).show();
+        }
+        else if (BPpresion.equals("<120")){//presion<120){
             riesgo=riesgo+(-3);
-        }else if(presion>120&& presion<130){
+        }else if(BPpresion.equals("120-129")){//presion>120&& presion<130){
             riesgo=riesgo+(0);
-        }else if(presion>130&& presion<140){
+        }else if(BPpresion.equals("130-139")){//presion>130&& presion<140){
             riesgo=riesgo+(0);
-        }else if(presion>140&& presion<160){
+        }else if(BPpresion.equals("140-159")){//presion>140&& presion<160){
             riesgo=riesgo+(2);
-        }else if(presion>160){
+        }else if(BPpresion.equals(">=160")){//presion>160){
             riesgo=riesgo+3;
         }
 
         //********************************FUMADOR*****************************************
         String fumador=(jspfumador.getSelectedItem().toString());
-        if(fumador.equals("si")){
+        if (fumador.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un campo de Fumador", Toast.LENGTH_SHORT).show();
+        }
+        else if(fumador.equals("si")){
             riesgo=riesgo+(2);
         }else if(fumador.equals("no")){
             riesgo=riesgo+(0);
@@ -246,7 +278,10 @@ public class Riesgo extends AppCompatActivity {
 
         //********************************DIABETES*****************************************
         String diabetes=(jspdiabetes.getSelectedItem().toString());
-        if(diabetes.equals("si")){
+        if (fumador.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un campo de Medicamento", Toast.LENGTH_SHORT).show();
+        }
+        else if(diabetes.equals("si")){
             riesgo=riesgo+(4);
         }else if(diabetes.equals("no")){
             riesgo=riesgo+(0);
