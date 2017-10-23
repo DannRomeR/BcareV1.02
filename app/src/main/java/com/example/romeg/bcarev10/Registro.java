@@ -206,9 +206,9 @@ public class Registro extends AppCompatActivity {
                         c.setMed("Sin dato");
                         c.setColt("Sin dato");
                         c.setColh("Sin dato");
-                        c.setPresu(0);
-                        c.setPunt(0);
-                        c.setRisk(0);
+                        c.setPresu(120);
+                        c.setPunt(120);
+                        c.setRisk(120);
                         helper.insertContact(c);
 
                         Toast pass = Toast.makeText(Registro.this, "Registro exitoso", Toast.LENGTH_LONG);
