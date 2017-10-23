@@ -157,8 +157,6 @@ public class Editar extends AppCompatActivity {
             }
         }
 
-
-
     public boolean ValidacionEmail(String email)
     {
         String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -179,17 +177,31 @@ public class Editar extends AppCompatActivity {
 
         return matcher.matches();
     }
-    public boolean validarPass(String pass)
-    {
-        // ^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$
-        // ^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(pass);
 
-        return matcher.matches();
+    public void onBackPressed()
+    {
+
+        String str = getIntent().getStringExtra("Username");
+        String userna = helper.searchPass(str);
+        String named = helper.searchname(str);
+        String edadd = helper.searchedad(str);
+        String emaild = helper.searchemail(str);
+        String teld = helper.searchtel(str);
+        String cont1d = helper.searchcont1(str);
+        String cont2d = helper.searchcont2(str);
+        String gend = helper.searchgen(str);
+
+        Intent i = new Intent(Editar.this, DatosP.class);
+        i.putExtra("Username", str);
+        i.putExtra("Name", named);
+        i.putExtra("Edad", edadd);
+        i.putExtra("Email", emaild);
+        i.putExtra("Tel", teld);
+        i.putExtra("Cont1", cont1d);
+        i.putExtra("Cont2", cont2d);
+        i.putExtra("Gen", gend);
+        startActivity(i);
+        finish();
     }
 
 

@@ -3,7 +3,7 @@
     package="com.example.romeg.bcarev10">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -14,9 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Registro"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -31,16 +29,19 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".DatosP"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:noHistory="true" />
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Editar"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:noHistory="true"/>
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Expediente"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Emergencia"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:noHistory="true"/>
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Vincular"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -53,8 +54,11 @@
         <activity
             android:name=".Riesgo"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Fast2"  android:noHistory="true"/>
-        <activity android:name=".Bienvenido"
+        <activity
+            android:name=".Fast2"
+            android:noHistory="true" />
+        <activity
+            android:name=".Bienvenido"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,6 +66,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Editarexped"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Verexp"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

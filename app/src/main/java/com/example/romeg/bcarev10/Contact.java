@@ -6,8 +6,8 @@ package com.example.romeg.bcarev10;
 
 public class Contact {
 
-    int tel, cont1, cont2, edad;
-    String name, email, uname, pass, genero;
+    int tel, cont1, cont2, edad, presu, punt, risk;
+    String name, email, uname, pass, genero, fum, med, colt,colh;
 
 
     public void setName(String name)
@@ -91,4 +91,50 @@ public class Contact {
         return this.genero;
     }
 
+    public void setFum(String fum){
+        this.fum = fum;
+    }
+    public String getFum(){
+        return this.fum;
+    }
+
+    public void setMed(String med){
+        this.med = med;
+    }
+    public String getMed(){return this.med;}
+
+    public void setColt(String colt){
+        this.colt = colt;
+    }
+    public String getColt(){
+        return this.colt;
+    }
+
+    public void setColh(String colh){
+        this.colh = colh;
+    }
+    public String getColh(){
+        return this.colh;
+    }
+
+    public void setPresu(int presu){
+        this.presu = presu;
+    }
+    public int getPresu(){
+        return this.presu;
+    }
+
+    public void setPunt(int punt){
+        this.punt = punt;
+    }
+    public int getPunt(){
+        return this.punt;
+    }
+
+    public void setRisk(int risk){
+        this.risk = risk;
+    }
+    public int getRisk(){
+        return  this.risk;
+    }
 }

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.romeg.bcarev10.Verexp"
+    android:background="@drawable/b4">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgdatos"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/userinfo"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                />
+            <LinearLayout
+                android:id="@+id/datoscampos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/imgdatos"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/tituloDatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Datos Expediente"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    android:textColor="#ffff"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+
+                        />
+                    <TextView
+                        android:id="@+id/tvnomExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        android:paddingLeft="20dp"
+                        />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Genero:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/tvgeneroE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        android:paddingLeft="28dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edad:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvageE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        android:paddingLeft="46dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="E-mail:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/tvemailE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        android:paddingLeft="36dp"
+                        />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/factores"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Factores Vasculares"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:textColor="#ffff"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fumador:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvfumE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        android:paddingLeft="14dp"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Diabetes:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/tvdiaE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Colesterol Total:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/tvcoltE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Colesterol HDL:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/tvcolh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BP sistólica:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/tvpresu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Puntuación:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/tvpunt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Riesgo de que ocurra ACV:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/tvrisk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/datoscampos">
+
+                <Button
+                    android:id="@+id/btneditarexp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/borde"
+                    android:onClick="onDatosPClick"
+                    android:text="Editar Expediente"
+                    android:textColor="#ffff" />
+
+                <Button
+                    android:id="@+id/btnexportarexp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/borde"
+                    android:onClick="onDatosPClick"
+                    android:text="Exportar Expediente"
+                    android:textColor="#ffff" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

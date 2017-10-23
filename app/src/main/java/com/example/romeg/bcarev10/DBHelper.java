@@ -25,11 +25,17 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CONT1 = "cont1";
     private static final String COLUMN_CONT2 = "cont2";
     private static final String COLUMN_GENE = "gen";
+    private static final String COLUMN_FUM = "fum";
+    private static final String COLUMN_MED = "med";
+    private static final String COLUMN_COLT = "colt";
+    private static final String COLUMN_COLH = "colh";
+    private static final String COLUMN_PRESU = "presu";
+    private static final String COLUMN_PUNT = "punt";
+    private static final String COLUMN_RISK = "risk";
 
 
     SQLiteDatabase db;
-    private static final String TABLE_CREATE = "create table contacts (id integer primary key not null, " +
-            "name text not null, email text not null, uname text not null, pass text not null, edad integer null, tel integer null, cont1 integer null, cont2 integer null, gen text not null);";
+    private static final String TABLE_CREATE = "create table contacts (id integer primary key not null, name text not null, email text not null, uname text not null, pass text not null, edad integer null, tel integer null, cont1 integer null, cont2 integer null, gen text not null, fum text not null, med text not null, colt text not null, colh text not null, presu integer not null, punt integer not null, risk integer not null);";
 
 
     public DBHelper(Context context)
@@ -62,6 +68,15 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_CONT1, c.getCont1());
         values.put(COLUMN_CONT2, c.getCont2());
         values.put(COLUMN_GENE, c.getGenero());
+
+        values.put(COLUMN_FUM, c.getFum());
+        values.put(COLUMN_MED, c.getMed());
+        values.put(COLUMN_COLT, c.getColt());
+        values.put(COLUMN_COLH, c.getColh());
+        values.put(COLUMN_PRESU, c.getPresu());
+        values.put(COLUMN_PUNT, c.getPunt());
+        values.put(COLUMN_RISK, c.getRisk());
+
 
         db.insert(TABLE_NAME, null, values);
         db.close();
@@ -273,6 +288,190 @@ public class DBHelper extends SQLiteOpenHelper {
         return b;
     }
 
+    public String searchfum (String uname)
+    {
+        db = this.getReadableDatabase();
+        String query = "select uname, fum from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(uname))
+                {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+
+    public String searchmed(String uname)
+    {
+        db = this.getReadableDatabase();
+        String query = "select uname, med from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(uname))
+                {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+
+    public String searchcolt(String uname)
+    {
+        db = this.getReadableDatabase();
+        String query = "select uname, colt from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(uname))
+                {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+
+    public String searchcolh(String uname)
+    {
+        db = this.getReadableDatabase();
+        String query = "select uname, colh from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(uname))
+                {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+
+    public String searchpresure(String uname)
+    {
+        db = this.getReadableDatabase();
+        String query = "select uname, presu from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(uname))
+                {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+
+    public String searchpunt(String uname)
+    {
+        db = this.getReadableDatabase();
+        String query = "select uname, punt from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(uname))
+                {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+
+    public String searchrisk(String uname)
+    {
+        db = this.getReadableDatabase();
+        String query = "select uname, risk from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(uname))
+                {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+
+    public String insertCalcu (String useCal, String fum, String med, String colt, String colh, int presure, int punt, int risk )
+    {
+        String Mensaje = "";
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contenedor = new ContentValues();
+        contenedor.put("fum",fum);
+        contenedor.put("med",med);
+        contenedor.put("colt",colt);
+        contenedor.put("colh",colh);
+        contenedor.put("presu",presure);
+        contenedor.put("punt",punt);
+        contenedor.put("risk",risk);
+        int cantidad = database.update("contacts", contenedor,"uname='"+useCal+"'",null);
+        if (cantidad != 0){
+            Mensaje="La operacion se ha realizado exitosamente";
+        }
+        else
+        {
+            Mensaje = "Operación no exitosa";
+        }
+
+        return Mensaje;
+    }
 
 
     public String actualizarData(String use, String uname,String name, int edad, String email, int tel, int cont1, int cont2,String gener)

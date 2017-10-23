@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class Riesgo extends AppCompatActivity {
     DBHelper helper = new DBHelper(this);
 
-    public Spinner jspfumador,jspdiabetes, spcolesterolTot, spcolesterolHDL, spPresion;
+    public Spinner jspfumador,jspdiabetes, spcolesterolTot, spcolesterolHDL;
     TextView edadCal, generCal, usercalcul;
 
     public EditText jgenero,jedad,jcolesterolt,jcolesterolh,jpresion;
@@ -32,7 +32,7 @@ public class Riesgo extends AppCompatActivity {
         String gene = getIntent().getStringExtra("Gen");
         String[] colesteroTot = {"-seleccione-","<160","160-199","200-239","240-279",">=280"};
         String[] colesterolHDL = {"-seleccione-",">=60","50-59","40-49","30-39","<30"};
-        String[] BPsistolica = {"-seleccione-","<120","120-129","130-139","140-159",">=160"};
+        //String[] BPsistolica = {"-seleccione-","<120","120-129","130-139","140-159",">=160"};
 
 
         usercalcul = (TextView) findViewById(R.id.UserCalcu);
@@ -45,10 +45,10 @@ public class Riesgo extends AppCompatActivity {
         spcolesterolTot.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colesteroTot));
         spcolesterolHDL = (Spinner) findViewById(R.id.spcolesterolHDL);
         spcolesterolHDL.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colesterolHDL));
-        spPresion = (Spinner) findViewById(R.id.sppresion);
-        spPresion.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, BPsistolica));
+        //spPresion = (Spinner) findViewById(R.id.sppresion);
+        //spPresion.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, BPsistolica));
         edadCal=(TextView)findViewById(R.id.textEdad);
-
+        jpresion = (EditText) findViewById(R.id.etpresion);
         jspfumador=(Spinner) findViewById(R.id.spFumador);
         String[] valoresfumador = {"-seleccione-","sí","no"};
         jspfumador.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, valoresfumador));
@@ -61,8 +61,14 @@ public class Riesgo extends AppCompatActivity {
 
     public void calcular(View v){
         int riesgo,porcentaje=0;
+        String usern2 = getIntent().getStringExtra("Username");
         String geneC = generCal.getText().toString();
-
+        String fum = jspfumador.getSelectedItem().toString();
+        String med = jspdiabetes.getSelectedItem().toString();
+        String colt  = spcolesterolTot.getSelectedItem().toString();
+        String colh = spcolesterolHDL.getSelectedItem().toString();
+        String presionBP2 = (jpresion.getText().toString());
+        int Ipresion2 = Integer.parseInt(presionBP2);
         String str = usercalcul.getText().toString();
         String gend = helper.searchgen(str);
 
@@ -72,11 +78,22 @@ public class Riesgo extends AppCompatActivity {
             porcentaje=calcularPorcentajeHombre(riesgo);
             Toast.makeText(this, "Sexo: Masculino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
 
+            DBHelper db = new DBHelper(getApplicationContext());
+            String Mensaje = db.insertCalcu(str, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
+            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_LONG).show();
+            finish();
+
         }else if (gend.equals(geneC))
         {
             riesgo=calcularMujer();
             porcentaje=calcularPorcentajeMujer(riesgo);
             Toast.makeText(this, "Sexo: Femenino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
+
+            DBHelper db = new DBHelper(getApplicationContext());
+            String Mensaje = db.insertCalcu(usern2, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
+            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_LONG).show();
+            finish();
+
         }
 
     }
@@ -143,21 +160,23 @@ public class Riesgo extends AppCompatActivity {
         }//colesterolHDL>=60){
 
         //********************************PRESION SISTOLICA*****************************************
-        //int presion=Integer.parseInt(jpresion.getText().toString());
-        String presionBP = (spPresion.getSelectedItem().toString());
-        if (presionBP.equals("-seleccione-")){
-            Toast.makeText(this, "Seleccione un valor de Presión", Toast.LENGTH_SHORT).show();
-        } else if (presionBP.equals("<120")){//presion<120){
+        String presionBP = (jpresion.getText().toString());
+        int Ipresion=Integer.parseInt(presionBP);
+
+        if (presionBP.isEmpty()) {
+            Toast.makeText(this, "El campo de presión está vacío", Toast.LENGTH_SHORT).show();
+        }else if (Ipresion<120){//presionBP.equals("<120")){//
             riesgo=riesgo+(0);
-        }else if(presionBP.equals("120-129")){//presion>=120&& presion<130){
+        }else if(Ipresion>=120&& Ipresion<130){//presionBP.equals("120-129")){
             riesgo=riesgo+(0);
-        }else if(presionBP.equals("130-139")){//presion>=130&& presion<140){
+        }else if(Ipresion>=130&& Ipresion<140){//presionBP.equals("130-139")){//
             riesgo=riesgo+(1);
-        }else if(presionBP.equals("140-159")){//presion>=140&& presion<160){
+        }else if(Ipresion>=140&& Ipresion<160){//presionBP.equals("140-159")){//
             riesgo=riesgo+(2);
-        }else if(presionBP.equals(">=160")){//presion>=160){
+        }else if(Ipresion>=160){//presionBP.equals(">=160")){//
             riesgo=riesgo+3;
         }
+
 
         //********************************FUMADOR*****************************************
         String fumador=(jspfumador.getSelectedItem().toString());
@@ -249,19 +268,21 @@ public class Riesgo extends AppCompatActivity {
 
         //********************************PRESION SISTOLICA*****************************************
         //int presion=Integer.parseInt(jpresion.getText().toString());
-        String BPpresion = (spPresion.getSelectedItem().toString());
-        if (BPpresion.equals("-seleccione-")){
-            Toast.makeText(this, "Seleccione un valor de Presión", Toast.LENGTH_SHORT).show();
-        }
-        else if (BPpresion.equals("<120")){//presion<120){
+
+        String presionBP = (jpresion.getText().toString());
+        int Ipresion=Integer.parseInt(presionBP);
+
+        if (presionBP.isEmpty()) {
+            Toast.makeText(this, "El campo de presión está vacío", Toast.LENGTH_SHORT).show();
+        }else if (Ipresion<120){//presionBP.equals("<120")){//
             riesgo=riesgo+(-3);
-        }else if(BPpresion.equals("120-129")){//presion>120&& presion<130){
+        }else if(Ipresion>=120&& Ipresion<130){//presionBP.equals("120-129")){
             riesgo=riesgo+(0);
-        }else if(BPpresion.equals("130-139")){//presion>130&& presion<140){
+        }else if(Ipresion>=130&& Ipresion<140){//presionBP.equals("130-139")){//
             riesgo=riesgo+(0);
-        }else if(BPpresion.equals("140-159")){//presion>140&& presion<160){
+        }else if(Ipresion>=140&& Ipresion<160){//presionBP.equals("140-159")){//
             riesgo=riesgo+(2);
-        }else if(BPpresion.equals(">=160")){//presion>160){
+        }else if(Ipresion>=160){//presionBP.equals(">=160")){//
             riesgo=riesgo+3;
         }
 

@@ -180,6 +180,7 @@ public class Registro extends AppCompatActivity {
                         int telint = Integer.parseInt(telstr);
                         int cont1int = Integer.parseInt(cont1str);
                         int cont2int = Integer.parseInt(cont2str);
+
                         //insert the details in database
                         Contact c = new Contact();
                         c.setName(namestr);
@@ -190,6 +191,8 @@ public class Registro extends AppCompatActivity {
                         c.setTel(telint);
                         c.setCont1(cont1int);
                         c.setCont2(cont2int);
+
+
                         if (chkgeneroM.isChecked()) {
                             c.setGenero("Masculino");
                             chkgeneroF.setChecked(false);
@@ -199,7 +202,13 @@ public class Registro extends AppCompatActivity {
                             chkgeneroM.setChecked(false);
                         }
 
-
+                        c.setFum("Sin dato");
+                        c.setMed("Sin dato");
+                        c.setColt("Sin dato");
+                        c.setColh("Sin dato");
+                        c.setPresu(0);
+                        c.setPunt(0);
+                        c.setRisk(0);
                         helper.insertContact(c);
 
                         Toast pass = Toast.makeText(Registro.this, "Registro exitoso", Toast.LENGTH_LONG);

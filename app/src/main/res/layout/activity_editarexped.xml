@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.romeg.bcarev10.Editarexped"
+    android:background="@drawable/b4">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgeditar"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/useredit"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/reccampos"
+                android:layout_below="@+id/imgeditar">
+
+                <TextView
+                    android:id="@+id/tituloRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Editar Datos Expediente"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="#ffff"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    />
+                <EditText
+                    android:id="@+id/txtnombrerec"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Nombre * "
+                    android:paddingLeft="10dp"
+                    android:textColorHint="#ffff"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/borde"
+                    android:textColor="#ffff"
+                    />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Género *"
+                    android:textColor="#ffff"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    />
+                <Spinner
+                    android:id="@+id/spgeneroExp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="-Seleccione-"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/borde"
+                    android:textColor="#ffff"/>
+
+
+
+
+
+                <EditText
+                    android:id="@+id/txtedadrec"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Edad *"
+                    android:inputType="number"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="#ffff"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/borde"
+                    android:textColor="#ffff"
+                    />
+                <EditText
+                    android:id="@+id/txtemailrec"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Email *"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="#ffff"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/borde"
+                    android:textColor="#ffff"
+                    />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fumador (si|no) *"
+                    android:textColor="#ffff"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"/>
+
+                <Spinner
+                    android:id="@+id/spFumador"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textColorHint="#ffff"
+                    android:hint="-Seleccione-"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/borde"
+                    android:textColor="#ffff"/>
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Diabetes (si|no) *"
+                    android:textColor="#ffff"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"/>
+
+
+                <Spinner
+                    android:id="@+id/spDiabetes"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="-Seleccione-"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/borde"
+                    android:textColor="#ffff"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Colesterol Total (mg / dL) *"
+                    android:textColor="#ffff"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    />
+
+                <Spinner
+                    android:id="@+id/spcolesterol1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textColorHint="#ffff"
+                    android:hint="-Seleccione-"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/borde"
+                    android:textColor="#ffff"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Colesterol HDL (mg / dL) *"
+                    android:textColor="#ffff"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    />
+
+                <Spinner
+                    android:id="@+id/spcolesterolHDL"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textColorHint="#ffff"
+                    android:hint="-Seleccione-"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/borde"
+                    android:textColor="#ffff"/>
+
+
+
+                <EditText
+                    android:id="@+id/etpresion"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="BP sistólica (mmHg) *"
+                    android:inputType="text|number"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="#ffff"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/borde"
+                    android:textColor="#ffff"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btnguardarDatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="30dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/borde"
+                        android:onClick="onEditarClick"
+                        android:text="Guardar Datos"
+                        android:textColor="#ffff" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

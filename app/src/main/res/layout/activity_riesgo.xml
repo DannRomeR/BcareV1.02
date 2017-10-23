@@ -25,7 +25,7 @@
                 android:textSize="10dp"
                 android:textColor="#ffff"
                 android:gravity="center"
-                                android:visibility="invisible"
+                android:visibility="invisible"
                 />
             <TextView
                 android:id="@+id/tituloExp"
@@ -104,7 +104,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Colesterol Total (mg / dL)"
+                android:text="Colesterol Total (mg / dL) *"
                 android:textColor="#ffff"
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
@@ -128,7 +128,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Colesterol HDL (mg / dL)"
+                android:text="Colesterol HDL (mg / dL) *"
                 android:textColor="#ffff"
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
@@ -153,7 +153,7 @@
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fumador"
+                android:text="Fumador (si|no) *"
                 android:textColor="#ffff"
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
@@ -174,7 +174,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="BP sistólica (mmHg)"
+                android:text="BP sistólica (mmHg) *"
                 android:textColor="#ffff"
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
@@ -182,26 +182,29 @@
                 android:layout_marginRight="30dp"
                 />
 
-            <Spinner
-                android:id="@+id/sppresion"
+
+            <EditText
+                android:id="@+id/etpresion"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:hint="Presion sistólica *"
+                android:inputType="text|number"
+                android:paddingLeft="10dp"
                 android:textColorHint="#ffff"
-                android:hint="-Seleccione-"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/borde"
-                android:textColor="#ffff"/>
-
+                android:textColor="#ffff"
+                />
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Medicamento para presión arterial(si|no)"
+                android:text="Diabetes (si|no) *"
                 android:textColor="#ffff"
-                android:textSize="19sp"
+                android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"/>
