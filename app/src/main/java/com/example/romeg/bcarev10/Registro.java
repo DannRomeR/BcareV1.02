@@ -5,10 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.regex.*;
@@ -20,17 +21,18 @@ public class Registro extends AppCompatActivity {
     DBHelper helper = new DBHelper(this);
 
     EditText etnombre, etemail, etusuario, etcontraseña, etconfirmar, etTel, etedad, etcont1, etcont2;
-
-    CheckBox chkgeneroM, chkgeneroF;
-    Button btnreg;
+    Spinner spGeneroR;
+        Button btnreg;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-
+        String[] gener = {"-seleccione-","Masculino","Femenino"};
         btnreg = (Button) findViewById(R.id.btnregistrarreg);
+        spGeneroR =(Spinner) findViewById(R.id.spgeneroR);
+        spGeneroR.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, gener));
 
     }
 
@@ -41,8 +43,6 @@ public class Registro extends AppCompatActivity {
         etnombre = (EditText) findViewById(R.id.txtnombrereg);
         etemail = (EditText) findViewById(R.id.txtemailreg);
         etusuario = (EditText) findViewById(R.id.txtusuarioreg);
-        chkgeneroF = (CheckBox) findViewById(R.id.rbfemenino);
-        chkgeneroM = (CheckBox) findViewById(R.id.rbmasculino);
         etedad = (EditText) findViewById(R.id.txtedadreg);
         etTel = (EditText) findViewById(R.id.txtelefonoreg);
         etcont1 = (EditText) findViewById(R.id.txcont1reg);
@@ -60,13 +60,14 @@ public class Registro extends AppCompatActivity {
         String telstr = etTel.getText().toString();
         String cont1str = etcont1.getText().toString();
         String cont2str = etcont2.getText().toString();
+        String genero = (spGeneroR.getSelectedItem().toString());
 
 
 
         if (v.getId() == R.id.btnregistrarreg)
         {
 
-            if (namestr.isEmpty() || emailstr.isEmpty() || unamestr.isEmpty() || pass1str.isEmpty() || pass2str.isEmpty() || edadstr.isEmpty() || telstr.isEmpty())
+            if (namestr.isEmpty() || emailstr.isEmpty() || unamestr.isEmpty() || pass1str.isEmpty() || pass2str.isEmpty() || edadstr.isEmpty() || telstr.isEmpty() || genero.equals("-seleccione-"))
             {
                 Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
                         Toast.LENGTH_LONG).show();
@@ -74,11 +75,7 @@ public class Registro extends AppCompatActivity {
                 {
                     etnombre.setError( "Campo Nombre obligatorio");
                 }
-                if (!chkgeneroM.isChecked() || !chkgeneroF.isChecked())
-                {
-                    chkgeneroF.setError("Campo Genero obligatorio");
-                    chkgeneroM.setError("Campo Genero obligatorio");
-                }
+
                 if (edadstr.isEmpty())
                 {
                     etedad.setError( "Campo Edad obligatorio");
@@ -108,19 +105,14 @@ public class Registro extends AppCompatActivity {
             else {
                 int edadnumero = Integer.parseInt(edadstr);
 
-                if(!pass1str.equals(pass2str) || (chkgeneroM.isChecked() && chkgeneroF.isChecked()) || !validarNom(namestr) || edadnumero > 90 || edadnumero <= 18 || !ValidacionEmail(emailstr) || telstr.length()<8 || cont1str.length()<8 || cont2str.length()<8 || pass1str.length()<6 || !validarPass(pass1str))
+                if(!pass1str.equals(pass2str)  || !validarNom(namestr) || edadnumero > 90 || edadnumero <= 18 || !ValidacionEmail(emailstr) || telstr.length()<8 || cont1str.length()<8 || cont2str.length()<8 || pass1str.length()<6 || !validarPass(pass1str))
                 {
                     if (!pass1str.equals(pass2str)) {
                         //popup msg
                         Toast.makeText(this, "Contraseñas no coinciden ",
                                 Toast.LENGTH_SHORT).show();
                     }
-                    if (chkgeneroM.isChecked() && chkgeneroF.isChecked()) {
-                        Toast.makeText(this, "Seleccione unicamente un campo ",
-                                Toast.LENGTH_LONG).show();
-                        chkgeneroF.setError("Seleccione unicamente un campo");
-                        chkgeneroM.setError("Seleccione unicamente un campo");
-                    }
+
                     if(!validarNom(namestr))
                     {
                         etnombre.setError( "Formato del nombre invalido");
@@ -191,16 +183,7 @@ public class Registro extends AppCompatActivity {
                         c.setTel(telint);
                         c.setCont1(cont1int);
                         c.setCont2(cont2int);
-
-
-                        if (chkgeneroM.isChecked()) {
-                            c.setGenero("Masculino");
-                            chkgeneroF.setChecked(false);
-
-                        } else if (chkgeneroF.isChecked()) {
-                            c.setGenero("Femenino");
-                            chkgeneroM.setChecked(false);
-                        }
+                        c.setGenero(genero);
 
                         c.setFum("Sin dato");
                         c.setMed("Sin dato");

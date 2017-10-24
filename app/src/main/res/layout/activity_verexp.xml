@@ -340,7 +340,8 @@
                         android:text=""
                         android:textSize="20sp"
                         android:textColor="#ffff"
-                        android:layout_margin="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
                         />
 
                 </LinearLayout>

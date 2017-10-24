@@ -5,10 +5,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.regex.Matcher;
@@ -18,6 +20,7 @@ public class Editar extends AppCompatActivity {
 
     DBHelper helper = new DBHelper(this);
     EditText etnombree, etemaile, etusuarioe, etedad, ettel, etcont1, etcont2;
+    Spinner spGeneroE;
     CheckBox etgeneM, etgeneF;
     Button btnrec;
 
@@ -26,8 +29,10 @@ public class Editar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar);
-
+        String[] gener = {"-seleccione-","Masculino","Femenino"};
         btnrec = (Button) findViewById(R.id.btnguardarDatos);
+        spGeneroE =(Spinner) findViewById(R.id.spgeneroEd);
+        spGeneroE.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, gener));
 
         String usernamed = getIntent().getStringExtra("Username");
         String named = getIntent().getStringExtra("Name");
@@ -36,7 +41,7 @@ public class Editar extends AppCompatActivity {
         String teld = getIntent().getStringExtra("Tel");
         String cont1d = getIntent().getStringExtra("Cont1");
         String cont2d = getIntent().getStringExtra("Cont2");
-        String gened = getIntent().getStringExtra("Gen");
+
 
 
         etnombree = (EditText) findViewById(R.id.txtnombrerec);
@@ -54,17 +59,6 @@ public class Editar extends AppCompatActivity {
         etcont2 = (EditText) findViewById(R.id.txtcontworec);
         etcont2.setText(cont2d);
 
-        if (gened.equals("Masculino") )
-        {
-            etgeneM = (CheckBox) findViewById(R.id.rbmasculino);
-            etgeneM.setChecked(true);
-
-        }else if (gened.equals("Femenino")){
-            etgeneF = (CheckBox) findViewById(R.id.rbfemenino);
-            etgeneF.setChecked(true);
-
-        }
-
     }
 
     public void onEditarClick(View v) {
@@ -78,8 +72,9 @@ public class Editar extends AppCompatActivity {
             String cont1e = etcont1.getText().toString();
             String cont2e = etcont2.getText().toString();
             int edadnumero = Integer.parseInt(edadee);
+            String genero = (spGeneroE.getSelectedItem().toString());
 
-            if (namee.isEmpty() || emaile.isEmpty() || usere.isEmpty() || edadee.isEmpty() || tele.isEmpty() || !validarNom(namee) || !ValidacionEmail(emaile) || edadnumero > 90 || edadnumero <= 18 || tele.length()<8 || cont1e.length()<8 || cont2e.length()<8 ) {
+            if (namee.isEmpty() || emaile.isEmpty() || usere.isEmpty() || edadee.isEmpty() || tele.isEmpty() || !validarNom(namee) || !ValidacionEmail(emaile) || edadnumero > 90 || edadnumero <= 18 || tele.length()<8 || cont1e.length()<8 || cont2e.length()<8 || genero.equals("-seleccione-")) {
                 Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
                         Toast.LENGTH_SHORT).show();
                 if (namee.isEmpty()) {
@@ -114,20 +109,14 @@ public class Editar extends AppCompatActivity {
 
             } else {
 
-                    String generoE = "";
-                    if (etgeneM.isChecked()) {
-                        generoE = "Masculino";
 
-                    } else if (etgeneF.isChecked()) {
-                        generoE = "Femenino";
-                    }
 
                     int edadinte = Integer.parseInt(edadee);
                     int telinte = Integer.parseInt(tele);
                     int cont1inte = Integer.parseInt(cont1e);
                     int cont2inte = Integer.parseInt(cont2e);
                     DBHelper db = new DBHelper(getApplicationContext());
-                    String Mensaje = db.actualizarData(usernamed2, usere, namee, edadinte, emaile, telinte, cont1inte, cont2inte, generoE);
+                    String Mensaje = db.actualizarData(usernamed2, usere, namee, edadinte, emaile, telinte, cont1inte, cont2inte, genero);
                     Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_LONG).show();
 
                     if (!Mensaje.isEmpty()) {
@@ -144,7 +133,7 @@ public class Editar extends AppCompatActivity {
                         i.putExtra("Tel", telE);
                         i.putExtra("Cont1", cont1E);
                         i.putExtra("Cont2", Cont2E);
-                        i.putExtra("Gen", generoE);
+                        i.putExtra("Gen", genero);
                         startActivity(i);
 
                         finish();

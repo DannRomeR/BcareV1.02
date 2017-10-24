@@ -83,33 +83,6 @@
             android:background="@drawable/borde"
             android:textColor="#ffff"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="30dp">
-
-
-                <CheckBox
-                    android:id="@+id/rbfemenino"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:text="Femenino"
-                    android:textColor="#ffff"
-                    />
-
-                <CheckBox
-                    android:id="@+id/rbmasculino"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Masculino"
-                    android:textColor="#ffff"
-                    />
-
-            </LinearLayout>
-
-
 
         <EditText
             android:id="@+id/txtedadreg"
