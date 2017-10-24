@@ -41,7 +41,7 @@ public class Expediente extends AppCompatActivity {
         userE = (TextView) findViewById(R.id.UserExp);
         userE.setText(username);
 
-        if (fumE.equals("")||medE.equals("")||coltE.equals("")||colhE.equals("")||presE.equals("0")|| puntE.equals("0")||riskE.equals("0")){
+        if (fumE.equals("Sin dato")||medE.equals("Sin dato")||coltE.equals("Sin dato")||colhE.equals("Sin dato")){
             verExp.setVisibility(View.GONE);
         }
         else {
@@ -73,7 +73,7 @@ public class Expediente extends AppCompatActivity {
             String risk = helper.searchrisk(str);
 
 
-            if(fum.isEmpty() || med.isEmpty() || colt.isEmpty() || colh.isEmpty() || presu.isEmpty() || punt.isEmpty() || risk.isEmpty())
+            if(fum.equals("Sin dato") || med.equals("Sin dato") || colt.equals("Sin dato") || colh.equals("Sin dato"))
             {
                 Toast.makeText(this, "Sus datos estan incompletos, llene el formulario de la calculadora",
                         Toast.LENGTH_LONG).show();

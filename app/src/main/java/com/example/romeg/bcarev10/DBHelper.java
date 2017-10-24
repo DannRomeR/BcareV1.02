@@ -473,6 +473,34 @@ public class DBHelper extends SQLiteOpenHelper {
         return Mensaje;
     }
 
+    public String actualizarExpediente (String use, String name, int age, String email, int presure, String genero, String fum, String med, String colt, String colh, int punt, int risk)
+    {
+        String Mensaje = "";
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contenedor = new ContentValues();
+        contenedor.put("name",name);
+        contenedor.put("edad",age);
+        contenedor.put("email",email);
+        contenedor.put("gen",genero);
+        contenedor.put("fum",fum);
+        contenedor.put("med",med);
+        contenedor.put("colt",colt);
+        contenedor.put("colh",colh);
+        contenedor.put("presu",presure);
+        contenedor.put("punt",punt);
+        contenedor.put("risk",risk);
+        int cantidad = database.update("contacts", contenedor,"uname='"+use+"'",null);
+        if (cantidad != 0){
+            Mensaje="La operacion se ha realizado exitosamente";
+        }
+        else
+        {
+            Mensaje = "Operación no exitosa";
+        }
+
+        return Mensaje;
+    }
+
 
     public String actualizarData(String use, String uname,String name, int edad, String email, int tel, int cont1, int cont2,String gener)
     {

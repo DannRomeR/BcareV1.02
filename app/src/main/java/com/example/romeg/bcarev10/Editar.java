@@ -81,7 +81,7 @@ public class Editar extends AppCompatActivity {
 
             if (namee.isEmpty() || emaile.isEmpty() || usere.isEmpty() || edadee.isEmpty() || tele.isEmpty() || !validarNom(namee) || !ValidacionEmail(emaile) || edadnumero > 90 || edadnumero <= 18 || tele.length()<8 || cont1e.length()<8 || cont2e.length()<8 ) {
                 Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
                 if (namee.isEmpty()) {
                     etnombree.setError("Campo Nombre obligatorio");
                 } if (edadee.isEmpty()) {

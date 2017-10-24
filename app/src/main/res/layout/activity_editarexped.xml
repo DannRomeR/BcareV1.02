@@ -45,7 +45,7 @@
                     android:layout_margin="10dp"
                     />
                 <EditText
-                    android:id="@+id/txtnombrerec"
+                    android:id="@+id/txtnombreEx"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Nombre * "
@@ -85,7 +85,7 @@
 
 
                 <EditText
-                    android:id="@+id/txtedadrec"
+                    android:id="@+id/txtedadEx"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Edad *"
@@ -99,7 +99,7 @@
                     android:textColor="#ffff"
                     />
                 <EditText
-                    android:id="@+id/txtemailrec"
+                    android:id="@+id/txtemailEx"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Email *"
@@ -114,7 +114,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/txtfumEx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Fumador (si|no) *"
@@ -125,7 +125,7 @@
                     android:layout_marginRight="30dp"/>
 
                 <Spinner
-                    android:id="@+id/spFumador"
+                    android:id="@+id/spFumadorEx"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:textColorHint="#ffff"
@@ -149,7 +149,7 @@
 
 
                 <Spinner
-                    android:id="@+id/spDiabetes"
+                    android:id="@+id/spDiabetesEx"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="-Seleccione-"
@@ -172,7 +172,7 @@
                     />
 
                 <Spinner
-                    android:id="@+id/spcolesterol1"
+                    android:id="@+id/spcolesterol1Ex"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:textColorHint="#ffff"
@@ -196,7 +196,7 @@
                     />
 
                 <Spinner
-                    android:id="@+id/spcolesterolHDL"
+                    android:id="@+id/spcolesterolHDLEx"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:textColorHint="#ffff"
@@ -210,7 +210,7 @@
 
 
                 <EditText
-                    android:id="@+id/etpresion"
+                    android:id="@+id/etpresionEx"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="BP sistólica (mmHg) *"
@@ -241,7 +241,7 @@
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
                         android:background="@drawable/borde"
-                        android:onClick="onEditarClick"
+                        android:onClick="onEditarEClick"
                         android:text="Guardar Datos"
                         android:textColor="#ffff" />
                 </LinearLayout>

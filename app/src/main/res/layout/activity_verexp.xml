@@ -328,7 +328,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Riesgo de que ocurra ACV:"
+                        android:text="Riesgo de que ocurra ACV: %"
                         android:textSize="20sp"
                         android:textColor="#ffff"
                         android:layout_margin="10dp"
@@ -340,7 +340,7 @@
                         android:text=""
                         android:textSize="20sp"
                         android:textColor="#ffff"
-                        android:layout_margin="10dp"
+                        android:layout_margin="5dp"
                         />
 
                 </LinearLayout>
@@ -365,7 +365,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/borde"
-                    android:onClick="onDatosPClick"
+                    android:onClick="onVerClick"
                     android:text="Editar Expediente"
                     android:textColor="#ffff" />
 
@@ -373,12 +373,11 @@
                     android:id="@+id/btnexportarexp"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-
                     android:layout_marginBottom="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/borde"
-                    android:onClick="onDatosPClick"
+                    android:onClick="onVerClick"
                     android:text="Exportar Expediente"
                     android:textColor="#ffff" />
 

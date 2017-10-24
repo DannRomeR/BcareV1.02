@@ -113,7 +113,7 @@ public class Registro extends AppCompatActivity {
                     if (!pass1str.equals(pass2str)) {
                         //popup msg
                         Toast.makeText(this, "Contraseñas no coinciden ",
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_SHORT).show();
                     }
                     if (chkgeneroM.isChecked() && chkgeneroF.isChecked()) {
                         Toast.makeText(this, "Seleccione unicamente un campo ",

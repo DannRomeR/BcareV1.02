@@ -80,8 +80,8 @@ public class Riesgo extends AppCompatActivity {
 
             DBHelper db = new DBHelper(getApplicationContext());
             String Mensaje = db.insertCalcu(str, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
-            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_LONG).show();
-            finish();
+            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
+
 
         }else if (gend.equals(geneC))
         {
@@ -91,8 +91,8 @@ public class Riesgo extends AppCompatActivity {
 
             DBHelper db = new DBHelper(getApplicationContext());
             String Mensaje = db.insertCalcu(usern2, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
-            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_LONG).show();
-            finish();
+            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
+
 
         }
 
@@ -396,9 +396,10 @@ public class Riesgo extends AppCompatActivity {
         return porcentaje;
 
     }
+
     public void onBackPressed()
     {
-        String str = usercalcul.getText().toString();
+        String str = getIntent().getStringExtra("Username");
         String userna = helper.searchPass(str);
         String named = helper.searchname(str);
         String edadd = helper.searchedad(str);
@@ -407,8 +408,15 @@ public class Riesgo extends AppCompatActivity {
         String cont1d = helper.searchcont1(str);
         String cont2d = helper.searchcont2(str);
         String gend = helper.searchgen(str);
+        String fum = helper.searchfum(str);
+        String med = helper.searchmed(str);
+        String colt = helper.searchcolt(str);
+        String colh = helper.searchcolh(str);
+        String presu = helper.searchpresure(str);
+        String punt = helper.searchpunt(str);
+        String risk = helper.searchrisk(str);
 
-        Intent i = new Intent(Riesgo.this, Expediente.class);
+        Intent i = new Intent(Riesgo.this, Verexp.class);
         i.putExtra("Username", str);
         i.putExtra("Name", named);
         i.putExtra("Edad", edadd);
@@ -417,8 +425,15 @@ public class Riesgo extends AppCompatActivity {
         i.putExtra("Cont1", cont1d);
         i.putExtra("Cont2", cont2d);
         i.putExtra("Gen", gend);
+
+        i.putExtra("Fum", fum);
+        i.putExtra("Med", med);
+        i.putExtra("Colt", colt);
+        i.putExtra("Colh", colh);
+        i.putExtra("Presu", presu);
+        i.putExtra("Punt", punt);
+        i.putExtra("Risk", risk);
         startActivity(i);
-        finish();
     }
 
 
