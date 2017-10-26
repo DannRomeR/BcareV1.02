@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
 public class Vincular extends AppCompatActivity {
 
     BluetoothManager btManager;

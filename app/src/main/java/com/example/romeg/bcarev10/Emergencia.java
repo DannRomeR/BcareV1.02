@@ -41,14 +41,21 @@ public class Emergencia extends AppCompatActivity {
 
         if (v.getId() == R.id.btncall) {
 
-            llamar(telefono);
+            llamar(tel);
         }
     }
 
     public void onBackPressed() {
-        startActivity(new Intent(getBaseContext(), Usuario.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
-        finish();
+
+        String usern = getIntent().getStringExtra("Username");
+
+
+
+        Intent i = new Intent(Emergencia.this, Usuario.class);
+        i.putExtra("Username", usern);
+
+        startActivity(i);
+
     }
 
     public void llamar(String tel) {
@@ -63,7 +70,7 @@ public class Emergencia extends AppCompatActivity {
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + tel)));
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(tel)));
         }catch(Exception e){
             e.printStackTrace();
         }

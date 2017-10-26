@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.romeg.bcarev10.Verexp"
-    android:background="@drawable/b4">
+    android:background="@drawable/b4"
+    android:id="@+id/container">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -383,6 +384,12 @@
                     android:textColor="#ffff" />
 
             </LinearLayout>
+
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"></ListView>
 
 
         </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.romeg.bcarev10;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -464,6 +465,45 @@ public class Editarexped extends AppCompatActivity {
         matcher = pattern.matcher(name);
 
         return matcher.matches();
+    }
+
+    public void onBackPressed()
+    {
+        String str = getIntent().getStringExtra("Username");
+        String userna = helper.searchPass(str);
+        String named = helper.searchname(str);
+        String edadd = helper.searchedad(str);
+        String emaild = helper.searchemail(str);
+        String teld = helper.searchtel(str);
+        String cont1d = helper.searchcont1(str);
+        String cont2d = helper.searchcont2(str);
+        String gend = helper.searchgen(str);
+        String fum = helper.searchfum(str);
+        String med = helper.searchmed(str);
+        String colt = helper.searchcolt(str);
+        String colh = helper.searchcolh(str);
+        String presu = helper.searchpresure(str);
+        String punt = helper.searchpunt(str);
+        String risk = helper.searchrisk(str);
+
+        Intent i = new Intent(Editarexped.this, Verexp.class);
+        i.putExtra("Username", str);
+        i.putExtra("Name", named);
+        i.putExtra("Edad", edadd);
+        i.putExtra("Email", emaild);
+        i.putExtra("Tel", teld);
+        i.putExtra("Cont1", cont1d);
+        i.putExtra("Cont2", cont2d);
+        i.putExtra("Gen", gend);
+
+        i.putExtra("Fum", fum);
+        i.putExtra("Med", med);
+        i.putExtra("Colt", colt);
+        i.putExtra("Colh", colh);
+        i.putExtra("Presu", presu);
+        i.putExtra("Punt", punt);
+        i.putExtra("Risk", risk);
+        startActivity(i);
     }
 
 }

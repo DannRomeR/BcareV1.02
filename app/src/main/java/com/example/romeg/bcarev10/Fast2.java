@@ -12,9 +12,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
-
 
     private ViewPager mPager;
     private int[] layouts = {R.layout.face, R.layout.arms, R.layout.speak, R.layout.time};
@@ -29,6 +29,7 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (new PreferenceManager(this).checkPreference())
         {
             loadHome();
@@ -70,7 +71,7 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
                 {
                     BnNext.setText("Emergencia");
                     BnSkip.setVisibility(View.INVISIBLE);
-                    loadEmergencia();
+
                 }
                 else
                 {
@@ -134,7 +135,11 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
 
     private void loadHome()
     {
-        startActivity(new Intent(this, Usuario.class));
+        String username = getIntent().getStringExtra("Username");
+        Intent i = new Intent(Fast2.this, Usuario.class);
+        i.putExtra("Username", username);
+
+        startActivity(i);
         finish();
     }
     private void loadNextSlide()
@@ -147,14 +152,18 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
         }
         else
         {
-            loadHome();
+            loadEmergencia();
             new PreferenceManager(this).writePreference();
         }
     }
 
     private void loadEmergencia()
     {
-        startActivity(new Intent(this, Emergencia.class));
+        String username = getIntent().getStringExtra("Username");
+        Intent i = new Intent(Fast2.this, Emergencia.class);
+        i.putExtra("Username", username);
+
+        startActivity(i);
         finish();
     }
 }

@@ -1,20 +1,49 @@
 package com.example.romeg.bcarev10;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.html.WebColors;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import static android.R.attr.path;
+
 public class Riesgo extends AppCompatActivity {
     DBHelper helper = new DBHelper(this);
+
+
 
     public Spinner jspfumador,jspdiabetes, spcolesterolTot, spcolesterolHDL;
     TextView edadCal, generCal, usercalcul;
@@ -56,6 +85,8 @@ public class Riesgo extends AppCompatActivity {
         jspdiabetes=(Spinner) findViewById(R.id.spDiabetes);
         String[] valoresDiabetes = {"-seleccione-","sí","no"};
         jspdiabetes.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, valoresDiabetes));
+
+
     }
 
 
@@ -97,6 +128,7 @@ public class Riesgo extends AppCompatActivity {
         }
 
     }
+
     public int calcularHombre(){
         String edadC = edadCal.getText().toString();
         int riesgo=0;
@@ -416,7 +448,7 @@ public class Riesgo extends AppCompatActivity {
         String punt = helper.searchpunt(str);
         String risk = helper.searchrisk(str);
 
-        Intent i = new Intent(Riesgo.this, Verexp.class);
+        Intent i = new Intent(Riesgo.this, Expediente.class);
         i.putExtra("Username", str);
         i.putExtra("Name", named);
         i.putExtra("Edad", edadd);
@@ -435,6 +467,7 @@ public class Riesgo extends AppCompatActivity {
         i.putExtra("Risk", risk);
         startActivity(i);
     }
+
 
 
 

@@ -110,8 +110,13 @@ public class Usuario extends AppCompatActivity {
 
     public void loadSlides(View view)
     {
+        String str = tvuserD.getText().toString();
+        String userna = helper.searchPass(str);
         new PreferenceManager(this).clearPreference();
-        startActivity(new Intent(this, Fast2.class));
+        Intent i = new Intent(Usuario.this, Fast2.class);
+        i.putExtra("Username", str);
+
+        startActivity(i);
         finish();
     }
 }

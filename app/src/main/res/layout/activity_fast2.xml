@@ -13,6 +13,18 @@
         android:id="@+id/viewPager"
         />
 
+    <TextView
+        android:id="@+id/UserEm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="2dp"
+        android:textStyle="bold"
+        android:textColor="#ffff"
+        android:gravity="center"
+        android:visibility="invisible"
+        />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

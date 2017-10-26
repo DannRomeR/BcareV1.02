@@ -22,5 +22,17 @@
     <string name="slide_4_desc">Sí muestra alguno de los síntomas anteriores, incluso sí los síntomas desaparece muy rápído, ¡Llame a una ambulancia! </string>
     <string name="my_preference" />
     <string name="my_preference_key" />
+    <string name="invoice_number">Prueba1</string>
+    <string name="invoice_date">Fecha 1</string>
+    <string name="company">BCARE</string>
+    <string name="client_title">pACIENTE 1</string>
+    <string name="client_name">Daniel</string>
+    <string name="detail_code">Ya funciona</string>
+    <string name="detail_description">Documento PDF</string>
+    <string name="detail_amount">sI FUNCIONA</string>
+    <string name="detail_price">Esta bien</string>
+    <string name="detail_total">Asi es</string>
+    <string name="invoice_subtotal">Ya casi terminas</string>
+    <string name="invoice_tax">Ya acabaste</string>
 
 </resources>
