@@ -107,7 +107,6 @@ public class Usuario extends AppCompatActivity {
     }
 
 }
-
     public void loadSlides(View view)
     {
         String str = tvuserD.getText().toString();
