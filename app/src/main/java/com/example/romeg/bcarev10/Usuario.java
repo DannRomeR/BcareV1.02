@@ -105,7 +105,6 @@ public class Usuario extends AppCompatActivity {
             i.putExtra("Gen", genn);
             startActivity(i);
     }
-
 }
     public void loadSlides(View view)
     {
