@@ -15,9 +15,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    AlertDialogManager alert = new AlertDialogManager();
     DBHelper helper = new DBHelper(this);
     EditText etusario, etpassword;
     Button registrar, iniciar, recuperar;
+    SessionManagement session;
 
 
     @Override
@@ -25,9 +27,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        session = new SessionManagement(getApplicationContext());
         registrar = (Button) findViewById(R.id.btnregistrar);
         recuperar = (Button) findViewById(R.id.btnrecuperar);
         iniciar = (Button) findViewById(R.id.btniniciar);
+
+        Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
     }
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -49,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             String pass = b.getText().toString();
 
             String password = helper.searchPass(str);
+            String userp = helper.searchUse(str);
+            String emailp = helper.searchPass(str);
 
             if(str.isEmpty() || pass.isEmpty())
             {
@@ -59,9 +66,14 @@ public class MainActivity extends AppCompatActivity {
             {
                 if(pass.equals(password))
                 {
+
+                    session.createLoginSession(userp, emailp);
+
                     Intent i = new Intent(MainActivity.this, Usuario.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     i.putExtra("Username",str);
                     startActivity(i);
+                    finish();
                 }
                 else
                 {

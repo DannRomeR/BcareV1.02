@@ -9,8 +9,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 public class Usuario extends AppCompatActivity {
 
+    AlertDialogManager alert = new AlertDialogManager();
+
+    // Session Manager Class
+    SessionManagement session;
     DBHelper helper = new DBHelper(this);
     TextView tvuserD;
 
@@ -18,9 +24,32 @@ public class Usuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario);
+
+        session = new SessionManagement(getApplicationContext());
+
         String usern = getIntent().getStringExtra("Username");
+
+
+        Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+
+        /**
+         * Call this function whenever you want to check user login
+         * This will redirect user to LoginActivity is he is not
+         * logged in
+         * */
+        session.checkLogin();
+
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+
+        // name
+        String name = user.get(SessionManagement.KEY_NAME);
+
+        // email
+        String email = user.get(SessionManagement.KEY_EMAIL);
+
         tvuserD = (TextView) findViewById(R.id.bieuser);
-        tvuserD.setText(usern);
+        tvuserD.setText(name);
     }
 
     public void onMenuClick(View v) {
@@ -80,8 +109,27 @@ public class Usuario extends AppCompatActivity {
 
 
         } else if (v.getId() == R.id.btnvincularmenu) {
-            startActivity(new Intent(this, Vincular.class));
-            finish();
+            String str = tvuserD.getText().toString();
+            String userna = helper.searchPass(str);
+            String namen = helper.searchname(str);
+            String edadn = helper.searchedad(str);
+            String emailn = helper.searchemail(str);
+            String teln = helper.searchtel(str);
+            String cont1 = helper.searchcont1(str);
+            String cont2 = helper.searchcont2(str);
+            String genn = helper.searchgen(str);
+
+
+            Intent i = new Intent(Usuario.this, Vincular.class);
+            i.putExtra("Username", str);
+            i.putExtra("Name", namen);
+            i.putExtra("Edad", edadn);
+            i.putExtra("Email", emailn);
+            i.putExtra("Tel", teln);
+            i.putExtra("Cont1", cont1);
+            i.putExtra("Cont2", cont2);
+            i.putExtra("Gen", genn);
+            startActivity(i);
         } else if (v.getId() == R.id.btndatospersonalesmenu) {
             String str = tvuserD.getText().toString();
             String userna = helper.searchPass(str);
@@ -104,7 +152,11 @@ public class Usuario extends AppCompatActivity {
             i.putExtra("Cont2", cont2);
             i.putExtra("Gen", genn);
             startActivity(i);
-    }
+        }else if(v.getId() == R.id.btnsalirmenu){
+
+            session.logoutUser();
+
+        }
 }
     public void loadSlides(View view)
     {
@@ -116,5 +168,31 @@ public class Usuario extends AppCompatActivity {
 
         startActivity(i);
         finish();
+    }
+
+    public void onBackPressed()
+    {
+        String str = tvuserD.getText().toString();
+        String userna = helper.searchPass(str);
+        String named = helper.searchname(str);
+        String edadd = helper.searchedad(str);
+        String emaild = helper.searchemail(str);
+        String teld = helper.searchtel(str);
+        String cont1d = helper.searchcont1(str);
+        String cont2d = helper.searchcont2(str);
+        String gend = helper.searchgen(str);
+
+        Intent i = new Intent(Usuario.this, Usuario.class);
+        i.putExtra("Username", str);
+        i.putExtra("Name", named);
+        i.putExtra("Edad", edadd);
+        i.putExtra("Email", emaild);
+        i.putExtra("Tel", teld);
+        i.putExtra("Cont1", cont1d);
+        i.putExtra("Cont2", cont2d);
+        i.putExtra("Gen", gend);
+        startActivity(i);
+        finish();
+
     }
 }

@@ -198,6 +198,15 @@
             android:background="@drawable/smartwatch"
             android:onClick="onMenuClick" />
 
+        <Button
+            android:id="@+id/btnsalirmenu"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/logout"
+            android:onClick="onMenuClick" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -216,6 +225,17 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="10dp"
             android:text="Vincular"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"
+            />
+        <TextView
+            android:id="@+id/SalirMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:layout_marginRight="10dp"
+            android:text="Cerrar sesión"
             android:textSize="20dp"
             android:textStyle="bold"
             android:textColor="#ffff"
