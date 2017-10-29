@@ -19,7 +19,7 @@
     <ImageView
         android:id="@+id/imgdatos"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         android:layout_gravity="center"
         android:src="@drawable/userinfo"
         android:layout_marginLeft="30dp"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/imgdatos"
-        android:layout_margin="20dp">
+        android:layout_margin="10dp">
 
         <TextView
             android:id="@+id/tituloDatos"
@@ -42,8 +42,42 @@
             android:textStyle="bold"
             android:textColor="#ffff"
             android:gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N° Paciente:"
+                android:textSize="20sp"
+                android:textColor="#ffff"
+                android:layout_margin="10dp"
+
+                />
+            <TextView
+                android:id="@+id/numpacDatos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#ffff"
+                android:layout_margin="10dp"
+                android:paddingLeft="20dp"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffff"
+            android:layout_margin="10dp"></View>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -72,6 +106,79 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffff"
+            android:layout_margin="10dp"></View>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellido P:"
+                android:textSize="20sp"
+                android:textColor="#ffff"
+                android:layout_margin="10dp"
+
+                />
+            <TextView
+                android:id="@+id/appDatos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20sp"
+                android:textColor="#ffff"
+                android:layout_margin="10dp"
+                android:paddingLeft="20dp"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffff"
+            android:layout_margin="10dp"></View>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellido M:"
+                android:textSize="20sp"
+                android:textColor="#ffff"
+                android:layout_margin="10dp"
+
+                />
+            <TextView
+                android:id="@+id/apmDatos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20sp"
+                android:textColor="#ffff"
+                android:layout_margin="10dp"
+                android:paddingLeft="20dp"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffff"
+            android:layout_margin="10dp"></View>
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,6 +205,11 @@
                 />
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffff"
+            android:layout_margin="10dp"></View>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -124,6 +236,12 @@
                 />
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffff"
+            android:layout_margin="10dp"></View>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -152,6 +270,12 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffff"
+            android:layout_margin="10dp"></View>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -177,6 +301,12 @@
                 />
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffff"
+            android:layout_margin="10dp"></View>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -205,6 +335,12 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffff"
+            android:layout_margin="10dp"></View>
+
 
        <LinearLayout
            android:layout_width="wrap_content"
@@ -230,6 +366,12 @@
                />
 
        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffff"
+            android:layout_margin="10dp"></View>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -259,6 +401,8 @@
 
     </LinearLayout>
 
+
+
     <LinearLayout
 
         android:layout_width="match_parent"
@@ -272,7 +416,7 @@
             android:id="@+id/btneditardatos"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/borde"
@@ -285,7 +429,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
 
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/borde"

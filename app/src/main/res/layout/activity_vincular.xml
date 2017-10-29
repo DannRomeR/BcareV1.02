@@ -56,6 +56,32 @@
 
         </LinearLayout>
 
+        <EditText
+            android:id="@+id/etpresion"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Presión sistólica "
+            android:paddingLeft="10dp"
+            android:textColorHint="#ffff"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/borde"
+            android:textColor="#ffff"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Enviar"
+            android:id="@+id/Calcular"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/borde"
+            android:textColor="#ffff"
+            android:layout_gravity="center"/>
+
 
         <TextView
             android:layout_width="match_parent"

@@ -137,9 +137,25 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
     private void loadHome()
     {
         String username = getIntent().getStringExtra("Username");
-        Intent i = new Intent(Fast2.this, Usuario.class);
-        i.putExtra("Username", username);
+        String str = getIntent().getStringExtra("Username");
+        String userna = helper.searchPass(str);
+        String named = helper.searchname(str);
+        String edadd = helper.searchedad(str);
+        String emaild = helper.searchemail(str);
+        String teld = helper.searchtel(str);
+        String cont1d = helper.searchcont1(str);
+        String cont2d = helper.searchcont2(str);
+        String gend = helper.searchgen(str);
 
+        Intent i = new Intent(Fast2.this, Usuario.class);
+        i.putExtra("Username", str);
+        i.putExtra("Name", named);
+        i.putExtra("Edad", edadd);
+        i.putExtra("Email", emaild);
+        i.putExtra("Tel", teld);
+        i.putExtra("Cont1", cont1d);
+        i.putExtra("Cont2", cont2d);
+        i.putExtra("Gen", gend);
         startActivity(i);
         finish();
     }
@@ -156,9 +172,34 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
             String usestr = getIntent().getStringExtra("Username");
             String risk = helper.searchrisk(usestr);
             int riesgo = Integer.parseInt(risk);
-            if(riesgo > 10){
+            if(riesgo > 10 && riesgo < 50){
                 loadEmergencia();
                 new PreferenceManager(this).writePreference();
+            }else if (riesgo == 120)
+            {
+                Toast.makeText(this, "No ha realizado el cálculo de riesgo para realizar una llamada",
+                        Toast.LENGTH_LONG).show();
+                String str = getIntent().getStringExtra("Username");
+                String userna = helper.searchPass(str);
+                String named = helper.searchname(str);
+                String edadd = helper.searchedad(str);
+                String emaild = helper.searchemail(str);
+                String teld = helper.searchtel(str);
+                String cont1d = helper.searchcont1(str);
+                String cont2d = helper.searchcont2(str);
+                String gend = helper.searchgen(str);
+
+                Intent i = new Intent(Fast2.this, Usuario.class);
+                i.putExtra("Username", str);
+                i.putExtra("Name", named);
+                i.putExtra("Edad", edadd);
+                i.putExtra("Email", emaild);
+                i.putExtra("Tel", teld);
+                i.putExtra("Cont1", cont1d);
+                i.putExtra("Cont2", cont2d);
+                i.putExtra("Gen", gend);
+                startActivity(i);
+                finish();
             }
             else
             {

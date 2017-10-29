@@ -13,7 +13,6 @@ import java.util.HashMap;
 
 public class Usuario extends AppCompatActivity {
 
-    AlertDialogManager alert = new AlertDialogManager();
 
     // Session Manager Class
     SessionManagement session;
@@ -38,13 +37,10 @@ public class Usuario extends AppCompatActivity {
          * logged in
          * */
         session.checkLogin();
-
         // get user data from session
         HashMap<String, String> user = session.getUserDetails();
-
         // name
         String name = user.get(SessionManagement.KEY_NAME);
-
         // email
         String email = user.get(SessionManagement.KEY_EMAIL);
 
@@ -58,6 +54,8 @@ public class Usuario extends AppCompatActivity {
             String str = tvuserD.getText().toString();
             String userna = helper.searchPass(str);
             String named = helper.searchname(str);
+            String appd = helper.searchapp(str);
+            String apmd = helper.searchapm(str);
             String edadd = helper.searchedad(str);
             String emaild = helper.searchemail(str);
             String teld = helper.searchtel(str);
@@ -71,12 +69,15 @@ public class Usuario extends AppCompatActivity {
             String presu = helper.searchpresure(str);
             String punt = helper.searchpunt(str);
             String risk = helper.searchrisk(str);
+            String numpacd = helper.searchnumpac(str);
 
 
 
             Intent i = new Intent(Usuario.this, Expediente.class);
             i.putExtra("Username", str);
             i.putExtra("Name", named);
+            i.putExtra("App", appd);
+            i.putExtra("Apm", apmd);
             i.putExtra("Edad", edadd);
             i.putExtra("Email", emaild);
             i.putExtra("Tel", teld);
@@ -91,6 +92,7 @@ public class Usuario extends AppCompatActivity {
             i.putExtra("Presu", presu);
             i.putExtra("Punt", punt);
             i.putExtra("Risk", risk);
+            i.putExtra("Numpac", numpacd);
             startActivity(i);
 
         } else if (v.getId() == R.id.btnemergenciamenu) {
@@ -130,32 +132,44 @@ public class Usuario extends AppCompatActivity {
             i.putExtra("Cont2", cont2);
             i.putExtra("Gen", genn);
             startActivity(i);
+
+
         } else if (v.getId() == R.id.btndatospersonalesmenu) {
             String str = tvuserD.getText().toString();
             String userna = helper.searchPass(str);
-            String namen = helper.searchname(str);
-            String edadn = helper.searchedad(str);
-            String emailn = helper.searchemail(str);
-            String teln = helper.searchtel(str);
-            String cont1 = helper.searchcont1(str);
-            String cont2 = helper.searchcont2(str);
-            String genn = helper.searchgen(str);
+            String named = helper.searchname(str);
+            String appd = helper.searchapp(str);
+            String apmd = helper.searchapm(str);
+            String edadd = helper.searchedad(str);
+            String emaild = helper.searchemail(str);
+            String teld = helper.searchtel(str);
+            String cont1d = helper.searchcont1(str);
+            String cont2d = helper.searchcont2(str);
+            String gend = helper.searchgen(str);
+
+            String numpacd = helper.searchnumpac(str);
+
 
 
             Intent i = new Intent(Usuario.this, DatosP.class);
             i.putExtra("Username", str);
-            i.putExtra("Name", namen);
-            i.putExtra("Edad", edadn);
-            i.putExtra("Email", emailn);
-            i.putExtra("Tel", teln);
-            i.putExtra("Cont1", cont1);
-            i.putExtra("Cont2", cont2);
-            i.putExtra("Gen", genn);
+            i.putExtra("Name", named);
+            i.putExtra("App", appd);
+            i.putExtra("Apm", apmd);
+            i.putExtra("Edad", edadd);
+            i.putExtra("Email", emaild);
+            i.putExtra("Tel", teld);
+            i.putExtra("Cont1", cont1d);
+            i.putExtra("Cont2", cont2d);
+            i.putExtra("Gen", gend);
+
+            i.putExtra("Numpac", numpacd);
             startActivity(i);
+
+
         }else if(v.getId() == R.id.btnsalirmenu){
 
             session.logoutUser();
-
         }
 }
     public void loadSlides(View view)
@@ -175,6 +189,8 @@ public class Usuario extends AppCompatActivity {
         String str = tvuserD.getText().toString();
         String userna = helper.searchPass(str);
         String named = helper.searchname(str);
+        String appd = helper.searchapp(str);
+        String apmd = helper.searchapm(str);
         String edadd = helper.searchedad(str);
         String emaild = helper.searchemail(str);
         String teld = helper.searchtel(str);
@@ -182,15 +198,21 @@ public class Usuario extends AppCompatActivity {
         String cont2d = helper.searchcont2(str);
         String gend = helper.searchgen(str);
 
+        String numpacd = helper.searchnumpac(str);
+
         Intent i = new Intent(Usuario.this, Usuario.class);
         i.putExtra("Username", str);
         i.putExtra("Name", named);
+        i.putExtra("App", appd);
+        i.putExtra("Apm", apmd);
         i.putExtra("Edad", edadd);
         i.putExtra("Email", emaild);
         i.putExtra("Tel", teld);
         i.putExtra("Cont1", cont1d);
         i.putExtra("Cont2", cont2d);
         i.putExtra("Gen", gend);
+
+        i.putExtra("Numpac", numpacd);
         startActivity(i);
         finish();
 

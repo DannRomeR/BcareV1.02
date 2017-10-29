@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public class Registro extends AppCompatActivity {
     DBHelper helper = new DBHelper(this);
 
-    EditText etnombre, etemail, etusuario, etcontraseña, etconfirmar, etTel, etedad, etcont1, etcont2;
+    EditText etnombre, etapp, etapm, etemail, etusuario, etcontraseña, etconfirmar, etTel, etedad, etcont1, etcont2;
     Spinner spGeneroR;
         Button btnreg;
 
@@ -41,6 +41,8 @@ public class Registro extends AppCompatActivity {
     {
 
         etnombre = (EditText) findViewById(R.id.txtnombrereg);
+        etapp = (EditText) findViewById(R.id.txtappreg);
+        etapm = (EditText) findViewById(R.id.txtapmreg);
         etemail = (EditText) findViewById(R.id.txtemailreg);
         etusuario = (EditText) findViewById(R.id.txtusuarioreg);
         etedad = (EditText) findViewById(R.id.txtedadreg);
@@ -52,6 +54,8 @@ public class Registro extends AppCompatActivity {
 
 
         String namestr = etnombre.getText().toString();
+        String appstr = etapp.getText().toString();
+        String apmstr = etapm.getText().toString();
         String emailstr = etemail.getText().toString();
         String unamestr = etusuario.getText().toString();
         String pass1str = etcontraseña.getText().toString();
@@ -67,7 +71,7 @@ public class Registro extends AppCompatActivity {
         if (v.getId() == R.id.btnregistrarreg)
         {
 
-            if (namestr.isEmpty() || emailstr.isEmpty() || unamestr.isEmpty() || pass1str.isEmpty() || pass2str.isEmpty() || edadstr.isEmpty() || telstr.isEmpty() || genero.equals("-seleccione-"))
+            if (namestr.isEmpty() || appstr.isEmpty() || apmstr.isEmpty() || emailstr.isEmpty() || unamestr.isEmpty() || pass1str.isEmpty() || pass2str.isEmpty() || edadstr.isEmpty() || telstr.isEmpty() || genero.equals("-seleccione-"))
             {
                 Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
                         Toast.LENGTH_LONG).show();
@@ -75,7 +79,14 @@ public class Registro extends AppCompatActivity {
                 {
                     etnombre.setError( "Campo Nombre obligatorio");
                 }
-
+                if (appstr.isEmpty())
+                {
+                    etapp.setError("Campo apellido obligatorio");
+                }
+                if (apmstr.isEmpty())
+                {
+                    etapm.setError("Campo apellido obligatorio");
+                }
                 if (edadstr.isEmpty())
                 {
                     etedad.setError( "Campo Edad obligatorio");
@@ -117,6 +128,16 @@ public class Registro extends AppCompatActivity {
                     {
                         etnombre.setError( "Formato del nombre invalido");
                         etnombre.requestFocus();
+                    }
+                    if (!validarNom(appstr))
+                    {
+                        etapp.setError( "Formato del nombre invalido");
+                        etapp.requestFocus();
+                    }
+                    if (!validarNom(apmstr))
+                    {
+                        etapm.setError( "Formato del nombre invalido");
+                        etapm.requestFocus();
                     }
                     if(edadnumero > 90 || edadnumero <= 18)
                     {
@@ -172,10 +193,19 @@ public class Registro extends AppCompatActivity {
                         int telint = Integer.parseInt(telstr);
                         int cont1int = Integer.parseInt(cont1str);
                         int cont2int = Integer.parseInt(cont2str);
+                        int numa = (int)(Math.random()*999)+1;
+                        String numastr = String.valueOf(numa);
+                        String nomS = namestr.substring(0,1);
+                        String appS = appstr.substring(0,1);
+                        String apmS = apmstr.substring(0,1);
+
+                        String  numPac = nomS + appS + apmS + edadstr +numastr;
 
                         //insert the details in database
                         Contact c = new Contact();
                         c.setName(namestr);
+                        c.setApp(appstr);
+                        c.setApm(apmstr);
                         c.setEmail(emailstr);
                         c.setUname(unamestr);
                         c.setPass(pass1str);
@@ -192,6 +222,7 @@ public class Registro extends AppCompatActivity {
                         c.setPresu(120);
                         c.setPunt(120);
                         c.setRisk(120);
+                        c.setNumPac(numPac);
                         helper.insertContact(c);
 
                         Toast pass = Toast.makeText(Registro.this, "Registro exitoso", Toast.LENGTH_LONG);

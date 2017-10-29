@@ -7,7 +7,7 @@ package com.example.romeg.bcarev10;
 public class Contact {
 
     int tel, cont1, cont2, edad, presu, punt, risk;
-    String name, email, uname, pass, genero, fum, med, colt,colh;
+    String name, app, apm, email, uname, pass, genero, fum, med, colt,colh, numPac;
 
 
     public void setName(String name)
@@ -18,6 +18,12 @@ public class Contact {
     {
         return this.name;
     }
+
+    public void setApp(String app){this.app = app;}
+    public String getApp(){return this.app;}
+
+    public void setApm(String apm){this.apm = apm;}
+    public String getApm(){return this.apm;}
 
     public void setEmail(String email)
     {
@@ -36,6 +42,7 @@ public class Contact {
     {
         return this.uname;
     }
+
 
     public void setPass(String pass)
     {
@@ -137,4 +144,7 @@ public class Contact {
     public int getRisk(){
         return  this.risk;
     }
+
+    public void setNumPac(String numPac){this.numPac = numPac;}
+    public String getNumPac(){return this.numPac; }
 }

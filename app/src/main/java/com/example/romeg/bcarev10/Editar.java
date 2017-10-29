@@ -19,9 +19,8 @@ import java.util.regex.Pattern;
 public class Editar extends AppCompatActivity {
 
     DBHelper helper = new DBHelper(this);
-    EditText etnombree, etemaile, etusuarioe, etedad, ettel, etcont1, etcont2;
+    EditText etnombree, etappe, etapme, etemaile, etusuarioe, etedad, ettel, etcont1, etcont2;
     Spinner spGeneroE;
-    CheckBox etgeneM, etgeneF;
     Button btnrec;
 
 
@@ -36,16 +35,24 @@ public class Editar extends AppCompatActivity {
 
         String usernamed = getIntent().getStringExtra("Username");
         String named = getIntent().getStringExtra("Name");
+        String appd = getIntent().getStringExtra("App");
+        String apmd = getIntent().getStringExtra("Apm");
         String edadd = getIntent().getStringExtra("Edad");
         String emaild = getIntent().getStringExtra("Email");
         String teld = getIntent().getStringExtra("Tel");
         String cont1d = getIntent().getStringExtra("Cont1");
         String cont2d = getIntent().getStringExtra("Cont2");
+        String numpacd = getIntent().getStringExtra("Numpac");
 
 
 
         etnombree = (EditText) findViewById(R.id.txtnombrerec);
         etnombree.setText(named);
+        etappe = (EditText) findViewById(R.id.txtapprec);
+        etappe.setText(appd);
+        etapme = (EditText) findViewById(R.id.txtapmrec);
+        etapme.setText(apmd);
+
         etemaile = (EditText) findViewById(R.id.txtemailrec);
         etemaile.setText(emaild);
         etusuarioe = (EditText) findViewById(R.id.txtusuariorec);
@@ -65,6 +72,8 @@ public class Editar extends AppCompatActivity {
         if (v.getId() == R.id.btnguardarDatos) {
             String usernamed2 = getIntent().getStringExtra("Username");
             String namee = etnombree.getText().toString();
+            String appe = etappe.getText().toString();
+            String apme = etapme.getText().toString();
             String usere = etusuarioe.getText().toString();
             String edadee = etedad.getText().toString();
             String emaile = etemaile.getText().toString();
@@ -74,12 +83,25 @@ public class Editar extends AppCompatActivity {
             int edadnumero = Integer.parseInt(edadee);
             String genero = (spGeneroE.getSelectedItem().toString());
 
-            if (namee.isEmpty() || emaile.isEmpty() || usere.isEmpty() || edadee.isEmpty() || tele.isEmpty() || !validarNom(namee) || !ValidacionEmail(emaile) || edadnumero > 90 || edadnumero <= 18 || tele.length()<8 || cont1e.length()<8 || cont2e.length()<8 || genero.equals("-seleccione-")) {
+            int numa = (int)(Math.random()*999)+1;
+            String numastr = String.valueOf(numa);
+            String nomS = namee.substring(0,1);
+            String appS = appe.substring(0,1);
+            String apmS = apme.substring(0,1);
+
+            String  numPac = nomS + appS + apmS + edadee +numastr;
+
+
+            if (namee.isEmpty() || appe.isEmpty() || apme.isEmpty() || emaile.isEmpty() || usere.isEmpty() || edadee.isEmpty() || tele.isEmpty() || !validarNom(namee) || !ValidacionEmail(emaile) || edadnumero > 90 || edadnumero <= 18 || tele.length()<8 || cont1e.length()<8 || cont2e.length()<8 || genero.equals("-seleccione-")) {
                 Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
                         Toast.LENGTH_SHORT).show();
                 if (namee.isEmpty()) {
                     etnombree.setError("Campo Nombre obligatorio");
-                } if (edadee.isEmpty()) {
+                }if (appe.isEmpty()){
+                    etappe.setError("Campo Nombre obligatorio");
+                }if (apme.isEmpty()){
+                    etapme.setError("Campo Nombre obligatorio");
+                }if (edadee.isEmpty()) {
                     etedad.setError("Campo Edad obligatorio");
                 } if (emaile.isEmpty()) {
                     etemaile.setError("Campo Email obligatorio");
@@ -90,6 +112,12 @@ public class Editar extends AppCompatActivity {
                 } if (!validarNom(namee)){
                     etnombree.setError("Formato del nombre invalido");
                     etnombree.requestFocus();
+                } if (!validarNom(appe)){
+                    etappe.setError("Formato del nombre invalido");
+                    etappe.requestFocus();
+                } if (!validarNom(apme)){
+                    etapme.setError("Formato del nombre invalido");
+                    etapme.requestFocus();
                 } if (!ValidacionEmail(emaile)){
                     etemaile.setError("Formato del email invalido");
                     etemaile.requestFocus();
@@ -109,14 +137,12 @@ public class Editar extends AppCompatActivity {
 
             } else {
 
-
-
                     int edadinte = Integer.parseInt(edadee);
                     int telinte = Integer.parseInt(tele);
                     int cont1inte = Integer.parseInt(cont1e);
                     int cont2inte = Integer.parseInt(cont2e);
                     DBHelper db = new DBHelper(getApplicationContext());
-                    String Mensaje = db.actualizarData(usernamed2, usere, namee, edadinte, emaile, telinte, cont1inte, cont2inte, genero);
+                    String Mensaje = db.actualizarData(usernamed2, usere, namee, appe, apme, edadinte, emaile, telinte, cont1inte, cont2inte, genero, numPac);
                     Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_LONG).show();
 
                     if (!Mensaje.isEmpty()) {
@@ -128,12 +154,16 @@ public class Editar extends AppCompatActivity {
                         Intent i = new Intent(Editar.this, DatosP.class);
                         i.putExtra("Username", usere);
                         i.putExtra("Name", namee);
+                        i.putExtra("App", appe);
+                        i.putExtra("Apm", appe);
                         i.putExtra("Edad", agee);
                         i.putExtra("Email", emaile);
                         i.putExtra("Tel", telE);
                         i.putExtra("Cont1", cont1E);
                         i.putExtra("Cont2", Cont2E);
                         i.putExtra("Gen", genero);
+                        i.putExtra("Gen", genero);
+                        i.putExtra("Numpac", numPac);
                         startActivity(i);
 
                         finish();
@@ -173,22 +203,28 @@ public class Editar extends AppCompatActivity {
         String str = getIntent().getStringExtra("Username");
         String userna = helper.searchPass(str);
         String named = helper.searchname(str);
+        String appd = helper.searchapp(str);
+        String apmd = helper.searchapm(str);
         String edadd = helper.searchedad(str);
         String emaild = helper.searchemail(str);
         String teld = helper.searchtel(str);
         String cont1d = helper.searchcont1(str);
         String cont2d = helper.searchcont2(str);
         String gend = helper.searchgen(str);
+        String numpacd = helper.searchnumpac(str);
 
         Intent i = new Intent(Editar.this, DatosP.class);
         i.putExtra("Username", str);
         i.putExtra("Name", named);
+        i.putExtra("App", appd);
+        i.putExtra("Apm", apmd);
         i.putExtra("Edad", edadd);
         i.putExtra("Email", emaild);
         i.putExtra("Tel", teld);
         i.putExtra("Cont1", cont1d);
         i.putExtra("Cont2", cont2d);
         i.putExtra("Gen", gend);
+        i.putExtra("Numpac", numpacd);
         startActivity(i);
         finish();
     }

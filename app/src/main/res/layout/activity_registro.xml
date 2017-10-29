@@ -58,6 +58,32 @@
             android:paddingLeft="10dp"
             android:textColor="#ffff"
             android:textColorHint="#ffff" />
+        <EditText
+            android:id="@+id/txtappreg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/borde"
+            android:hint="Apellido paterno * "
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:textColor="#ffff"
+            android:textColorHint="#ffff" />
+        <EditText
+            android:id="@+id/txtapmreg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/borde"
+            android:hint="Apellido materno * "
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:textColor="#ffff"
+            android:textColorHint="#ffff" />
 
         <TextView
             android:id="@+id/textView2"

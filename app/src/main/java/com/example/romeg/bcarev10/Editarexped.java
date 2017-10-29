@@ -19,7 +19,7 @@ public class Editarexped extends AppCompatActivity {
 
     DBHelper helper = new DBHelper(this);
 
-    TextView tvnomEx, tvedadEx, tvemailEx, tvpresure;
+    TextView tvnomEx, tvappEx, tvapmEx, tvedadEx, tvemailEx, tvpresure,  tvnumpacEx;
     Spinner spGenEx, spFumEx,spmedEx,spColtEx, spColhEx;
 
     @Override
@@ -30,6 +30,9 @@ public class Editarexped extends AppCompatActivity {
         String usernamed = getIntent().getStringExtra("Username");
         String named = getIntent().getStringExtra("Name");
         String edadd = getIntent().getStringExtra("Edad");
+        String appd = getIntent().getStringExtra("App");
+        String apmd = getIntent().getStringExtra("Apm");
+
         String emaild = getIntent().getStringExtra("Email");
         String gened = getIntent().getStringExtra("Gen");
         String fumE = getIntent().getStringExtra("Fum");
@@ -37,6 +40,7 @@ public class Editarexped extends AppCompatActivity {
         String coltE = getIntent().getStringExtra("Colt");
         String colhE = getIntent().getStringExtra("Colh");
         String presE = getIntent().getStringExtra("Presu");
+        String numpacE = getIntent().getStringExtra("Numpac");
         String[] gener = {"-seleccione-","Masculino","Femenino"};
         String[] colesteroTot = {"-seleccione-","<160","160-199","200-239","240-279",">=280"};
         String[] colesterolHDL = {"-seleccione-",">=60","50-59","40-49","30-39","<30"};
@@ -45,6 +49,11 @@ public class Editarexped extends AppCompatActivity {
 
         tvnomEx = (EditText) findViewById(R.id.txtnombreEx);
         tvnomEx.setText(named);
+        tvappEx = (EditText) findViewById(R.id.txtappEx);
+        tvappEx.setText(appd);
+        tvapmEx = (EditText) findViewById(R.id.txtapmEx);
+        tvapmEx.setText(apmd);
+
         tvedadEx = (EditText) findViewById(R.id.txtedadEx);
         tvedadEx.setText(edadd);
         tvemailEx = (EditText) findViewById(R.id.txtemailEx);
@@ -58,9 +67,9 @@ public class Editarexped extends AppCompatActivity {
         spmedEx = (Spinner) findViewById(R.id.spDiabetesEx);
         spmedEx.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, valoresDiabetes));
         spColhEx = (Spinner) findViewById(R.id.spcolesterolHDLEx);
-        spColhEx.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colesteroTot));
+        spColhEx.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colesterolHDL));
         spColtEx = (Spinner) findViewById(R.id.spcolesterol1Ex);
-        spColtEx.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colesterolHDL));
+        spColtEx.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colesteroTot));
     }
 
     public void onEditarEClick(View v)
@@ -69,6 +78,9 @@ public class Editarexped extends AppCompatActivity {
         {
             String usernamed2 = getIntent().getStringExtra("Username");
             String namee = tvnomEx.getText().toString();
+            String appe = tvappEx.getText().toString();
+            String apme = tvapmEx.getText().toString();
+
             String edadee = tvedadEx.getText().toString();
             String emaile = tvemailEx.getText().toString();
             String presure = tvpresure.getText().toString();
@@ -81,26 +93,49 @@ public class Editarexped extends AppCompatActivity {
             int edadnumero = Integer.parseInt(edadee);
             int presurenumero = Integer.parseInt(presure);
 
+            int numa = (int)(Math.random()*999)+1;
+            String numastr = String.valueOf(numa);
+            String nomS = namee.substring(0,1);
+            String appS = appe.substring(0,1);
+            String apmS = apme.substring(0,1);
 
-            if (namee.isEmpty() || edadee.isEmpty() || emaile.isEmpty() || presure.isEmpty() ||gene.equals("-seleccione-") || fum.equals("-seleccione-") || med.equals("-seleccione-") || colesterol.equals("-seleccione-") || colesteHDL.equals("-seleccione-"))
+            String  numPac = nomS + appS + apmS + edadee +numastr;
+
+
+            if (namee.isEmpty() || appe.isEmpty() || apme.isEmpty() || edadee.isEmpty() || emaile.isEmpty() || presure.isEmpty() ||gene.equals("-seleccione-") || fum.equals("-seleccione-") || med.equals("-seleccione-") || colesterol.equals("-seleccione-") || colesteHDL.equals("-seleccione-"))
             {
                 Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
                         Toast.LENGTH_SHORT).show();
                 if (namee.isEmpty()) {
                     tvnomEx.setError("Campo Nombre obligatorio");
-                } if (edadee.isEmpty()){
-                    tvedadEx.setError("Campo Nombre obligatorio");
+                } if (appe.isEmpty()) {
+                    tvappEx.setError("Campo Nombre obligatorio");
+                } if (apme.isEmpty()) {
+                    tvapmEx.setError("Campo Nombre obligatorio");
+                }
+                if (edadee.isEmpty()){
+                    tvedadEx.setError("Campo Edad obligatorio");
                 } if (emaile.isEmpty()){
-                    tvemailEx.setError("Campo Nombre obligatorio");
+                    tvemailEx.setError("Campo Email obligatorio");
                 } if (presure.isEmpty()) {
-                    tvpresure.setError("Campo Nombre obligatorio");
+                    tvpresure.setError("Campo Presión obligatorio");
                 }
             }else {
-                if (!validarNom(namee) || !ValidacionEmail(emaile) || edadnumero > 90 || edadnumero <= 18){
+                if (!validarNom(namee) || !validarNom(appe) || !validarNom(apme) || !ValidacionEmail(emaile) || edadnumero > 90 || edadnumero <= 18){
                     if(!validarNom(namee))
                     {
                         tvnomEx.setError( "Formato del nombre invalido");
                         tvnomEx.requestFocus();
+                    }
+                    if(!validarNom(appe))
+                    {
+                        tvappEx.setError( "Formato del nombre invalido");
+                        tvappEx.requestFocus();
+                    }
+                    if(!validarNom(apme))
+                    {
+                        tvapmEx.setError( "Formato del nombre invalido");
+                        tvapmEx.requestFocus();
                     }
                     if (!ValidacionEmail(emaile))
                     {
@@ -124,7 +159,7 @@ public class Editarexped extends AppCompatActivity {
                             Toast.makeText(this, "Sexo: Masculino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
 
                             DBHelper db = new DBHelper(getApplicationContext());
-                            String Mensaje = db.actualizarExpediente(usernamed2, namee, edadnumero, emaile, presurenumero, gene, fum, med, colesterol,colesteHDL,riesgo, porcentaje);
+                            String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol,colesteHDL,riesgo, porcentaje, numPac);
                             Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
 
 
@@ -134,7 +169,7 @@ public class Editarexped extends AppCompatActivity {
                             Toast.makeText(this, "Sexo: Femenino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
 
                             DBHelper db = new DBHelper(getApplicationContext());
-                            String Mensaje = db.actualizarExpediente(usernamed2, namee, edadnumero, emaile, presurenumero, gene, fum, med, colesterol,colesteHDL,riesgo, porcentaje);
+                            String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol,colesteHDL,riesgo, porcentaje, numPac);
                             Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
 
 
@@ -485,10 +520,15 @@ public class Editarexped extends AppCompatActivity {
         String presu = helper.searchpresure(str);
         String punt = helper.searchpunt(str);
         String risk = helper.searchrisk(str);
+        String appd = helper.searchapp(str);
+        String apmd = helper.searchapm(str);
+        String numpacd = helper.searchnumpac(str);
 
         Intent i = new Intent(Editarexped.this, Verexp.class);
         i.putExtra("Username", str);
         i.putExtra("Name", named);
+        i.putExtra("App", appd);
+        i.putExtra("Apm", apmd);
         i.putExtra("Edad", edadd);
         i.putExtra("Email", emaild);
         i.putExtra("Tel", teld);
@@ -503,6 +543,7 @@ public class Editarexped extends AppCompatActivity {
         i.putExtra("Presu", presu);
         i.putExtra("Punt", punt);
         i.putExtra("Risk", risk);
+        i.putExtra("Numpac", numpacd);
         startActivity(i);
     }
 

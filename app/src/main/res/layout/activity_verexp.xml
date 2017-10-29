@@ -54,6 +54,40 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="N° Paciente:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+
+                        />
+                    <TextView
+                        android:id="@+id/tvnumpExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        android:paddingLeft="20dp"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Nombre:"
                         android:textSize="20sp"
                         android:textColor="#ffff"
@@ -72,6 +106,78 @@
                         />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apellido P:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+
+                        />
+                    <TextView
+                        android:id="@+id/tvappExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        android:paddingLeft="20dp"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apellido M:"
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+
+                        />
+                    <TextView
+                        android:id="@+id/tvapmExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="#ffff"
+                        android:layout_margin="10dp"
+                        android:paddingLeft="20dp"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
 
 
 
@@ -101,6 +207,12 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,6 +239,12 @@
                         />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -193,6 +311,12 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -219,6 +343,12 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -243,6 +373,11 @@
                         />
 
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -269,6 +404,12 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -293,6 +434,12 @@
                         />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
 
 
                 <LinearLayout
@@ -319,6 +466,12 @@
                         />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ffff"
+                    android:layout_margin="10dp"></View>
 
 
                 <LinearLayout
@@ -348,6 +501,7 @@
                 </LinearLayout>
 
 
+
             </LinearLayout>
 
             <LinearLayout
@@ -363,7 +517,7 @@
                     android:id="@+id/btneditarexp"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="30dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/borde"
@@ -375,7 +529,7 @@
                     android:id="@+id/btnexportarexp"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="30dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/borde"
@@ -385,11 +539,7 @@
 
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="invisible"></ListView>
+
 
 
         </LinearLayout>

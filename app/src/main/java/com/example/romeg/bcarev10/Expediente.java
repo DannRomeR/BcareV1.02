@@ -71,6 +71,9 @@ public class Expediente extends AppCompatActivity {
             String presu = helper.searchpresure(str);
             String punt = helper.searchpunt(str);
             String risk = helper.searchrisk(str);
+            String appd = helper.searchapp(str);
+            String apmd = helper.searchapm(str);
+            String numpacd = helper.searchnumpac(str);
 
 
             if(fum.equals("Sin dato") || med.equals("Sin dato") || colt.equals("Sin dato") || colh.equals("Sin dato"))
@@ -83,6 +86,8 @@ public class Expediente extends AppCompatActivity {
                 Intent i = new Intent(Expediente.this, Verexp.class);
                 i.putExtra("Username", str);
                 i.putExtra("Name", named);
+                i.putExtra("App", appd);
+                i.putExtra("Apm", apmd);
                 i.putExtra("Edad", edadd);
                 i.putExtra("Email", emaild);
                 i.putExtra("Tel", teld);
@@ -97,7 +102,9 @@ public class Expediente extends AppCompatActivity {
                 i.putExtra("Presu", presu);
                 i.putExtra("Punt", punt);
                 i.putExtra("Risk", risk);
+                i.putExtra("Numpac", numpacd);
                 startActivity(i);
+                finish();
             }
 
 
@@ -114,16 +121,22 @@ public class Expediente extends AppCompatActivity {
             String cont1d = helper.searchcont1(str);
             String cont2d = helper.searchcont2(str);
             String gend = helper.searchgen(str);
+            String appd = helper.searchapp(str);
+            String apmd = helper.searchapm(str);
+            String numpacd = helper.searchnumpac(str);
 
             Intent i = new Intent(Expediente.this, Riesgo.class);
             i.putExtra("Username", str);
             i.putExtra("Name", named);
+            i.putExtra("App", appd);
+            i.putExtra("Apm", apmd);
             i.putExtra("Edad", edadd);
             i.putExtra("Email", emaild);
             i.putExtra("Tel", teld);
             i.putExtra("Cont1", cont1d);
             i.putExtra("Cont2", cont2d);
             i.putExtra("Gen", gend);
+            i.putExtra("Numpac", numpacd);
             startActivity(i);
             finish();
         }
@@ -145,16 +158,23 @@ public class Expediente extends AppCompatActivity {
         String cont1d = helper.searchcont1(str);
         String cont2d = helper.searchcont2(str);
         String gend = helper.searchgen(str);
+        String appd = helper.searchapp(str);
+        String apmd = helper.searchapm(str);
+        String numpacd = helper.searchnumpac(str);
 
         Intent i = new Intent(Expediente.this, Usuario.class);
         i.putExtra("Username", str);
         i.putExtra("Name", named);
+        i.putExtra("App", appd);
+        i.putExtra("Apm", apmd);
         i.putExtra("Edad", edadd);
         i.putExtra("Email", emaild);
         i.putExtra("Tel", teld);
         i.putExtra("Cont1", cont1d);
         i.putExtra("Cont2", cont2d);
         i.putExtra("Gen", gend);
+
+        i.putExtra("Numpac", numpacd);
         startActivity(i);
         finish();
     }

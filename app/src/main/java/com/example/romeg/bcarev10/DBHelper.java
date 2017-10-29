@@ -17,6 +17,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "contacts";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
+    private static final String COLUMN_APP = "app";
+    private static final String COLUMN_APM = "apm";
     private static final String COLUMN_EMAIL = "email";
     private static final String COLUMN_UNAME = "uname";
     private static final String COLUMN_PASS = "pass";
@@ -32,10 +34,11 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PRESU = "presu";
     private static final String COLUMN_PUNT = "punt";
     private static final String COLUMN_RISK = "risk";
+    private static final String COLUMN_NUMPAC="numpac";
 
 
     SQLiteDatabase db;
-    private static final String TABLE_CREATE = "create table contacts (id integer primary key not null, name text not null, email text not null, uname text not null, pass text not null, edad integer null, tel integer null, cont1 integer null, cont2 integer null, gen text not null, fum text not null, med text not null, colt text not null, colh text not null, presu integer not null, punt integer not null, risk integer not null);";
+    private static final String TABLE_CREATE = "create table contacts (id integer primary key not null, name text not null, app text not null, apm text not null, email text not null, uname text not null, pass text not null, edad integer null, tel integer null, cont1 integer null, cont2 integer null, gen text not null, fum text not null, med text not null, colt text not null, colh text not null, presu integer not null, punt integer not null, risk integer not null, numpac text not null);";
 
 
     public DBHelper(Context context)
@@ -60,6 +63,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         values.put(COLUMN_ID, count);
         values.put(COLUMN_NAME, c.getName());
+        values.put(COLUMN_APP, c.getApp());
+        values.put(COLUMN_APM, c.getApm());
         values.put(COLUMN_EMAIL, c.getEmail());
         values.put(COLUMN_UNAME, c.getUname());
         values.put(COLUMN_PASS, c.getPass());
@@ -76,6 +81,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_PRESU, c.getPresu());
         values.put(COLUMN_PUNT, c.getPunt());
         values.put(COLUMN_RISK, c.getRisk());
+
+        values.put(COLUMN_NUMPAC, c.getNumPac());
 
 
         db.insert(TABLE_NAME, null, values);
@@ -131,6 +138,52 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         db = this.getReadableDatabase();
         String query = "select uname, name from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(uname))
+                {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+
+    public String searchapp(String uname)
+    {
+        db = this.getReadableDatabase();
+        String query = "select uname, app from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(uname))
+                {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+
+    public String searchapm(String uname)
+    {
+        db = this.getReadableDatabase();
+        String query = "select uname, apm from contacts";
         Cursor cursor = db.rawQuery(query, null);
         String a, b;
         b = "not found";
@@ -449,6 +502,29 @@ public class DBHelper extends SQLiteOpenHelper {
         return b;
     }
 
+    public String searchnumpac(String uname)
+    {
+        db = this.getReadableDatabase();
+        String query = "select uname, numpac from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(uname))
+                {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+
     public String insertCalcu (String useCal, String fum, String med, String colt, String colh, int presure, int punt, int risk )
     {
         String Mensaje = "";
@@ -473,12 +549,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return Mensaje;
     }
 
-    public String actualizarExpediente (String use, String name, int age, String email, int presure, String genero, String fum, String med, String colt, String colh, int punt, int risk)
+    public String actualizarExpediente (String use, String name, String app, String apm,  int age, String email, int presure, String genero, String fum, String med, String colt, String colh, int punt, int risk, String numpac)
     {
         String Mensaje = "";
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contenedor = new ContentValues();
         contenedor.put("name",name);
+        contenedor.put("app",app);
+        contenedor.put("apm",apm);
         contenedor.put("edad",age);
         contenedor.put("email",email);
         contenedor.put("gen",genero);
@@ -489,6 +567,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contenedor.put("presu",presure);
         contenedor.put("punt",punt);
         contenedor.put("risk",risk);
+        contenedor.put("numpac",numpac);
         int cantidad = database.update("contacts", contenedor,"uname='"+use+"'",null);
         if (cantidad != 0){
             Mensaje="La operacion se ha realizado exitosamente";
@@ -501,13 +580,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return Mensaje;
     }
 
-
-    public String actualizarData(String use, String uname,String name, int edad, String email, int tel, int cont1, int cont2,String gener)
+    public String actualizarData(String use, String uname, String name, String app, String apm,  int edad, String email, int tel, int cont1, int cont2,String gener, String numpac)
     {
         String Mensaje = "";
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contenedor = new ContentValues();
         contenedor.put("name",name);
+        contenedor.put("app",app);
+        contenedor.put("apm",apm);
         contenedor.put("email",email);
         contenedor.put("uname",uname);
         contenedor.put("edad",edad);
@@ -515,6 +595,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contenedor.put("cont1",cont1);
         contenedor.put("cont2",cont2);
         contenedor.put("gen",gener);
+        contenedor.put("numpac",numpac);
         int cantidad = database.update("contacts", contenedor,"uname='"+use+"'",null);
         if (cantidad != 0){
             Mensaje="La operacion se ha realizado exitosamente";

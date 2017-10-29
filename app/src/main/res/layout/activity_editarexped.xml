@@ -57,6 +57,32 @@
                     android:background="@drawable/borde"
                     android:textColor="#ffff"
                     />
+                <EditText
+                    android:id="@+id/txtappEx"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Apellido paterno * "
+                    android:paddingLeft="10dp"
+                    android:textColorHint="#ffff"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/borde"
+                    android:textColor="#ffff"
+                    />
+                <EditText
+                    android:id="@+id/txtapmEx"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Apellido materno * "
+                    android:paddingLeft="10dp"
+                    android:textColorHint="#ffff"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/borde"
+                    android:textColor="#ffff"
+                    />
 
                 <TextView
                     android:id="@+id/textView2"
