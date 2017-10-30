@@ -21,7 +21,18 @@
             android:textStyle="bold"
             android:textColor="#ffff"
             android:gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
+            />
+
+        <TextView
+            android:id="@+id/userVin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="2sp"
+            android:textColor="#ffff"
+            android:layout_margin="1dp"
+            android:visibility="invisible"
             />
 
         <LinearLayout
@@ -57,7 +68,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/etpresion"
+            android:id="@+id/etpresionVin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Presión sistólica "
@@ -68,25 +79,28 @@
             android:layout_marginRight="30dp"
             android:background="@drawable/borde"
             android:textColor="#ffff"
+            android:inputType="text|number"
             />
+
         <Button
+            android:id="@+id/Calcular"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Enviar"
-            android:id="@+id/Calcular"
-            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/borde"
-            android:textColor="#ffff"
-            android:layout_gravity="center"/>
+            android:onClick="onEnviarClick"
+            android:text="Enviar"
+            android:textColor="#ffff" />
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/PeripheralTextView"
             android:scrollbars="vertical"
             android:maxLines="30"

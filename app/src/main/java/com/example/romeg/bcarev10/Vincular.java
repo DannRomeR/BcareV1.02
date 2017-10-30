@@ -28,7 +28,11 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import agency.tango.materialintroscreen.listeners.IFinishListener;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 
@@ -40,7 +44,11 @@ public class Vincular extends AppCompatActivity {
     BluetoothLeScanner btScanner;
     Button startScanningButton;
     Button stopScanningButton;
-    TextView peripheralTextView;
+    TextView peripheralTextView, etuse;
+    EditText bpsistolica;
+
+
+
     private final static int REQUEST_ENABLE_BT = 1;
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
 
@@ -50,6 +58,13 @@ public class Vincular extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vincular);
+
+
+        String username = getIntent().getStringExtra("Username");
+
+
+        etuse = (TextView) findViewById(R.id.userVin);
+        etuse.setText(username);
 
         peripheralTextView = (TextView) findViewById(R.id.PeripheralTextView);
         peripheralTextView.setMovementMethod(new ScrollingMovementMethod());
@@ -94,6 +109,427 @@ public class Vincular extends AppCompatActivity {
             });
             builder.show();
         }
+
+    }
+
+    public void onEnviarClick(View v)
+    {
+        int riesgo,porcentaje=0;
+        String username = etuse.getText().toString();
+        String userna = helper.searchPass(username);
+        String named = helper.searchname(username);
+        String edadd = helper.searchedad(username);
+        String emaild = helper.searchemail(username);
+        String teld = helper.searchtel(username);
+        String cont1d = helper.searchcont1(username);
+        String cont2d = helper.searchcont2(username);
+
+        String gend = helper.searchgen(username);
+
+        String fum = helper.searchfum(username);
+        String med = helper.searchmed(username);
+        String colt = helper.searchcolt(username);
+        String colh = helper.searchcolh(username);
+
+        String appd = helper.searchapp(username);
+        String apmd = helper.searchapm(username);
+        String numpacd = helper.searchnumpac(username);
+
+
+
+        bpsistolica = (EditText) findViewById(R.id.etpresionVin);
+        String presion = bpsistolica.getText().toString();
+        int Ipresion2 = Integer.parseInt(presion);
+
+        if (v.getId() == R.id.Calcular)
+        {
+            if (presion.isEmpty())
+            {
+                Toast.makeText(this, "El campo de presion está vacío", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                if(fum.equals("Sin dato") && med.equals("Sin dato") && colt.equals("Sin dato") && colh.equals("Sin dato"))
+                {
+                    Toast.makeText(this, "No ha realizado el calculo de riesgo, llene el formulario que se le pide", Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(Vincular.this, Riesgo.class);
+                    i.putExtra("Username", username);
+                    i.putExtra("Name", named);
+                    i.putExtra("App", appd);
+                    i.putExtra("Apm", apmd);
+                    i.putExtra("Edad", edadd);
+                    i.putExtra("Email", emaild);
+                    i.putExtra("Tel", teld);
+                    i.putExtra("Cont1", cont1d);
+                    i.putExtra("Cont2", cont2d);
+                    i.putExtra("Gen", gend);
+                    i.putExtra("Numpac", numpacd);
+                    startActivity(i);
+                    finish();
+                }
+                else
+                {
+                    if (gend.equals("Masculino"))
+                    {
+                        riesgo=calcularHombre();
+                        porcentaje=calcularPorcentajeHombre(riesgo);
+                        Toast.makeText(this, "Sexo: Masculino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
+
+                        DBHelper db = new DBHelper(getApplicationContext());
+                        String Mensaje = db.insertCalcu(username, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
+                        Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
+
+                        if(porcentaje > 10 && porcentaje < 50)
+                        {
+                            Toast.makeText(this, "Su porcentaje a ha salido alto realice el siguiente Test", Toast.LENGTH_LONG).show();
+                            String str = etuse.getText().toString();
+
+                            new PreferenceManager(this).clearPreference();
+                            Intent i = new Intent(Vincular.this, Fast2.class);
+                            i.putExtra("Username", str);
+
+                            startActivity(i);
+                            finish();
+                        }
+                        else
+                        {
+                            Toast.makeText(this, "Tus niveles de riesgo son normales, no olvides realizar el calculo de riesgo todos los días", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else if (gend.equals("Femenino"))
+                    {
+                        riesgo=calcularMujer();
+                        porcentaje=calcularPorcentajeMujer(riesgo);
+                        Toast.makeText(this, "Sexo: Femenino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
+
+                        DBHelper db = new DBHelper(getApplicationContext());
+                        String Mensaje = db.insertCalcu(username, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
+                        Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
+
+                        if(porcentaje > 10 && porcentaje < 50)
+                        {
+                            Toast.makeText(this, "Su porcentaje a ha salido alto realice el siguiente Test", Toast.LENGTH_LONG).show();
+                            String str = etuse.getText().toString();
+
+                            new PreferenceManager(this).clearPreference();
+                            Intent i = new Intent(Vincular.this, Fast2.class);
+                            i.putExtra("Username", str);
+
+                            startActivity(i);
+                            finish();
+                        }
+                        else
+                        {
+                            Toast.makeText(this, "Tus niveles de riesgo son normales, no olvides realizar el calculo de riesgo todos los días", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    public int calcularHombre(){
+        String username = etuse.getText().toString();
+        String edadd = helper.searchedad(username);
+        int riesgo=0;
+        int edad= Integer.parseInt(edadd);
+        if (edad<=35){
+            riesgo= -1;
+        }else if(edad>=35&&edad<40){
+            riesgo=0;
+        }else if(edad>=40&&edad<45){
+            riesgo=1;
+        }else if(edad>=45&&edad<50){
+            riesgo=2;
+        }else if(edad>=50&&edad<55){
+            riesgo=3;
+        } else if(edad>=55&&edad<60){
+            riesgo=4;
+        }else if(edad>=60&&edad<65){
+            riesgo=5;
+        }else if(edad>=65&&edad<70){
+            riesgo=6;
+        }else if(edad>70){
+            riesgo=7;
+        }else{
+            Toast.makeText(this, "Edad no valida", Toast.LENGTH_SHORT).show();
+        }
+
+
+        //********************************COLESTEROL TOTAL*****************************************
+        //int colesteroltotal=Integer.parseInt(jcolesterolt.getText().toString());
+        String colesterol = helper.searchcolt(username);
+        if (colesterol.equals("-seleccione-")) {
+            Toast.makeText(this, "Seleccione un valor de Colesterol Total", Toast.LENGTH_SHORT).show();
+        } else if(colesterol.equals("<160")){
+            riesgo=riesgo+(-3);
+        }else if(colesterol.equals("160-199")){
+            riesgo=riesgo+(0);
+        }else if(colesterol.equals("200-239")){
+            riesgo=riesgo+(1);
+        }else if(colesterol.equals("240-279")){
+            riesgo=riesgo+(2);
+        }else if(colesterol.equals(">=280")) {
+            riesgo = riesgo + (3);
+        }
+
+        //********************************COLESTEROL HDL*****************************************
+        //int colesterolHDL=Integer.parseInt(jcolesterolh.getText().toString());
+        String colesteHDL = helper.searchcolh(username);
+        if (colesteHDL.equals("-seleccione-")) {
+            Toast.makeText(this, "Seleccione un valor de Colesterol HDL", Toast.LENGTH_SHORT).show();
+        }
+        else if (colesteHDL.equals("<30")){
+            riesgo=riesgo+(5);
+        }else if(colesteHDL.equals("30-39")) { //30
+            riesgo=riesgo+(2);
+        }else if(colesteHDL.equals("40-49")){//colesterolHDL>=35&&colesterolHDL<45){
+            riesgo=riesgo+(1);
+        }else if(colesteHDL.equals("50-59")){//colesterolHDL>=45&&colesterolHDL<50){
+            riesgo=riesgo+(0);
+        }else if(colesteHDL.equals(">=60")){//colesterolHDL>=50&&colesterolHDL<60){
+            riesgo=riesgo+(-2);
+        }//colesterolHDL>=60){
+
+        //********************************PRESION SISTOLICA*****************************************
+        bpsistolica = (EditText) findViewById(R.id.etpresionVin);
+        String presionBP = bpsistolica.getText().toString();
+        int Ipresion=Integer.parseInt(presionBP);
+
+        if (presionBP.isEmpty()) {
+            Toast.makeText(this, "El campo de presión está vacío", Toast.LENGTH_SHORT).show();
+        }else if (Ipresion<120){//presionBP.equals("<120")){//
+            riesgo=riesgo+(0);
+        }else if(Ipresion>=120&& Ipresion<130){//presionBP.equals("120-129")){
+            riesgo=riesgo+(0);
+        }else if(Ipresion>=130&& Ipresion<140){//presionBP.equals("130-139")){//
+            riesgo=riesgo+(1);
+        }else if(Ipresion>=140&& Ipresion<160){//presionBP.equals("140-159")){//
+            riesgo=riesgo+(2);
+        }else if(Ipresion>=160){//presionBP.equals(">=160")){//
+            riesgo=riesgo+3;
+        }
+
+
+        //********************************FUMADOR*****************************************
+        String fumador = helper.searchfum(username);
+        if (fumador.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un campo de Fumador", Toast.LENGTH_SHORT).show();
+        }
+        else if(fumador.equals("si")){
+            riesgo=riesgo+(2);
+        }else if(fumador.equals("no")){
+            riesgo=riesgo+(0);
+        }
+
+        //********************************DIABETES*****************************************
+        String diabetes = helper.searchmed(username);
+        if (diabetes.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un campo de Medicamento", Toast.LENGTH_SHORT).show();
+        }
+        else if(diabetes.equals("si")){
+            riesgo=riesgo+(2);
+        }else if(diabetes.equals("no")){
+            riesgo=riesgo+(0);
+        }
+
+        return riesgo;
+    }
+
+    public int calcularMujer(){
+        String username = etuse.getText().toString();
+        String edadC = helper.searchedad(username);
+        int riesgo=0;
+        int edad= Integer.parseInt(edadC);
+        if (edad<=35){
+            riesgo=-9;
+        }else if(edad>=35&&edad<40){
+            riesgo=-4;
+        }else if(edad>=40&&edad<45){
+            riesgo=0;
+        }else if(edad>=45&&edad<50){
+            riesgo=3;
+        }else if(edad>=50&&edad<55){
+            riesgo=6;
+        } else if(edad>=55&&edad<60){
+            riesgo=7;
+        }else if(edad>=60&&edad<65){
+            riesgo=8;
+        }else if(edad>=65&&edad<70){
+            riesgo=8;
+        }else if(edad>=70){
+            riesgo=8;
+        }else{
+            Toast.makeText(this, "Edad no valida", Toast.LENGTH_SHORT).show();
+        }
+
+
+        //********************************COLESTEROL TOTAL*****************************************
+        //int colesteroltotal=Integer.parseInt(jcolesterolt.getText().toString());
+        String colesterol = helper.searchcolt(username);
+        if (colesterol.equals("-seleccione")){
+            Toast.makeText(this, "Seleccione un valor de Colesterol Total", Toast.LENGTH_SHORT).show();
+        }
+        else if(colesterol.equals("<160")){//colesteroltotal<160){
+            riesgo=riesgo+(-2);
+        }else if(colesterol.equals("160-199")){//colesteroltotal>160&&colesteroltotal<200){
+            riesgo=riesgo+(0);
+        }else if(colesterol.equals("200-239")){//colesteroltotal>200&&colesteroltotal<240){
+            riesgo=riesgo+(1);
+        }else if(colesterol.equals("240-279")){//colesteroltotal>240&&colesteroltotal<280){
+            riesgo=riesgo+(1);
+        }else if(colesterol.equals(">=280")){//colesteroltotal>280) {
+            riesgo=riesgo+(3);
+        }
+
+        //********************************COLESTEROL HDL*****************************************
+        //int colesterolHDL=Integer.parseInt(jcolesterolh.getText().toString());
+        String colesteHDL = helper.searchcolh(username);
+        if (colesteHDL.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un valor de Colesterol HDL", Toast.LENGTH_SHORT).show();
+        }
+        else if(colesteHDL.equals("<30")){//colesterolHDL<35) {
+            riesgo=riesgo+(5);
+        }else if(colesteHDL.equals("30-39")){//colesterolHDL>35&&colesterolHDL<45){
+            riesgo=riesgo+(2);
+        }else if(colesteHDL.equals("40-49")){//colesterolHDL>45&&colesterolHDL<50){
+            riesgo=riesgo+(1);
+        }else if(colesteHDL.equals("50-59")){//colesterolHDL>50&&colesterolHDL<60){
+            riesgo=riesgo+(0);
+        }else if(colesteHDL.equals(">=60")){//colesterolHDL>60){
+            riesgo=riesgo+(-3);
+        }
+
+        //********************************PRESION SISTOLICA*****************************************
+        //int presion=Integer.parseInt(jpresion.getText().toString());
+
+        String presionBP = helper.searchpresure(username);
+        int Ipresion=Integer.parseInt(presionBP);
+
+        if (presionBP.isEmpty()) {
+            Toast.makeText(this, "El campo de presión está vacío", Toast.LENGTH_SHORT).show();
+        }else if (Ipresion<120){//presionBP.equals("<120")){//
+            riesgo=riesgo+(-3);
+        }else if(Ipresion>=120&& Ipresion<130){//presionBP.equals("120-129")){
+            riesgo=riesgo+(0);
+        }else if(Ipresion>=130&& Ipresion<140){//presionBP.equals("130-139")){//
+            riesgo=riesgo+(0);
+        }else if(Ipresion>=140&& Ipresion<160){//presionBP.equals("140-159")){//
+            riesgo=riesgo+(2);
+        }else if(Ipresion>=160){//presionBP.equals(">=160")){//
+            riesgo=riesgo+3;
+        }
+
+        //********************************FUMADOR*****************************************
+        String fumador = helper.searchfum(username);
+        if (fumador.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un campo de Fumador", Toast.LENGTH_SHORT).show();
+        }
+        else if(fumador.equals("si")){
+            riesgo=riesgo+(2);
+        }else if(fumador.equals("no")){
+            riesgo=riesgo+(0);
+        }
+
+        //********************************DIABETES*****************************************
+        String diabetes = helper.searchmed(username);
+        if (fumador.equals("-seleccione-")){
+            Toast.makeText(this, "Seleccione un campo de Medicamento", Toast.LENGTH_SHORT).show();
+        }
+        else if(diabetes.equals("si")){
+            riesgo=riesgo+(4);
+        }else if(diabetes.equals("no")){
+            riesgo=riesgo+(0);
+        }
+
+        return riesgo;
+    }
+
+    public int calcularPorcentajeHombre(int riesgo) {
+        int porcentaje = 0;
+        if (riesgo < 0) {
+            porcentaje = 2;
+        }else if (riesgo == 0){
+            porcentaje = 3;
+        }else if (riesgo == 1){
+            porcentaje = 3;
+        }else if (riesgo == 2){
+            porcentaje = 4;
+        }else if (riesgo == 3){
+            porcentaje = 5;
+        }else if (riesgo == 4){
+            porcentaje = 7;
+        }else if (riesgo == 5){
+            porcentaje = 8;
+        }else if (riesgo == 6){
+            porcentaje = 10;
+        }else if (riesgo == 7){
+            porcentaje = 13;
+        }else if (riesgo == 8){
+            porcentaje = 16;
+        }else if (riesgo == 9){
+            porcentaje = 20;
+        }else if (riesgo == 10){
+            porcentaje = 25;
+        }else if (riesgo == 11){
+            porcentaje = 31;
+        }else if (riesgo == 12){
+            porcentaje = 37;
+        }else if (riesgo == 13){
+            porcentaje = 45;
+        }else if (riesgo > 14) {
+            porcentaje = 53;
+        }
+        return porcentaje;
+
+    }
+
+    public int calcularPorcentajeMujer(int riesgo) {
+        int porcentaje = 0;
+        if (riesgo < -1) {
+            porcentaje = 1;
+        }if (riesgo == -1) {
+            porcentaje = 2;
+        }if (riesgo == 0) {
+            porcentaje = 2;
+        }if (riesgo == 1) {
+            porcentaje = 3;
+        }if (riesgo == 2) {
+            porcentaje = 3;
+        }if (riesgo == 3) {
+            porcentaje = 3;
+        }if (riesgo == 4) {
+            porcentaje = 4;
+        }if (riesgo == 5) {
+            porcentaje = 4;
+        }if (riesgo == 6) {
+            porcentaje = 5;
+        }if (riesgo == 7) {
+            porcentaje = 6;
+        }if (riesgo == 8) {
+            porcentaje = 7;
+        }if (riesgo == 9) {
+            porcentaje = 8;
+        }if (riesgo == 10) {
+            porcentaje = 10;
+        }if (riesgo == 11) {
+            porcentaje = 11;
+        }if (riesgo == 12) {
+            porcentaje = 13;
+        }if (riesgo == 13) {
+            porcentaje = 15;
+        }if (riesgo == 14) {
+            porcentaje = 18;
+        }if (riesgo == 15) {
+            porcentaje = 20;
+        }if (riesgo == 16) {
+            porcentaje = 24;
+        }if (riesgo > 17) {
+            porcentaje = 27;
+        }
+        return porcentaje;
 
     }
 

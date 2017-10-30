@@ -20,7 +20,6 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
     private ViewPager mPager;
     private int[] layouts = {R.layout.face, R.layout.arms, R.layout.speak, R.layout.time};
     private MpagerAdapter mpagerAdapter;
-
     private LinearLayout Dost_Layout;
     private ImageView[] dots;
     private Button BnNext,BnSkip;
@@ -87,8 +86,6 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
 
             }
         });
-
-
     }
 
     private void createDots(int current_position)
@@ -116,8 +113,6 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
             Dost_Layout.addView(dots[i],params);
 
         }
-
-
     }
 
     @Override

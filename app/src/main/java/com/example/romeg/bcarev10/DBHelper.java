@@ -89,6 +89,51 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public String searchbyemail(String email)
+    {
+        db = this.getReadableDatabase();
+        String query = "select email, uname from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(email))
+                {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+
+    public String searchownemail(String email)
+    {
+        db = this.getReadableDatabase();
+        String query = "select email from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        a = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(email))
+                {
+                    return a;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return a;
+    }
+
     public String searchPass(String uname)
     {
         db = this.getReadableDatabase();

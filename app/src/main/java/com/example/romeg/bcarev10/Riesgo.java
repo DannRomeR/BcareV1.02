@@ -48,6 +48,7 @@ public class Riesgo extends AppCompatActivity {
     public Spinner jspfumador,jspdiabetes, spcolesterolTot, spcolesterolHDL;
     TextView edadCal, generCal, usercalcul;
 
+
     public EditText jgenero,jedad,jcolesterolt,jcolesterolh,jpresion;
 
     @Override
