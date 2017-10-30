@@ -1,8 +1,11 @@
 package com.example.romeg.bcarev10;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -21,6 +24,8 @@ public class Editarexped extends AppCompatActivity {
 
     TextView tvnomEx, tvappEx, tvapmEx, tvedadEx, tvemailEx, tvpresure,  tvnumpacEx;
     Spinner spGenEx, spFumEx,spmedEx,spColtEx, spColhEx;
+    NotificationCompat.Builder notificación;
+    private static final int idUnica= 51623;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,6 +167,27 @@ public class Editarexped extends AppCompatActivity {
                             String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol,colesteHDL,riesgo, porcentaje, numPac);
                             Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
 
+                            notificación = new NotificationCompat.Builder(this);
+                            notificación.setAutoCancel(true);
+
+                            if (porcentaje > 10 && porcentaje < 50)
+                            {
+                                notificación.setSmallIcon(R.drawable.doctor);
+                                notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                                notificación.setWhen(System.currentTimeMillis());
+                                notificación.setContentTitle("Bcare");
+                                notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+
+                                Intent i = new Intent(Editarexped.this, Vincular.class);
+                                PendingIntent pendingIntent = PendingIntent.getActivity(Editarexped.this,0, i,PendingIntent.FLAG_UPDATE_CURRENT);
+                                notificación.setContentIntent(pendingIntent);
+
+                                NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                                nm.notify(idUnica, notificación.build());
+
+                            }
+
 
                         } else if (gene.equals("Femenino")){
                             riesgo=calcularMujer();
@@ -172,6 +198,26 @@ public class Editarexped extends AppCompatActivity {
                             String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol,colesteHDL,riesgo, porcentaje, numPac);
                             Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
 
+                            notificación = new NotificationCompat.Builder(this);
+                            notificación.setAutoCancel(true);
+
+                            if (porcentaje > 10 && porcentaje < 50)
+                            {
+                                notificación.setSmallIcon(R.drawable.doctor);
+                                notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                                notificación.setWhen(System.currentTimeMillis());
+                                notificación.setContentTitle("Bcare");
+                                notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+
+                                Intent i = new Intent(Editarexped.this, Vincular.class);
+                                PendingIntent pendingIntent = PendingIntent.getActivity(Editarexped.this,0, i,PendingIntent.FLAG_UPDATE_CURRENT);
+                                notificación.setContentIntent(pendingIntent);
+
+                                NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                                nm.notify(idUnica, notificación.build());
+
+                            }
 
                     }
                 }

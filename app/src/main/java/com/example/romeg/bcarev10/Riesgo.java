@@ -130,7 +130,7 @@ public class Riesgo extends AppCompatActivity {
                 notificación.setContentTitle("Bcare");
                 notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
 
-                Intent i = new Intent(Riesgo.this, Usuario.class);
+                Intent i = new Intent(Riesgo.this, Vincular.class);
                 PendingIntent pendingIntent = PendingIntent.getActivity(Riesgo.this,0, i,PendingIntent.FLAG_UPDATE_CURRENT);
                 notificación.setContentIntent(pendingIntent);
 
@@ -151,6 +151,27 @@ public class Riesgo extends AppCompatActivity {
             String Mensaje = db.insertCalcu(usern2, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
             Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
 
+
+            notificación = new NotificationCompat.Builder(this);
+            notificación.setAutoCancel(true);
+
+            if (porcentaje > 10 && porcentaje < 50)
+            {
+                notificación.setSmallIcon(R.drawable.doctor);
+                notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                notificación.setWhen(System.currentTimeMillis());
+                notificación.setContentTitle("Bcare");
+                notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+
+                Intent i = new Intent(Riesgo.this, Vincular.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(Riesgo.this,0, i,PendingIntent.FLAG_UPDATE_CURRENT);
+                notificación.setContentIntent(pendingIntent);
+
+                NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                nm.notify(idUnica, notificación.build());
+
+            }
 
         }
 

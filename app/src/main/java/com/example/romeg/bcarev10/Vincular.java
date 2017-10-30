@@ -1,6 +1,8 @@
 package com.example.romeg.bcarev10;
 
 import android.annotation.TargetApi;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +50,8 @@ public class Vincular extends AppCompatActivity {
     TextView peripheralTextView, etuse;
     EditText bpsistolica;
 
+    NotificationCompat.Builder notificación;
+    private static final int idUnica= 51623;
 
 
     private final static int REQUEST_ENABLE_BT = 1;
@@ -180,8 +185,20 @@ public class Vincular extends AppCompatActivity {
                         String Mensaje = db.insertCalcu(username, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
                         Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
 
+                        notificación = new NotificationCompat.Builder(this);
+                        notificación.setAutoCancel(true);
                         if(porcentaje > 10 && porcentaje < 50)
                         {
+                            notificación.setSmallIcon(R.drawable.doctor);
+                            notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                            notificación.setWhen(System.currentTimeMillis());
+                            notificación.setContentTitle("Bcare");
+                            notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+
+
+                            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                            nm.notify(idUnica, notificación.build());
                             Toast.makeText(this, "Su porcentaje a ha salido alto realice el siguiente Test", Toast.LENGTH_LONG).show();
                             String str = etuse.getText().toString();
 
@@ -207,8 +224,20 @@ public class Vincular extends AppCompatActivity {
                         String Mensaje = db.insertCalcu(username, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
                         Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
 
+                        notificación = new NotificationCompat.Builder(this);
+                        notificación.setAutoCancel(true);
                         if(porcentaje > 10 && porcentaje < 50)
                         {
+                            notificación.setSmallIcon(R.drawable.doctor);
+                            notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                            notificación.setWhen(System.currentTimeMillis());
+                            notificación.setContentTitle("Bcare");
+                            notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+
+
+                            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                            nm.notify(idUnica, notificación.build());
                             Toast.makeText(this, "Su porcentaje a ha salido alto realice el siguiente Test", Toast.LENGTH_LONG).show();
                             String str = etuse.getText().toString();
 
