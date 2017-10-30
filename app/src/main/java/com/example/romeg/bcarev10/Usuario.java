@@ -16,8 +16,7 @@ import java.util.HashMap;
 
 public class Usuario extends AppCompatActivity {
 
-    NotificationCompat.Builder notificación;
-    private static final int idUnica= 51623;
+
     // Session Manager Class
     SessionManagement session;
     DBHelper helper = new DBHelper(this);
@@ -52,50 +51,7 @@ public class Usuario extends AppCompatActivity {
         tvuserD = (TextView) findViewById(R.id.bieuser);
         tvuserD.setText(name);
 
-        String fum = helper.searchfum(name);
-        String med = helper.searchmed(name);
-        String colt = helper.searchcolt(name);
-        String colh = helper.searchcolh(name);
-        String punt = helper.searchpunt(name);
-        int puntt = Integer.parseInt(punt);
 
-        notificación = new NotificationCompat.Builder(this);
-        notificación.setAutoCancel(true);
-
-        if (puntt > 10 && puntt < 50)
-        {
-            notificación.setSmallIcon(R.drawable.doctor);
-            notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
-            notificación.setWhen(System.currentTimeMillis());
-            notificación.setContentTitle("Bcare");
-            notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
-
-            Intent i = new Intent(Usuario.this, Riesgo.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(Usuario.this,0, i,PendingIntent.FLAG_UPDATE_CURRENT);
-            notificación.setContentIntent(pendingIntent);
-
-            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-            nm.notify(idUnica, notificación.build());
-
-        }
-        else if (fum.equals("Sin dato") && med.equals("Sin dato") && colt.equals("Sin dato") && colh.equals("Sin dato"))
-        {
-
-            notificación.setSmallIcon(R.drawable.doctor);
-            notificación.setTicker("No olvide llenar la calculadora de riesgo");
-            notificación.setWhen(System.currentTimeMillis());
-            notificación.setContentTitle("Bcare");
-            notificación.setContentText(" No olvide llenar el formulario de riesgo");
-
-            Intent i = new Intent(Usuario.this, Riesgo.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(Usuario.this,0, i,PendingIntent.FLAG_UPDATE_CURRENT);
-            notificación.setContentIntent(pendingIntent);
-
-            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-            nm.notify(idUnica, notificación.build());
-        }
 
     }
 

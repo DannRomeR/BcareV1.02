@@ -1,5 +1,7 @@
 package com.example.romeg.bcarev10;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -7,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -43,7 +46,8 @@ import static android.R.attr.path;
 public class Riesgo extends AppCompatActivity {
     DBHelper helper = new DBHelper(this);
 
-
+    NotificationCompat.Builder notificación;
+    private static final int idUnica= 51623;
 
     public Spinner jspfumador,jspdiabetes, spcolesterolTot, spcolesterolHDL;
     TextView edadCal, generCal, usercalcul;
@@ -113,6 +117,28 @@ public class Riesgo extends AppCompatActivity {
             DBHelper db = new DBHelper(getApplicationContext());
             String Mensaje = db.insertCalcu(str, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
             Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
+
+
+            notificación = new NotificationCompat.Builder(this);
+            notificación.setAutoCancel(true);
+
+            if (porcentaje > 10 && porcentaje < 50)
+            {
+                notificación.setSmallIcon(R.drawable.doctor);
+                notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                notificación.setWhen(System.currentTimeMillis());
+                notificación.setContentTitle("Bcare");
+                notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+
+                Intent i = new Intent(Riesgo.this, Usuario.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(Riesgo.this,0, i,PendingIntent.FLAG_UPDATE_CURRENT);
+                notificación.setContentIntent(pendingIntent);
+
+                NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                nm.notify(idUnica, notificación.build());
+
+            }
 
 
         }else if (gend.equals(geneC))
