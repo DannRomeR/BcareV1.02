@@ -58,6 +58,7 @@
             android:paddingLeft="10dp"
             android:textColor="#ffff"
             android:textColorHint="#ffff" />
+
         <EditText
             android:id="@+id/txtappreg"
             android:layout_width="match_parent"
@@ -119,10 +120,11 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/borde"
             android:hint="Edad "
-            android:inputType="number"
+            android:inputType="text|number"
             android:paddingLeft="10dp"
             android:textColor="#ffff"
-            android:textColorHint="#ffff" />
+            android:textColorHint="#ffff"
+            android:maxLength="2"/>
 
         <EditText
             android:id="@+id/txtemailreg"
@@ -164,7 +166,8 @@
             android:inputType="text|number"
             android:paddingLeft="10dp"
             android:textColor="#ffff"
-            android:textColorHint="#ffff" />
+            android:textColorHint="#ffff"
+            android:maxLength="10"/>
 
         <EditText
             android:id="@+id/txcont1reg"
@@ -174,11 +177,12 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/borde"
-            android:hint="Contacto 1"
+            android:hint="Contacto 1 *"
             android:inputType="text|number"
             android:paddingLeft="10dp"
             android:textColor="#ffff"
-            android:textColorHint="#ffff" />
+            android:textColorHint="#ffff"
+            android:maxLength="10"/>
 
         <EditText
             android:id="@+id/txcont2reg"
@@ -188,11 +192,12 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/borde"
-            android:hint="Contacto 2"
+            android:hint="Contacto 2 *"
             android:inputType="text|number"
             android:paddingLeft="10dp"
             android:textColor="#ffff"
-            android:textColorHint="#ffff" />
+            android:textColorHint="#ffff"
+            android:maxLength="10"/>
 
         <TextView
             android:id="@+id/txtcontr"
