@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         recuperar = (Button) findViewById(R.id.btnrecuperar);
         iniciar = (Button) findViewById(R.id.btniniciar);
 
-        Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+        /*Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();*/
     }
     public boolean onCreateOptionsMenu(Menu menu)
     {

@@ -96,85 +96,164 @@ public class Riesgo extends AppCompatActivity {
 
 
     public void calcular(View v){
-        int riesgo,porcentaje=0;
+        int riesgo,porcentaje;
         String usern2 = getIntent().getStringExtra("Username");
         String geneC = generCal.getText().toString();
-        String fum = jspfumador.getSelectedItem().toString();
-        String med = jspdiabetes.getSelectedItem().toString();
-        String colt  = spcolesterolTot.getSelectedItem().toString();
-        String colh = spcolesterolHDL.getSelectedItem().toString();
+        String fum = (jspfumador.getSelectedItem().toString());
+        String med = (jspdiabetes.getSelectedItem().toString());
+        String colt  = (spcolesterolTot.getSelectedItem().toString());
+        String colh = (spcolesterolHDL.getSelectedItem().toString());
         String presionBP2 = (jpresion.getText().toString());
-        int Ipresion2 = Integer.parseInt(presionBP2);
+
         String str = usercalcul.getText().toString();
         String gend = helper.searchgen(str);
 
-        if(gend.equals(geneC))//(genC=="Masculino")
+        if (presionBP2.isEmpty() || fum.equals("-seleccione-") || med.equals("-seleccione-") || colt.equals("-seleccione-") || colh.equals("-seleccione-") )
         {
-            riesgo=calcularHombre();
-            porcentaje=calcularPorcentajeHombre(riesgo);
-            Toast.makeText(this, "Sexo: Masculino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
-
-            DBHelper db = new DBHelper(getApplicationContext());
-            String Mensaje = db.insertCalcu(str, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
-            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
-
-
-            notificación = new NotificationCompat.Builder(this);
-            notificación.setAutoCancel(true);
-
-            if (porcentaje > 10 && porcentaje < 50)
-            {
-                notificación.setSmallIcon(R.drawable.doctor);
-                notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
-                notificación.setWhen(System.currentTimeMillis());
-                notificación.setContentTitle("Bcare");
-                notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
-
-                Intent i = new Intent(Riesgo.this, Vincular.class);
-                PendingIntent pendingIntent = PendingIntent.getActivity(Riesgo.this,0, i,PendingIntent.FLAG_UPDATE_CURRENT);
-                notificación.setContentIntent(pendingIntent);
-
-                NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-                nm.notify(idUnica, notificación.build());
-
-            }
-
-
-        }else if (gend.equals(geneC))
-        {
-            riesgo=calcularMujer();
-            porcentaje=calcularPorcentajeMujer(riesgo);
-            Toast.makeText(this, "Sexo: Femenino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
-
-            DBHelper db = new DBHelper(getApplicationContext());
-            String Mensaje = db.insertCalcu(usern2, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
-            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
-
-
-            notificación = new NotificationCompat.Builder(this);
-            notificación.setAutoCancel(true);
-
-            if (porcentaje > 10 && porcentaje < 50)
-            {
-                notificación.setSmallIcon(R.drawable.doctor);
-                notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
-                notificación.setWhen(System.currentTimeMillis());
-                notificación.setContentTitle("Bcare");
-                notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
-
-                Intent i = new Intent(Riesgo.this, Vincular.class);
-                PendingIntent pendingIntent = PendingIntent.getActivity(Riesgo.this,0, i,PendingIntent.FLAG_UPDATE_CURRENT);
-                notificación.setContentIntent(pendingIntent);
-
-                NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-                nm.notify(idUnica, notificación.build());
-
-            }
-
+            Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
+                    Toast.LENGTH_SHORT).show();
         }
+        else {
+            int Ipresion2 = Integer.parseInt(presionBP2);
+            if (gend.equals(geneC))//(genC=="Masculino")
+            {
 
+                if (Ipresion2 < 50 || Ipresion2 > 300) {
+                    Toast.makeText(this, "Numero de presión invalido", Toast.LENGTH_LONG).show();
+                    jpresion.setError("Numero de presión invalido");
+                } else {
+                    riesgo = calcularHombre();
+                    porcentaje = calcularPorcentajeHombre(riesgo);
+                    Toast.makeText(this, "Sexo: Masculino " + "Puntos: " + riesgo + "Porcentaje: " + porcentaje + " %", Toast.LENGTH_LONG).show();
+
+                    DBHelper db = new DBHelper(getApplicationContext());
+                    String Mensaje = db.insertCalcu(str, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
+                    Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
+
+
+                    notificación = new NotificationCompat.Builder(this);
+                    notificación.setAutoCancel(true);
+                    if (porcentaje > 10 && porcentaje < 50) {
+                        notificación.setSmallIcon(R.drawable.doctor);
+                        notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                        notificación.setWhen(System.currentTimeMillis());
+                        notificación.setContentTitle("Bcare");
+                        notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+
+                        Intent i = new Intent(Riesgo.this, Vincular.class);
+                        PendingIntent pendingIntent = PendingIntent.getActivity(Riesgo.this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                        notificación.setContentIntent(pendingIntent);
+
+                        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                        nm.notify(idUnica, notificación.build());
+
+                    }
+
+                    String named = helper.searchname(str);
+                    String edadd = helper.searchedad(str);
+                    String emaild = helper.searchemail(str);
+                    String teld = helper.searchtel(str);
+                    String cont1d = helper.searchcont1(str);
+                    String cont2d = helper.searchcont2(str);
+                    String presu = helper.searchpresure(str);
+                    String punt = helper.searchpunt(str);
+                    String risk = helper.searchrisk(str);
+
+                    Intent i = new Intent(Riesgo.this, Expediente.class);
+                    i.putExtra("Username", str);
+                    i.putExtra("Name", named);
+                    i.putExtra("Edad", edadd);
+                    i.putExtra("Email", emaild);
+                    i.putExtra("Tel", teld);
+                    i.putExtra("Cont1", cont1d);
+                    i.putExtra("Cont2", cont2d);
+                    i.putExtra("Gen", gend);
+
+                    i.putExtra("Fum", fum);
+                    i.putExtra("Med", med);
+                    i.putExtra("Colt", colt);
+                    i.putExtra("Colh", colh);
+                    i.putExtra("Presu", presu);
+                    i.putExtra("Punt", punt);
+                    i.putExtra("Risk", risk);
+                    startActivity(i);
+                    finish();
+                }
+
+
+            } else if (gend.equals(geneC)) {
+                if (fum.equals("-seleccione-") || med.equals("-seleccione-") || colt.equals("-seleccione-") || colh.equals("-seleccione-") || presionBP2.isEmpty()) {
+                    Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    if (Ipresion2 < 50 || Ipresion2 > 300) {
+                        Toast.makeText(this, "Numero de presión invalido", Toast.LENGTH_LONG).show();
+                        jpresion.setError("Numero de presión invalido");
+                    } else {
+                        riesgo = calcularMujer();
+                        porcentaje = calcularPorcentajeMujer(riesgo);
+                        Toast.makeText(this, "Sexo: Femenino " + "Puntos: " + riesgo + " Porcentaje: " + porcentaje + "%", Toast.LENGTH_LONG).show();
+
+                        DBHelper db = new DBHelper(getApplicationContext());
+                        String Mensaje = db.insertCalcu(usern2, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
+                        Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
+
+
+                        notificación = new NotificationCompat.Builder(this);
+                        notificación.setAutoCancel(true);
+
+                        if (porcentaje > 10 && porcentaje < 50) {
+                            notificación.setSmallIcon(R.drawable.doctor);
+                            notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                            notificación.setWhen(System.currentTimeMillis());
+                            notificación.setContentTitle("Bcare");
+                            notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+
+                            Intent i = new Intent(Riesgo.this, Vincular.class);
+                            PendingIntent pendingIntent = PendingIntent.getActivity(Riesgo.this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                            notificación.setContentIntent(pendingIntent);
+
+                            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                            nm.notify(idUnica, notificación.build());
+
+                        }
+
+                        String named = helper.searchname(str);
+                        String edadd = helper.searchedad(str);
+                        String emaild = helper.searchemail(str);
+                        String teld = helper.searchtel(str);
+                        String cont1d = helper.searchcont1(str);
+                        String cont2d = helper.searchcont2(str);
+                        String presu = helper.searchpresure(str);
+                        String punt = helper.searchpunt(str);
+                        String risk = helper.searchrisk(str);
+
+                        Intent i = new Intent(Riesgo.this, Expediente.class);
+                        i.putExtra("Username", str);
+                        i.putExtra("Name", named);
+                        i.putExtra("Edad", edadd);
+                        i.putExtra("Email", emaild);
+                        i.putExtra("Tel", teld);
+                        i.putExtra("Cont1", cont1d);
+                        i.putExtra("Cont2", cont2d);
+                        i.putExtra("Gen", gend);
+
+                        i.putExtra("Fum", fum);
+                        i.putExtra("Med", med);
+                        i.putExtra("Colt", colt);
+                        i.putExtra("Colh", colh);
+                        i.putExtra("Presu", presu);
+                        i.putExtra("Punt", punt);
+                        i.putExtra("Risk", risk);
+                        startActivity(i);
+                        finish();
+                    }
+                }
+
+            }
+        }
     }
 
     public int calcularHombre(){
@@ -514,6 +593,7 @@ public class Riesgo extends AppCompatActivity {
         i.putExtra("Punt", punt);
         i.putExtra("Risk", risk);
         startActivity(i);
+        finish();
     }
 
 

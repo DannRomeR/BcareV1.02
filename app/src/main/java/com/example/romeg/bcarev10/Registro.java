@@ -22,7 +22,7 @@ public class Registro extends AppCompatActivity {
     EditText etnombre, etapp, etapm, etemail, etusuario, etcontraseña, etconfirmar, etTel, etedad, etcont1, etcont2;
     TextView gen;
     Spinner spGeneroR;
-        Button btnreg;
+    Button btnreg;
 
 
     @Override
@@ -48,6 +48,36 @@ public class Registro extends AppCompatActivity {
         gen = (TextView) findViewById(R.id.textView2);
 
 
+        /*String namestr = etnombre.getText().toString();
+        String appstr = etapp.getText().toString();
+        String apmstr = etapm.getText().toString();
+
+        String edadstr = etedad.getText().toString();
+        String emailstr = etemail.getText().toString();
+        String unamestr = etusuario.getText().toString();
+        String em = helper.searchemail(unamestr);
+        String us = helper.searchUse(unamestr);
+        String telstr = etTel.getText().toString();
+        String cont1str = etcont1.getText().toString();
+        String cont2str = etcont2.getText().toString();
+        String pass1str = etcontraseña.getText().toString();
+        String pass2str = etconfirmar.getText().toString();
+        btnreg = (Button) findViewById(R.id.btnregistrarreg);
+
+
+        if (!pass2str.equals(pass1str) || pass2str.isEmpty() || pass1str.isEmpty() || pass1str.length()<6
+                || !validarPass(pass1str) || cont2str.length() < 8 || cont1str.length() < 8
+                || telstr.length() < 8 || telstr.length() > 10 || us.equals(unamestr) || unamestr.isEmpty()
+                || em.equals(emailstr) || !ValidacionEmail(emailstr) || emailstr.isEmpty() || etedad.getText().length() == 1
+                || edadstr.equals("00") || edadstr.equals("0") || edadstr.isEmpty() || apmstr.isEmpty() || !validarNom(apmstr)
+                || appstr.isEmpty() || namestr.isEmpty() || !validarNom(namestr) || !validarNom(appstr) )
+        {
+            btnreg.setEnabled(false);
+        }
+        else
+        {
+            btnreg.setEnabled(true);
+        }*/
 
         etnombre.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,11 +107,6 @@ public class Registro extends AppCompatActivity {
         etapp.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String namestr = etnombre.getText().toString();
                 if (namestr.isEmpty()) {
                     etnombre.setError("Campo Nombre obligatorio");
@@ -89,9 +114,14 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(namestr))
                 {
-                    etnombre.setError("Apellido Invalido");
+                    etnombre.setError("Formato del nombre invalido");
                     etnombre.requestFocus();
                 }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
 
             }
 
@@ -125,7 +155,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(namestr))
                 {
-                    etnombre.setError("Apellido Invalido");
+                    etnombre.setError("Formato de Nombre Invalido");
                     etnombre.requestFocus();
                 }
                 else if (appstr.isEmpty()) {
@@ -134,7 +164,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(appstr))
                 {
-                    etapp.setError("Apellido Invalido");
+                    etapp.setError("Formato de Apellido Invalido");
                     etapp.requestFocus();
                 }
 
@@ -171,7 +201,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(namestr))
                 {
-                    etnombre.setError("Apellido Invalido");
+                    etnombre.setError("Formato de Nombre Invalido");
                     etnombre.requestFocus();
                 }
                 else if (appstr.isEmpty()) {
@@ -180,7 +210,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(appstr))
                 {
-                    etapp.setError("Apellido Invalido");
+                    etapp.setError("Formato de Apellido Invalido");
                     etapp.requestFocus();
                 }
                 else if (apmstr.isEmpty()) {
@@ -190,7 +220,7 @@ public class Registro extends AppCompatActivity {
 
                 else if (!validarNom(apmstr))
                 {
-                    etapm.setError("Apellido Invalido");
+                    etapm.setError("Formato deApellido Invalido");
                     etapm.requestFocus();
                 }
 
@@ -198,18 +228,21 @@ public class Registro extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                String edadstr = etedad.getText().toString();
+                if (edadstr.equals("0"))
+                {
+                    etedad.setError( "Edad invalida");
+                }
+                else if (edadstr.equals("00"))
+                {
+                    etedad.setError( "Edad invalida");
+                }
             }
         });
 
         etemail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String namestr = etnombre.getText().toString();
                 String appstr = etapp.getText().toString();
                 String apmstr = etapm.getText().toString();
@@ -220,7 +253,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(namestr))
                 {
-                    etnombre.setError("Apellido Invalido");
+                    etnombre.setError("Formato de Nombre Invalido");
                     etnombre.requestFocus();
                 }
                 else if (appstr.isEmpty()) {
@@ -229,7 +262,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(appstr))
                 {
-                    etapp.setError("Apellido Invalido");
+                    etapp.setError("Formato de Apellido Invalido");
                     etapp.requestFocus();
                 }
                 else if (apmstr.isEmpty()) {
@@ -239,7 +272,7 @@ public class Registro extends AppCompatActivity {
 
                 else if (!validarNom(apmstr))
                 {
-                    etapm.setError("Apellido Invalido");
+                    etapm.setError("Formato de Apellido Invalido");
                     etapm.requestFocus();
                 }
                 else if (edadstr.isEmpty())
@@ -249,30 +282,33 @@ public class Registro extends AppCompatActivity {
                 }
 
                 else if (edadstr.isEmpty())
-                    {
-                        etedad.setError( "Campo vacío");
-                        etedad.requestFocus();
-                    }
-                else if (edadstr.equals("0"))
-                    {
-                        etedad.setError( "Edad invalida");
-                        etedad.requestFocus();
-                    }
-                 else if (edadstr.equals("00"))
-                    {
-                        etedad.setError( "Edad invalida");
-                        etedad.requestFocus();
-                    }
-                 else if (etedad.getText().length() ==1)
                 {
-                    etedad.setError( "Edad invalida");
+                    etedad.setError( "Campo vacío");
+                    etedad.requestFocus();
                 }
+
+                else if (etedad.getText().length() ==1)
+                {
+                    etedad.setError( "Formato de Edad invalida");
+                    etedad.requestFocus();
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                String emailstr = etemail.getText().toString();
+                String unamestr = etusuario.getText().toString();
+                String em = helper.searchownemail(emailstr);
+                if (em.equals(emailstr)) {
+                    etemail.setError("El email ya esta siendo usado");
+                    etemail.requestFocus();
+                }
             }
         });
 
@@ -289,15 +325,15 @@ public class Registro extends AppCompatActivity {
                 String apmstr = etapm.getText().toString();
                 String edadstr = etedad.getText().toString();
                 String emailstr = etemail.getText().toString();
-                String unamestr = etusuario.getText().toString();
-                String em = helper.searchemail(unamestr);
+
+
                 if (namestr.isEmpty()) {
                     etnombre.setError("Campo Nombre obligatorio");
                     etnombre.requestFocus();
                 }
                 else if (!validarNom(namestr))
                 {
-                    etnombre.setError("Apellido Invalido");
+                    etnombre.setError("Formato de Nombre Invalido");
                     etnombre.requestFocus();
                 }
                 else if (appstr.isEmpty()) {
@@ -306,7 +342,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(appstr))
                 {
-                    etapp.setError("Apellido Invalido");
+                    etapp.setError("Formato de Apellido Invalido");
                     etapp.requestFocus();
                 }
                 else if (apmstr.isEmpty()) {
@@ -316,7 +352,7 @@ public class Registro extends AppCompatActivity {
 
                 else if (!validarNom(apmstr))
                 {
-                    etapm.setError("Apellido Invalido");
+                    etapm.setError("Formato de Apellido Invalido");
                     etapm.requestFocus();
                 }
                else if (edadstr.isEmpty())
@@ -330,19 +366,10 @@ public class Registro extends AppCompatActivity {
                     etedad.setError( "Campo vacío");
                     etedad.requestFocus();
                 }
-                else if (edadstr.equals("0"))
+               else if (etedad.getText().length() ==1)
                 {
-                    etedad.setError( "Edad invalida");
-                    etedad.requestFocus();
-                }
-                else if (edadstr.equals("00"))
-                {
-                    etedad.setError( "Edad invalida");
-                    etedad.requestFocus();
-                }
-                else if (etedad.getText().length() ==1)
-                {
-                    etedad.setError( "Edad invalida");
+                    etedad.setError( "Formato de Edad invalida");
+                    etemail.requestFocus();
                 }
 
                 else if (emailstr.isEmpty())
@@ -356,18 +383,18 @@ public class Registro extends AppCompatActivity {
                         etemail.setError("Formato de email invalido");
                         etemail.requestFocus();
                     }
-                else if (em.equals(emailstr)) {
-                        etemail.setError("El email ya esta siendo usado");
-                        etemail.requestFocus();
-                    }
-
 
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                String unamestr = etusuario.getText().toString();
+                String us = helper.searchUse(unamestr);
+                if (us.equals(unamestr)) {
+                    etusuario.setError("El nombre de usuario ya existe");
 
+                }
             }
         });
 
@@ -385,15 +412,15 @@ public class Registro extends AppCompatActivity {
                 String edadstr = etedad.getText().toString();
                 String emailstr = etemail.getText().toString();
                 String unamestr = etusuario.getText().toString();
-                String em = helper.searchemail(unamestr);
-                String us = helper.searchUse(unamestr);
+
+
                 if (namestr.isEmpty()) {
                     etnombre.setError("Campo Nombre obligatorio");
                     etnombre.requestFocus();
                 }
                 else if (!validarNom(namestr))
                 {
-                    etnombre.setError("Apellido Invalido");
+                    etnombre.setError("Formato de Nombre Invalido");
                     etnombre.requestFocus();
                 }
                 else if (appstr.isEmpty()) {
@@ -402,7 +429,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(appstr))
                 {
-                    etapp.setError("Apellido Invalido");
+                    etapp.setError("Formato de Apellido Invalido");
                     etapp.requestFocus();
                 }
                 else if (apmstr.isEmpty()) {
@@ -412,7 +439,7 @@ public class Registro extends AppCompatActivity {
 
                 else if (!validarNom(apmstr))
                 {
-                    etapm.setError("Apellido Invalido");
+                    etapm.setError("Formato deApellido Invalido");
                     etapm.requestFocus();
                 }
                 else if (edadstr.isEmpty())
@@ -420,19 +447,11 @@ public class Registro extends AppCompatActivity {
                     etedad.setError( "Campo vacío");
                     etedad.requestFocus();
                 }
-                else if (edadstr.equals("0"))
-                {
-                    etedad.setError( "Edad invalida");
-                    etedad.requestFocus();
-                }
-                else if (edadstr.equals("00"))
-                {
-                    etedad.setError( "Edad invalida");
-                    etedad.requestFocus();
-                }
+
                 else if (etedad.getText().length() ==1)
                 {
-                    etedad.setError( "Edad invalida");
+                    etedad.setError( "Formato de Edad invalida");
+                    etedad.requestFocus();
                 }
 
                 else if (emailstr.isEmpty())
@@ -446,25 +465,33 @@ public class Registro extends AppCompatActivity {
                     etemail.setError("Formato de email invalido");
                     etemail.requestFocus();
                 }
-                else if (em.equals(emailstr)) {
-                    etemail.setError("El email ya esta siendo usado");
-                    etemail.requestFocus();
-                }
+
                 else if (unamestr.isEmpty())
                 {
                     etusuario.setError( "Campo Usuario obligatorio");
                     etusuario.requestFocus();
                 }
-                else if (us.equals(unamestr)) {
-                        etusuario.setError("El nombre de usuario ya existe");
-
-                    }
-                }
-
-
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                String telstr = etTel.getText().toString();
+                switch (telstr)
+                {
+                    case "0":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "00000000":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case"0000000000":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "000":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                }
 
             }
         });
@@ -483,8 +510,6 @@ public class Registro extends AppCompatActivity {
                 String edadstr = etedad.getText().toString();
                 String emailstr = etemail.getText().toString();
                 String unamestr = etusuario.getText().toString();
-                String em = helper.searchemail(unamestr);
-                String us = helper.searchUse(unamestr);
                 String telstr = etTel.getText().toString();
                 if (namestr.isEmpty()) {
                     etnombre.setError("Campo Nombre obligatorio");
@@ -492,7 +517,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(namestr))
                 {
-                    etnombre.setError("Apellido Invalido");
+                    etnombre.setError("Formato de Nombre Invalido");
                     etnombre.requestFocus();
                 }
                 else if (appstr.isEmpty()) {
@@ -501,7 +526,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(appstr))
                 {
-                    etapp.setError("Apellido Invalido");
+                    etapp.setError("Formato de Apellido Invalido");
                     etapp.requestFocus();
                 }
                 else if (apmstr.isEmpty()) {
@@ -511,7 +536,7 @@ public class Registro extends AppCompatActivity {
 
                 else if (!validarNom(apmstr))
                 {
-                    etapm.setError("Apellido Invalido");
+                    etapm.setError("Formato de Apellido Invalido");
                     etapm.requestFocus();
                 }
                 else if (edadstr.isEmpty())
@@ -519,19 +544,11 @@ public class Registro extends AppCompatActivity {
                     etedad.setError( "Campo vacío");
                     etedad.requestFocus();
                 }
-                else if (edadstr.equals("0"))
-                {
-                    etedad.setError( "Edad invalida");
-                    etedad.requestFocus();
-                }
-                else if (edadstr.equals("00"))
-                {
-                    etedad.setError( "Edad invalida");
-                    etedad.requestFocus();
-                }
+
                 else if (etedad.getText().length() ==1)
                 {
-                    etedad.setError( "Edad invalida");
+                    etedad.setError( "Formato de Edad invalida");
+                    etedad.requestFocus();
                 }
 
                 else if (emailstr.isEmpty())
@@ -545,36 +562,43 @@ public class Registro extends AppCompatActivity {
                     etemail.setError("Formato de email invalido");
                     etemail.requestFocus();
                 }
-                else if (em.equals(emailstr)) {
-                    etemail.setError("El email ya esta siendo usado");
-                    etemail.requestFocus();
-                }
+
                 else if (unamestr.isEmpty())
                 {
                     etusuario.setError( "Campo Usuario obligatorio");
                     etusuario.requestFocus();
                 }
-                else if (us.equals(unamestr)) {
-                    etusuario.setError("El nombre de usuario ya existe");
 
-                }
                 else if (telstr.isEmpty())
                 {
-                    etTel.setError( "Campo Telefono obligatorio");
+                    etTel.setError( "Campo Teléfono obligatorio");
                     etTel.requestFocus();
                 }
 
                 else if (telstr.length()<8 || telstr.length()>10)
                     {
-                        etTel.setError("El numero de telefeno no existe");
-
+                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.requestFocus();
                     }
                 }
-
-
             @Override
             public void afterTextChanged(Editable s) {
-
+                String cont1str = etcont1.getText().toString();
+                switch (cont1str)
+                {
+                    case "0":
+                        etcont1.setError("El numero de teléfeno no existe");
+                        break;
+                    case "00000000":
+                        etcont1.setError("El numero de teléfeno no existe");
+                        break;
+                    case"0000000000":
+                        etcont1.setError("El numero de teléfeno no existe");
+                        break;
+                    case "000":
+                        etcont1.setError("El numero de teléfeno no existe");
+                        break;
+                }
             }
         });
 
@@ -592,8 +616,7 @@ public class Registro extends AppCompatActivity {
                 String edadstr = etedad.getText().toString();
                 String emailstr = etemail.getText().toString();
                 String unamestr = etusuario.getText().toString();
-                String em = helper.searchemail(unamestr);
-                String us = helper.searchUse(unamestr);
+
                 String telstr = etTel.getText().toString();
                 String cont1str = etcont1.getText().toString();
                 if (namestr.isEmpty()) {
@@ -602,7 +625,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(namestr))
                 {
-                    etnombre.setError("Apellido Invalido");
+                    etnombre.setError("Formato de Nombre Invalido");
                     etnombre.requestFocus();
                 }
                 else if (appstr.isEmpty()) {
@@ -611,7 +634,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(appstr))
                 {
-                    etapp.setError("Apellido Invalido");
+                    etapp.setError("Formato de Apellido Invalido");
                     etapp.requestFocus();
                 }
                 else if (apmstr.isEmpty()) {
@@ -621,7 +644,7 @@ public class Registro extends AppCompatActivity {
 
                 else if (!validarNom(apmstr))
                 {
-                    etapm.setError("Apellido Invalido");
+                    etapm.setError("Formato de Apellido Invalido");
                     etapm.requestFocus();
                 }
                 else if (edadstr.isEmpty())
@@ -629,19 +652,11 @@ public class Registro extends AppCompatActivity {
                     etedad.setError( "Campo vacío");
                     etedad.requestFocus();
                 }
-                else if (edadstr.equals("0"))
-                {
-                    etedad.setError( "Edad invalida");
-                    etedad.requestFocus();
-                }
-                else if (edadstr.equals("00"))
-                {
-                    etedad.setError( "Edad invalida");
-                    etedad.requestFocus();
-                }
+
                 else if (etedad.getText().length() ==1)
                 {
-                    etedad.setError( "Edad invalida");
+                    etedad.setError( "Formato de Edad invalida");
+                    etedad.requestFocus();
                 }
 
                 else if (emailstr.isEmpty())
@@ -655,28 +670,23 @@ public class Registro extends AppCompatActivity {
                     etemail.setError("Formato de email invalido");
                     etemail.requestFocus();
                 }
-                else if (em.equals(emailstr)) {
-                    etemail.setError("El email ya esta siendo usado");
-                    etemail.requestFocus();
-                }
+
                 else if (unamestr.isEmpty())
                 {
                     etusuario.setError( "Campo Usuario obligatorio");
                     etusuario.requestFocus();
                 }
-                else if (us.equals(unamestr)) {
-                    etusuario.setError("El nombre de usuario ya existe");
 
-                }
                 else if (telstr.isEmpty())
                 {
-                    etTel.setError( "Campo Telefono obligatorio");
+                    etTel.setError( "Campo Teléfono obligatorio");
                     etTel.requestFocus();
                 }
 
                 else if (telstr.length()<8 || telstr.length()>10)
                 {
-                    etTel.setError("El numero de telefeno no existe");
+                    etTel.setError("El numero de teléfeno no existe");
+                    etTel.requestFocus();
 
                 }
                 else if (cont1str.isEmpty())
@@ -686,16 +696,30 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (cont1str.length()<8)
                 {
-                    etcont1.setError("El numero de telefeno no existe");
-
+                    etcont1.setError("El numero de teléfeno no existe");
+                    etcont1.requestFocus();
                 }
 
             }
 
-
-
             @Override
             public void afterTextChanged(Editable s) {
+                String cont2str = etcont2.getText().toString();
+                switch (cont2str)
+                {
+                    case "0":
+                        etcont2.setError("El numero de teléfeno no existe");
+                        break;
+                    case "00000000":
+                        etcont2.setError("El numero de teléfeno no existe");
+                        break;
+                    case"0000000000":
+                        etcont2.setError("El numero de teléfeno no existe");
+                        break;
+                    case "000":
+                        etcont2.setError("El numero de teléfeno no existe");
+                        break;
+                }
 
             }
         });
@@ -714,8 +738,6 @@ public class Registro extends AppCompatActivity {
                 String edadstr = etedad.getText().toString();
                 String emailstr = etemail.getText().toString();
                 String unamestr = etusuario.getText().toString();
-                String em = helper.searchemail(unamestr);
-                String us = helper.searchUse(unamestr);
                 String telstr = etTel.getText().toString();
                 String cont1str = etcont1.getText().toString();
                 String cont2str = etcont2.getText().toString();
@@ -726,7 +748,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(namestr))
                 {
-                    etnombre.setError("Apellido Invalido");
+                    etnombre.setError("Formato de Nombre Invalido");
                     etnombre.requestFocus();
                 }
                 else if (appstr.isEmpty()) {
@@ -735,7 +757,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(appstr))
                 {
-                    etapp.setError("Apellido Invalido");
+                    etapp.setError("Formato de Apellido Invalido");
                     etapp.requestFocus();
                 }
                 else if (apmstr.isEmpty()) {
@@ -745,7 +767,7 @@ public class Registro extends AppCompatActivity {
 
                 else if (!validarNom(apmstr))
                 {
-                    etapm.setError("Apellido Invalido");
+                    etapm.setError("Formato de Apellido Invalido");
                     etapm.requestFocus();
                 }
                 else if (edadstr.isEmpty())
@@ -753,19 +775,11 @@ public class Registro extends AppCompatActivity {
                     etedad.setError( "Campo vacío");
                     etedad.requestFocus();
                 }
-                else if (edadstr.equals("0"))
-                {
-                    etedad.setError( "Edad invalida");
-                    etedad.requestFocus();
-                }
-                else if (edadstr.equals("00"))
-                {
-                    etedad.setError( "Edad invalida");
-                    etedad.requestFocus();
-                }
+
                 else if (etedad.getText().length() ==1)
                 {
-                    etedad.setError( "Edad invalida");
+                    etedad.setError( "Formato de Edad invalida");
+                    etedad.requestFocus();
                 }
 
                 else if (emailstr.isEmpty())
@@ -779,28 +793,23 @@ public class Registro extends AppCompatActivity {
                     etemail.setError("Formato de email invalido");
                     etemail.requestFocus();
                 }
-                else if (em.equals(emailstr)) {
-                    etemail.setError("El email ya esta siendo usado");
-                    etemail.requestFocus();
-                }
+
                 else if (unamestr.isEmpty())
                 {
                     etusuario.setError( "Campo Usuario obligatorio");
                     etusuario.requestFocus();
                 }
-                else if (us.equals(unamestr)) {
-                    etusuario.setError("El nombre de usuario ya existe");
 
-                }
                 else if (telstr.isEmpty())
                 {
-                    etTel.setError( "Campo Telefono obligatorio");
+                    etTel.setError( "Campo Teléfono obligatorio");
                     etTel.requestFocus();
                 }
 
                 else if (telstr.length()<8 || telstr.length()>10)
                 {
-                    etTel.setError("El numero de telefeno no existe");
+                    etTel.setError("El numero de teléfeno no existe");
+                    etTel.requestFocus();
 
                 }
                 else if (cont1str.isEmpty())
@@ -810,7 +819,8 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (cont1str.length()<8)
                 {
-                    etcont1.setError("El numero de telefeno no existe");
+                    etcont1.setError("El numero de teléfeno no existe");
+                    etcont1.requestFocus();
 
                 }
                 else if (cont2str.isEmpty())
@@ -820,19 +830,18 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (cont2str.length()<8)
                 {
-                    etcont2.setError("El numero de telefeno no existe");
+                    etcont2.setError("El numero de teléfeno no existe");
+                    etcont2.requestFocus();
 
                 }
             }
-
-
 
             @Override
             public void afterTextChanged(Editable s) {
                 String pass1str = etcontraseña.getText().toString();
                 if (etcontraseña.getText().length() != 0)
                 {
-                    if (pass1str.length()<6 || !validarPass(pass1str))
+                    if (pass1str.length()<6 )
                     {
                         etcontraseña.setError("Formato de contraseña incorrecto");
 
@@ -868,7 +877,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(namestr))
                 {
-                    etnombre.setError("Apellido Invalido");
+                    etnombre.setError("Formato de Nombre Invalido");
                     etnombre.requestFocus();
                 }
                 else if (appstr.isEmpty()) {
@@ -877,7 +886,7 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (!validarNom(appstr))
                 {
-                    etapp.setError("Apellido Invalido");
+                    etapp.setError("Formato de Apellido Invalido");
                     etapp.requestFocus();
                 }
                 else if (apmstr.isEmpty()) {
@@ -887,22 +896,23 @@ public class Registro extends AppCompatActivity {
 
                 else if (!validarNom(apmstr))
                 {
-                    etapm.setError("Apellido Invalido");
+                    etapm.setError("Formato de Apellido Invalido");
                     etapm.requestFocus();
                 }
                 else if (edadstr.equals("0"))
                 {
-                    etedad.setError( "Edad invalida");
+                    etedad.setError( "Formato de Edad invalida");
                     etedad.requestFocus();
                 }
                 else if (edadstr.equals("00"))
                 {
-                    etedad.setError( "Edad invalida");
+                    etedad.setError( "Formato de Edad invalida");
                     etedad.requestFocus();
                 }
                 else if (etedad.getText().length() ==1)
                 {
-                    etedad.setError( "Edad invalida");
+                    etedad.setError( "Formato de Edad invalida");
+                    etedad.requestFocus();
                 }
 
                 else if (emailstr.isEmpty())
@@ -927,17 +937,19 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (us.equals(unamestr)) {
                     etusuario.setError("El nombre de usuario ya existe");
+                    etusuario.requestFocus();
 
                 }
                 else if (telstr.isEmpty())
                 {
-                    etTel.setError( "Campo Telefono obligatorio");
+                    etTel.setError( "Campo Teléfono obligatorio");
                     etTel.requestFocus();
                 }
 
                 else if (telstr.length()<8 || telstr.length()>10)
                 {
-                    etTel.setError("El numero de telefeno no existe");
+                    etTel.setError("El numero de teléfeno no existe");
+                    etTel.requestFocus();
 
                 }
                 else if (cont1str.isEmpty())
@@ -947,7 +959,8 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (cont1str.length()<8)
                 {
-                    etcont1.setError("El numero de telefeno no existe");
+                    etcont1.setError("El numero de teléfeno no existe");
+                    etcont1.requestFocus();
 
                 }
                 else if (cont2str.isEmpty())
@@ -957,7 +970,8 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (cont2str.length()<8)
                 {
-                    etcont2.setError("El numero de telefeno no existe");
+                    etcont2.setError("El numero de teléfeno no existe");
+                    etcont2.requestFocus();
 
                 }
                 else if (pass1str.isEmpty())
@@ -968,53 +982,24 @@ public class Registro extends AppCompatActivity {
                 else if (pass1str.length()<6 || !validarPass(pass1str))
                 {
                     etcontraseña.setError("Formato de contraseña incorrecto");
+                    etcontraseña.requestFocus();
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                String namestr = etnombre.getText().toString();
-                String appstr = etapp.getText().toString();
-                String apmstr = etapm.getText().toString();
-
-                String edadstr = etedad.getText().toString();
-                String emailstr = etemail.getText().toString();
-                String unamestr = etusuario.getText().toString();
-                String em = helper.searchemail(unamestr);
-                String us = helper.searchUse(unamestr);
-                String telstr = etTel.getText().toString();
-                String cont1str = etcont1.getText().toString();
-                String cont2str = etcont2.getText().toString();
                 String pass1str = etcontraseña.getText().toString();
                 String pass2str = etconfirmar.getText().toString();
-                Button reg = (Button) findViewById(R.id.btnregistrarreg);
                 if (etconfirmar.getText().length() != 0)
                 {
                     if (!pass2str.equals(pass1str))
                     {
                         etconfirmar.setError("Las contraseñas no coinciden");
-
                     }
-                }
-
-                if (!pass2str.equals(pass1str) || pass2str.isEmpty() || pass1str.isEmpty() || pass1str.length()<6
-                        || !validarPass(pass1str) || cont2str.length() < 8 || cont1str.length() < 8
-                        || telstr.length() < 8 || telstr.length() > 10 || us.equals(unamestr) || unamestr.isEmpty()
-                        || em.equals(emailstr) || !ValidacionEmail(emailstr) || emailstr.isEmpty() || etedad.getText().length() == 1
-                        || edadstr.equals("00") || edadstr.equals("0") || edadstr.isEmpty() || apmstr.isEmpty() || !validarNom(apmstr)
-                        || appstr.isEmpty() || namestr.isEmpty() || !validarNom(namestr) || !validarNom(appstr) )
-                {
-                    reg.setEnabled(false);
-                }
-                else
-                {
-                    reg.setEnabled(true);
                 }
 
             }
         });
-
-
     }
 
     public void onSignUpClick(View v)
@@ -1036,20 +1021,30 @@ public class Registro extends AppCompatActivity {
         String namestr = etnombre.getText().toString();
         String appstr = etapp.getText().toString();
         String apmstr = etapm.getText().toString();
+
+        String edadstr = etedad.getText().toString();
         String emailstr = etemail.getText().toString();
         String unamestr = etusuario.getText().toString();
-        String pass1str = etcontraseña.getText().toString();
-        String pass2str = etconfirmar.getText().toString();
-        String edadstr = etedad.getText().toString();
+        String em = helper.searchownemail(emailstr);
+        String us = helper.searchUse(unamestr);
         String telstr = etTel.getText().toString();
         String cont1str = etcont1.getText().toString();
         String cont2str = etcont2.getText().toString();
+        String pass1str = etcontraseña.getText().toString();
+        String pass2str = etconfirmar.getText().toString();
+
+
         String genero = (spGeneroR.getSelectedItem().toString());
 
         if (v.getId() == R.id.btnregistrarreg)
         {
 
-            if (genero.equals("-seleccione-"))
+            if (!pass2str.equals(pass1str) || pass2str.isEmpty() || pass1str.isEmpty() || pass1str.length()<6
+                    || !validarPass(pass1str) || cont2str.length() < 8 || cont1str.length() < 8
+                    || telstr.length() < 3 || telstr.length() > 10 || us.equals(unamestr) || unamestr.isEmpty()
+                    || em.equals(emailstr) || !ValidacionEmail(emailstr) || emailstr.isEmpty() || etedad.getText().length() == 1
+                    || edadstr.equals("00") || edadstr.equals("0") || edadstr.equals("000") || edadstr.isEmpty() || apmstr.isEmpty() || !validarNom(apmstr)
+                    || appstr.isEmpty() || namestr.isEmpty() || !validarNom(namestr) || !validarNom(appstr) || genero.equals("-seleccione-"))
             {
                 Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
                         Toast.LENGTH_LONG).show();
@@ -1062,15 +1057,10 @@ public class Registro extends AppCompatActivity {
                 if(edadnumero > 90 || edadnumero <= 18 )
                 {
                         etedad.setError( "Edad invalida");
-
+                        etedad.requestFocus();
                 }
-
-
                 else//***********************************REGISTRO****************************/
                 {
-                    String em = helper.searchemail(unamestr);
-                    String us = helper.searchUse(unamestr);
-
 
                         int edadint = Integer.parseInt(edadstr);
                         int telint = Integer.parseInt(telstr);

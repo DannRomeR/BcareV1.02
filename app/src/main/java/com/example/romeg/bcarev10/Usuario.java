@@ -31,9 +31,7 @@ public class Usuario extends AppCompatActivity {
 
         String usern = getIntent().getStringExtra("Username");
 
-
-
-        Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+       /* Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();*/
 
         /**
          * Call this function whenever you want to check user login

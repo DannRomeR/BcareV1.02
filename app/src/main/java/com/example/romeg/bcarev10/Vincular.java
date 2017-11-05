@@ -2,7 +2,7 @@ package com.example.romeg.bcarev10;
 
 import android.annotation.TargetApi;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
+
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
+
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
@@ -19,23 +19,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
+
 import android.os.AsyncTask;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
 import android.support.v7.app.NotificationCompat;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import agency.tango.materialintroscreen.listeners.IFinishListener;
+
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 
@@ -119,9 +115,8 @@ public class Vincular extends AppCompatActivity {
 
     public void onEnviarClick(View v)
     {
-        int riesgo,porcentaje=0;
+        int riesgo,porcentaje;
         String username = etuse.getText().toString();
-        String userna = helper.searchPass(username);
         String named = helper.searchname(username);
         String edadd = helper.searchedad(username);
         String emaild = helper.searchemail(username);
@@ -177,80 +172,88 @@ public class Vincular extends AppCompatActivity {
                 {
                     if (gend.equals("Masculino"))
                     {
-                        riesgo=calcularHombre();
-                        porcentaje=calcularPorcentajeHombre(riesgo);
-                        Toast.makeText(this, "Sexo: Masculino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
-
-                        DBHelper db = new DBHelper(getApplicationContext());
-                        String Mensaje = db.insertCalcu(username, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
-                        Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
-
-                        notificación = new NotificationCompat.Builder(this);
-                        notificación.setAutoCancel(true);
-                        if(porcentaje > 10 && porcentaje < 50)
+                        if (Ipresion2 < 50 || Ipresion2 > 300)
                         {
-                            notificación.setSmallIcon(R.drawable.doctor);
-                            notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
-                            notificación.setWhen(System.currentTimeMillis());
-                            notificación.setContentTitle("Bcare");
-                            notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
-
-
-                            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-                            nm.notify(idUnica, notificación.build());
-                            Toast.makeText(this, "Su porcentaje a ha salido alto realice el siguiente Test", Toast.LENGTH_LONG).show();
-                            String str = etuse.getText().toString();
-
-                            new PreferenceManager(this).clearPreference();
-                            Intent i = new Intent(Vincular.this, Fast2.class);
-                            i.putExtra("Username", str);
-
-                            startActivity(i);
-                            finish();
+                            Toast.makeText(this, "Numero de presión invalido", Toast.LENGTH_LONG).show();
+                            bpsistolica.setError("Numero de presión invalido");
                         }
-                        else
-                        {
-                            Toast.makeText(this, "Tus niveles de riesgo son normales, no olvides realizar el calculo de riesgo todos los días", Toast.LENGTH_LONG).show();
+                        else {
+                            riesgo = calcularHombre();
+                            porcentaje = calcularPorcentajeHombre(riesgo);
+                            Toast.makeText(this, "Sexo: Masculino " + "Puntos: " + riesgo + "Porcentaje: " + porcentaje + " %", Toast.LENGTH_LONG).show();
+
+                            DBHelper db = new DBHelper(getApplicationContext());
+                            String Mensaje = db.insertCalcu(username, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
+                            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
+
+                            notificación = new NotificationCompat.Builder(this);
+                            notificación.setAutoCancel(true);
+                            if (porcentaje > 10 && porcentaje < 50) {
+                                notificación.setSmallIcon(R.drawable.doctor);
+                                notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                                notificación.setWhen(System.currentTimeMillis());
+                                notificación.setContentTitle("Bcare");
+                                notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+
+
+                                NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                                nm.notify(idUnica, notificación.build());
+                                Toast.makeText(this, "Su porcentaje a ha salido alto realice el siguiente Test", Toast.LENGTH_LONG).show();
+                                String str = etuse.getText().toString();
+
+                                new PreferenceManager(this).clearPreference();
+                                Intent i = new Intent(Vincular.this, Fast2.class);
+                                i.putExtra("Username", str);
+
+                                startActivity(i);
+                                finish();
+                            } else {
+                                Toast.makeText(this, "Tus niveles de riesgo son normales, no olvides realizar el calculo de riesgo todos los días", Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                     else if (gend.equals("Femenino"))
                     {
-                        riesgo=calcularMujer();
-                        porcentaje=calcularPorcentajeMujer(riesgo);
-                        Toast.makeText(this, "Sexo: Femenino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
-
-                        DBHelper db = new DBHelper(getApplicationContext());
-                        String Mensaje = db.insertCalcu(username, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
-                        Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
-
-                        notificación = new NotificationCompat.Builder(this);
-                        notificación.setAutoCancel(true);
-                        if(porcentaje > 10 && porcentaje < 50)
+                        if (Ipresion2 < 50 || Ipresion2 > 300)
                         {
-                            notificación.setSmallIcon(R.drawable.doctor);
-                            notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
-                            notificación.setWhen(System.currentTimeMillis());
-                            notificación.setContentTitle("Bcare");
-                            notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
-
-
-                            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-                            nm.notify(idUnica, notificación.build());
-                            Toast.makeText(this, "Su porcentaje a ha salido alto realice el siguiente Test", Toast.LENGTH_LONG).show();
-                            String str = etuse.getText().toString();
-
-                            new PreferenceManager(this).clearPreference();
-                            Intent i = new Intent(Vincular.this, Fast2.class);
-                            i.putExtra("Username", str);
-
-                            startActivity(i);
-                            finish();
+                            Toast.makeText(this, "Numero de presión invalido", Toast.LENGTH_LONG).show();
+                            bpsistolica.setError("Numero de presión invalido");
                         }
-                        else
-                        {
-                            Toast.makeText(this, "Tus niveles de riesgo son normales, no olvides realizar el calculo de riesgo todos los días", Toast.LENGTH_LONG).show();
+                        else {
+                            riesgo = calcularMujer();
+                            porcentaje = calcularPorcentajeMujer(riesgo);
+                            Toast.makeText(this, "Sexo: Femenino " + "Puntos: " + riesgo + "Porcentaje: " + porcentaje + " %", Toast.LENGTH_LONG).show();
+
+                            DBHelper db = new DBHelper(getApplicationContext());
+                            String Mensaje = db.insertCalcu(username, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
+                            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
+
+                            notificación = new NotificationCompat.Builder(this);
+                            notificación.setAutoCancel(true);
+                            if (porcentaje > 10 && porcentaje < 50) {
+                                notificación.setSmallIcon(R.drawable.doctor);
+                                notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                                notificación.setWhen(System.currentTimeMillis());
+                                notificación.setContentTitle("Bcare");
+                                notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+
+
+                                NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                                nm.notify(idUnica, notificación.build());
+                                Toast.makeText(this, "Su porcentaje a ha salido alto realice el siguiente Test", Toast.LENGTH_LONG).show();
+                                String str = etuse.getText().toString();
+
+                                new PreferenceManager(this).clearPreference();
+                                Intent i = new Intent(Vincular.this, Fast2.class);
+                                i.putExtra("Username", str);
+
+                                startActivity(i);
+                                finish();
+                            } else {
+                                Toast.makeText(this, "Tus niveles de riesgo son normales, no olvides realizar el calculo de riesgo todos los días", Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 }

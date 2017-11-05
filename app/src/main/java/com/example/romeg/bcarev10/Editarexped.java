@@ -22,7 +22,7 @@ public class Editarexped extends AppCompatActivity {
 
     DBHelper helper = new DBHelper(this);
 
-    TextView tvnomEx, tvappEx, tvapmEx, tvedadEx, tvemailEx, tvpresure,  tvnumpacEx;
+    TextView tvnomEx, tvappEx, tvapmEx, tvedadEx, tvemailEx, tvpresure;
     Spinner spGenEx, spFumEx,spmedEx,spColtEx, spColhEx;
     NotificationCompat.Builder notificación;
     private static final int idUnica= 51623;
@@ -32,20 +32,16 @@ public class Editarexped extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editarexped);
 
-        String usernamed = getIntent().getStringExtra("Username");
+
         String named = getIntent().getStringExtra("Name");
         String edadd = getIntent().getStringExtra("Edad");
         String appd = getIntent().getStringExtra("App");
         String apmd = getIntent().getStringExtra("Apm");
 
         String emaild = getIntent().getStringExtra("Email");
-        String gened = getIntent().getStringExtra("Gen");
-        String fumE = getIntent().getStringExtra("Fum");
-        String medE = getIntent().getStringExtra("Med");
-        String coltE = getIntent().getStringExtra("Colt");
-        String colhE = getIntent().getStringExtra("Colh");
+
         String presE = getIntent().getStringExtra("Presu");
-        String numpacE = getIntent().getStringExtra("Numpac");
+
         String[] gener = {"-seleccione-","Masculino","Femenino"};
         String[] colesteroTot = {"-seleccione-","<160","160-199","200-239","240-279",">=280"};
         String[] colesterolHDL = {"-seleccione-",">=60","50-59","40-49","30-39","<30"};
@@ -153,72 +149,82 @@ public class Editarexped extends AppCompatActivity {
                         tvedadEx.requestFocus();
                     }
                 } else{
-                    int riesgo,porcentaje=0;
-                    String em = helper.searchemail(usernamed2);
-
+                    int riesgo,porcentaje;
 
                         if (gene.equals("Masculino"))
                         {
-                            riesgo=calcularHombre();
-                            porcentaje=calcularPorcentajeHombre(riesgo);
-                            Toast.makeText(this, "Sexo: Masculino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
-
-                            DBHelper db = new DBHelper(getApplicationContext());
-                            String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol,colesteHDL,riesgo, porcentaje, numPac);
-                            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
-
-                            notificación = new NotificationCompat.Builder(this);
-                            notificación.setAutoCancel(true);
-
-                            if (porcentaje > 10 && porcentaje < 50)
+                            if (presurenumero < 50 || presurenumero > 300)
                             {
-                                notificación.setSmallIcon(R.drawable.doctor);
-                                notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
-                                notificación.setWhen(System.currentTimeMillis());
-                                notificación.setContentTitle("Bcare");
-                                notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+                                Toast.makeText(this, "Numero de presión invalido", Toast.LENGTH_LONG).show();
+                                tvpresure.setError("Numero de presión invalido");
+                            }
+                            else {
+                                riesgo = calcularHombre();
+                                porcentaje = calcularPorcentajeHombre(riesgo);
+                                Toast.makeText(this, "Sexo: Masculino " + "Puntos: " + riesgo + "Porcentaje: " + porcentaje + " %", Toast.LENGTH_LONG).show();
 
-                                Intent i = new Intent(Editarexped.this, Vincular.class);
-                                PendingIntent pendingIntent = PendingIntent.getActivity(Editarexped.this,0, i,PendingIntent.FLAG_UPDATE_CURRENT);
-                                notificación.setContentIntent(pendingIntent);
+                                DBHelper db = new DBHelper(getApplicationContext());
+                                String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol, colesteHDL, riesgo, porcentaje, numPac);
+                                Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
 
-                                NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                notificación = new NotificationCompat.Builder(this);
+                                notificación.setAutoCancel(true);
 
-                                nm.notify(idUnica, notificación.build());
+                                if (porcentaje > 10 && porcentaje < 50) {
+                                    notificación.setSmallIcon(R.drawable.doctor);
+                                    notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                                    notificación.setWhen(System.currentTimeMillis());
+                                    notificación.setContentTitle("Bcare");
+                                    notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
 
+                                    Intent i = new Intent(Editarexped.this, Vincular.class);
+                                    PendingIntent pendingIntent = PendingIntent.getActivity(Editarexped.this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                                    notificación.setContentIntent(pendingIntent);
+
+                                    NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                                    nm.notify(idUnica, notificación.build());
+
+                                }
                             }
 
 
                         } else if (gene.equals("Femenino")){
-                            riesgo=calcularMujer();
-                            porcentaje=calcularPorcentajeMujer(riesgo);
-                            Toast.makeText(this, "Sexo: Femenino "+"Puntos: "+riesgo+ "Porcentaje: "+ porcentaje+" %", Toast.LENGTH_LONG).show();
 
-                            DBHelper db = new DBHelper(getApplicationContext());
-                            String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol,colesteHDL,riesgo, porcentaje, numPac);
-                            Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
-
-                            notificación = new NotificationCompat.Builder(this);
-                            notificación.setAutoCancel(true);
-
-                            if (porcentaje > 10 && porcentaje < 50)
+                            if (presurenumero < 50 || presurenumero > 300)
                             {
-                                notificación.setSmallIcon(R.drawable.doctor);
-                                notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
-                                notificación.setWhen(System.currentTimeMillis());
-                                notificación.setContentTitle("Bcare");
-                                notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
-
-                                Intent i = new Intent(Editarexped.this, Vincular.class);
-                                PendingIntent pendingIntent = PendingIntent.getActivity(Editarexped.this,0, i,PendingIntent.FLAG_UPDATE_CURRENT);
-                                notificación.setContentIntent(pendingIntent);
-
-                                NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-                                nm.notify(idUnica, notificación.build());
-
+                                Toast.makeText(this, "Numero de presión invalido", Toast.LENGTH_LONG).show();
+                                tvpresure.setError("Numero de presión invalido");
                             }
+                            else {
+                                riesgo = calcularMujer();
+                                porcentaje = calcularPorcentajeMujer(riesgo);
+                                Toast.makeText(this, "Sexo: Femenino " + "Puntos: " + riesgo + "Porcentaje: " + porcentaje + " %", Toast.LENGTH_LONG).show();
 
+                                DBHelper db = new DBHelper(getApplicationContext());
+                                String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol, colesteHDL, riesgo, porcentaje, numPac);
+                                Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
+
+                                notificación = new NotificationCompat.Builder(this);
+                                notificación.setAutoCancel(true);
+
+                                if (porcentaje > 10 && porcentaje < 50) {
+                                    notificación.setSmallIcon(R.drawable.doctor);
+                                    notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
+                                    notificación.setWhen(System.currentTimeMillis());
+                                    notificación.setContentTitle("Bcare");
+                                    notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+
+                                    Intent i = new Intent(Editarexped.this, Vincular.class);
+                                    PendingIntent pendingIntent = PendingIntent.getActivity(Editarexped.this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                                    notificación.setContentIntent(pendingIntent);
+
+                                    NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                                    nm.notify(idUnica, notificación.build());
+
+                                }
+                            }
                     }
                 }
 

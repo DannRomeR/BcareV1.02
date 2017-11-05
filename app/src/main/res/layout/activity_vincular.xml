@@ -80,6 +80,7 @@
             android:background="@drawable/borde"
             android:textColor="#ffff"
             android:inputType="text|number"
+            android:maxLength="3"
             />
 
         <Button

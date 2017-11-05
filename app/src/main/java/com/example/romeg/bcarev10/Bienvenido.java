@@ -22,7 +22,7 @@ public class Bienvenido extends AppCompatActivity {
         setContentView(R.layout.activity_bienvenido);
 
         session = new SessionManagement(getApplicationContext());
-        Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+       /* Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();*/
 
         if (session.isLoggedIn()) {
             //here, pref is the instance of your preference manager

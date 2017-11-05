@@ -197,6 +197,7 @@
                 android:layout_marginRight="30dp"
                 android:background="@drawable/borde"
                 android:textColor="#ffff"
+                android:maxLength="3"
                 />
 
             <TextView
