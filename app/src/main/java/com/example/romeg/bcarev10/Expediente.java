@@ -14,7 +14,7 @@ public class Expediente extends AppCompatActivity {
 
     DBHelper helper = new DBHelper(this);
     TextView userE;
-    Button verExp;
+    Button verExp, envExp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +38,17 @@ public class Expediente extends AppCompatActivity {
         String riskE = getIntent().getStringExtra("Risk");
 
         verExp = (Button) findViewById(R.id.btnsummary);
+        envExp = (Button) findViewById(R.id.btncompartir);
         userE = (TextView) findViewById(R.id.UserExp);
         userE.setText(username);
 
         if (fumE.equals("Sin dato")||medE.equals("Sin dato")||coltE.equals("Sin dato")||colhE.equals("Sin dato")){
             verExp.setVisibility(View.GONE);
+            envExp.setVisibility(View.GONE);
         }
         else {
             verExp.setVisibility(View.VISIBLE);
+            envExp.setVisibility(View.VISIBLE);
         }
 
     }
@@ -142,6 +145,7 @@ public class Expediente extends AppCompatActivity {
         }
         else if(v.getId() == R.id.btncompartir)
         {
+
 
         }
     }

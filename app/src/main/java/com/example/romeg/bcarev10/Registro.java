@@ -48,37 +48,6 @@ public class Registro extends AppCompatActivity {
         gen = (TextView) findViewById(R.id.textView2);
 
 
-        /*String namestr = etnombre.getText().toString();
-        String appstr = etapp.getText().toString();
-        String apmstr = etapm.getText().toString();
-
-        String edadstr = etedad.getText().toString();
-        String emailstr = etemail.getText().toString();
-        String unamestr = etusuario.getText().toString();
-        String em = helper.searchemail(unamestr);
-        String us = helper.searchUse(unamestr);
-        String telstr = etTel.getText().toString();
-        String cont1str = etcont1.getText().toString();
-        String cont2str = etcont2.getText().toString();
-        String pass1str = etcontraseña.getText().toString();
-        String pass2str = etconfirmar.getText().toString();
-        btnreg = (Button) findViewById(R.id.btnregistrarreg);
-
-
-        if (!pass2str.equals(pass1str) || pass2str.isEmpty() || pass1str.isEmpty() || pass1str.length()<6
-                || !validarPass(pass1str) || cont2str.length() < 8 || cont1str.length() < 8
-                || telstr.length() < 8 || telstr.length() > 10 || us.equals(unamestr) || unamestr.isEmpty()
-                || em.equals(emailstr) || !ValidacionEmail(emailstr) || emailstr.isEmpty() || etedad.getText().length() == 1
-                || edadstr.equals("00") || edadstr.equals("0") || edadstr.isEmpty() || apmstr.isEmpty() || !validarNom(apmstr)
-                || appstr.isEmpty() || namestr.isEmpty() || !validarNom(namestr) || !validarNom(appstr) )
-        {
-            btnreg.setEnabled(false);
-        }
-        else
-        {
-            btnreg.setEnabled(true);
-        }*/
-
         etnombre.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -491,6 +460,60 @@ public class Registro extends AppCompatActivity {
                     case "000":
                         etTel.setError("El numero de teléfeno no existe");
                         break;
+                    case "11111111":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "1111111111":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "22222222":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "2222222222":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "33333333":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "3333333333":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "44444444":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "4444444444":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "55555555":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "5555555555":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "66666666":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "6666666666":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "77777777":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "7777777777":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "88888888":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "8888888888":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "99999999":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
+                    case "9999999999":
+                        etTel.setError("El numero de teléfeno no existe");
+                        break;
                 }
 
             }
@@ -575,7 +598,7 @@ public class Registro extends AppCompatActivity {
                     etTel.requestFocus();
                 }
 
-                else if (telstr.length()<8 || telstr.length()>10)
+                else if (telstr.length()<3 || telstr.length()>10)
                     {
                         etTel.setError("El numero de teléfeno no existe");
                         etTel.requestFocus();
@@ -683,7 +706,7 @@ public class Registro extends AppCompatActivity {
                     etTel.requestFocus();
                 }
 
-                else if (telstr.length()<8 || telstr.length()>10)
+                else if (telstr.length()<3 || telstr.length()>10)
                 {
                     etTel.setError("El numero de teléfeno no existe");
                     etTel.requestFocus();
@@ -806,7 +829,7 @@ public class Registro extends AppCompatActivity {
                     etTel.requestFocus();
                 }
 
-                else if (telstr.length()<8 || telstr.length()>10)
+                else if (telstr.length()<3 || telstr.length()>10)
                 {
                     etTel.setError("El numero de teléfeno no existe");
                     etTel.requestFocus();
@@ -841,10 +864,9 @@ public class Registro extends AppCompatActivity {
                 String pass1str = etcontraseña.getText().toString();
                 if (etcontraseña.getText().length() != 0)
                 {
-                    if (pass1str.length()<6 )
+                    if (pass1str.length()<6 || !validarPass(pass1str))
                     {
                         etcontraseña.setError("Formato de contraseña incorrecto");
-
                     }
                 }
             }
@@ -899,16 +921,7 @@ public class Registro extends AppCompatActivity {
                     etapm.setError("Formato de Apellido Invalido");
                     etapm.requestFocus();
                 }
-                else if (edadstr.equals("0"))
-                {
-                    etedad.setError( "Formato de Edad invalida");
-                    etedad.requestFocus();
-                }
-                else if (edadstr.equals("00"))
-                {
-                    etedad.setError( "Formato de Edad invalida");
-                    etedad.requestFocus();
-                }
+
                 else if (etedad.getText().length() ==1)
                 {
                     etedad.setError( "Formato de Edad invalida");
@@ -946,7 +959,7 @@ public class Registro extends AppCompatActivity {
                     etTel.requestFocus();
                 }
 
-                else if (telstr.length()<8 || telstr.length()>10)
+                else if (telstr.length()<3 || telstr.length()>10)
                 {
                     etTel.setError("El numero de teléfeno no existe");
                     etTel.requestFocus();
@@ -979,11 +992,7 @@ public class Registro extends AppCompatActivity {
                     etcontraseña.setError( "Campo Contraseña obligatorio");
                     etcontraseña.requestFocus();
                 }
-                else if (pass1str.length()<6 || !validarPass(pass1str))
-                {
-                    etcontraseña.setError("Formato de contraseña incorrecto");
-                    etcontraseña.requestFocus();
-                }
+
             }
 
             @Override
@@ -1044,7 +1053,7 @@ public class Registro extends AppCompatActivity {
                     || telstr.length() < 3 || telstr.length() > 10 || us.equals(unamestr) || unamestr.isEmpty()
                     || em.equals(emailstr) || !ValidacionEmail(emailstr) || emailstr.isEmpty() || etedad.getText().length() == 1
                     || edadstr.equals("00") || edadstr.equals("0") || edadstr.equals("000") || edadstr.isEmpty() || apmstr.isEmpty() || !validarNom(apmstr)
-                    || appstr.isEmpty() || namestr.isEmpty() || !validarNom(namestr) || !validarNom(appstr) || genero.equals("-seleccione-"))
+                    || appstr.isEmpty() || namestr.isEmpty() || !validarNom(namestr) || !validarNom(appstr) || genero.equals("-seleccione-") || pass1str.length()<6)
             {
                 Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
                         Toast.LENGTH_LONG).show();
