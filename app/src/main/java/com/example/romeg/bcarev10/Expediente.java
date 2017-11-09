@@ -9,6 +9,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class Expediente extends AppCompatActivity {
 
@@ -21,21 +28,12 @@ public class Expediente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expediente);
         String username = getIntent().getStringExtra("Username");
-        String name = getIntent().getStringExtra("Name");
-        String edad = getIntent().getStringExtra("Edad");
-        String email = getIntent().getStringExtra("Email");
-        String tel = getIntent().getStringExtra("Tel");
-        String cont1 = getIntent().getStringExtra("Cont1");
-        String cont2 = getIntent().getStringExtra("Cont2");
-        String gene = getIntent().getStringExtra("Gen");
 
         String fumE = getIntent().getStringExtra("Fum");
         String medE = getIntent().getStringExtra("Med");
         String coltE = getIntent().getStringExtra("Colt");
         String colhE = getIntent().getStringExtra("Colh");
-        String presE = getIntent().getStringExtra("Presu");
-        String puntE = getIntent().getStringExtra("Punt");
-        String riskE = getIntent().getStringExtra("Risk");
+
 
         verExp = (Button) findViewById(R.id.btnsummary);
         envExp = (Button) findViewById(R.id.btncompartir);
@@ -59,7 +57,6 @@ public class Expediente extends AppCompatActivity {
         {
 
             String str = getIntent().getStringExtra("Username");
-            String userna = helper.searchPass(str);
             String named = helper.searchname(str);
             String edadd = helper.searchedad(str);
             String emaild = helper.searchemail(str);
@@ -116,7 +113,6 @@ public class Expediente extends AppCompatActivity {
         else if(v.getId() == R.id.btncalcular)
         {
             String str = userE.getText().toString();
-            String userna = helper.searchPass(str);
             String named = helper.searchname(str);
             String edadd = helper.searchedad(str);
             String emaild = helper.searchemail(str);
@@ -147,6 +143,126 @@ public class Expediente extends AppCompatActivity {
         {
 
 
+            String str = getIntent().getStringExtra("Username");
+            String numpacd = helper.searchnumpac(str);
+
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        boolean sucess = jsonObject.getBoolean("success");
+                        if (sucess)
+                        {
+                            String str = getIntent().getStringExtra("Username");
+                            final String named = helper.searchname(str);
+                            final String edadd = helper.searchedad(str);
+                            final String emaild = helper.searchemail(str);
+
+                            final String gend = helper.searchgen(str);
+                            final String fum = helper.searchfum(str);
+                            final String med = helper.searchmed(str);
+                            final String colt = helper.searchcolt(str);
+                            final String colh = helper.searchcolh(str);
+                            final String presu = helper.searchpresure(str);
+                            final String punt = helper.searchpunt(str);
+                            final String risk = helper.searchrisk(str);
+                            final String appd = helper.searchapp(str);
+                            final String apmd = helper.searchapm(str);
+                            final String numpacd = helper.searchnumpac(str);
+                            int edadint = Integer.parseInt(edadd);
+                            int press = Integer.parseInt(presu);
+                            int puntint = Integer.parseInt(punt);
+                            int riskint = Integer.parseInt(risk);
+
+
+                            Response.Listener<String> resposListener = new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    try {
+                                        JSONObject jsonResponse = new JSONObject(response);
+                                        boolean success = jsonResponse.getBoolean("success");
+                                        if (success)
+                                        {
+                                            Toast pass = Toast.makeText(Expediente.this, "El expediente ha sido enviado, pronto lo verá su médico", Toast.LENGTH_LONG);
+                                            pass.show();
+                                        }
+                                        else
+                                        {
+                                            Toast pass = Toast.makeText(Expediente.this, "Operación no exitosa", Toast.LENGTH_SHORT);
+                                            pass.show();
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            };
+                            UpdateRequest updateRequest = new UpdateRequest(emaild,named,appd,apmd,edadint,gend,fum,med,colt,colh,press,puntint,riskint,resposListener);
+                            RequestQueue queue = Volley.newRequestQueue(Expediente.this);
+                            queue.add(updateRequest);
+
+                        }
+                        else
+                        {
+                            String str = getIntent().getStringExtra("Username");
+                            final String named = helper.searchname(str);
+                            final String edadd = helper.searchedad(str);
+                            final String emaild = helper.searchemail(str);
+
+                            final String gend = helper.searchgen(str);
+                            final String fum = helper.searchfum(str);
+                            final String med = helper.searchmed(str);
+                            final String colt = helper.searchcolt(str);
+                            final String colh = helper.searchcolh(str);
+                            final String presu = helper.searchpresure(str);
+                            final String punt = helper.searchpunt(str);
+                            final String risk = helper.searchrisk(str);
+                            final String appd = helper.searchapp(str);
+                            final String apmd = helper.searchapm(str);
+                            final String numpacd = helper.searchnumpac(str);
+                            int edadint = Integer.parseInt(edadd);
+                            int press = Integer.parseInt(presu);
+                            int puntint = Integer.parseInt(punt);
+                            int riskint = Integer.parseInt(risk);
+
+                            Response.Listener<String> respoListener = new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    try {
+                                        JSONObject jsonResponse = new JSONObject(response);
+                                        boolean success = jsonResponse.getBoolean("success");
+                                        if (success)
+                                        {
+                                            Toast pass = Toast.makeText(Expediente.this, "El expediente ha sido enviado, pronto lo verá su médico", Toast.LENGTH_LONG);
+                                            pass.show();
+                                        }
+                                        else
+                                        {
+                                            Toast pass = Toast.makeText(Expediente.this, "Operación no exitosa", Toast.LENGTH_SHORT);
+                                            pass.show();
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            };
+                            RegisterRequest registerRequest = new RegisterRequest(emaild,numpacd,named,appd,apmd,edadint,gend,fum,med,colt,colh,press,puntint,riskint,respoListener);
+                            RequestQueue queue = Volley.newRequestQueue(Expediente.this);
+                            queue.add(registerRequest);
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            LoginRequest loginRequest = new LoginRequest(numpacd,responseListener);
+            RequestQueue queue = Volley.newRequestQueue(Expediente.this);
+            queue.add(loginRequest);
+
+
+
         }
     }
 
@@ -154,7 +270,6 @@ public class Expediente extends AppCompatActivity {
     {
 
         String str = userE.getText().toString();
-        String userna = helper.searchPass(str);
         String named = helper.searchname(str);
         String edadd = helper.searchedad(str);
         String emaild = helper.searchemail(str);

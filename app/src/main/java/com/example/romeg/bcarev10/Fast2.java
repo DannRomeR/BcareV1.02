@@ -235,4 +235,36 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
         startActivity(i);
         finish();
     }
+
+    public void onBackPressed()
+    {
+
+        String str = getIntent().getStringExtra("Username");
+        String named = helper.searchname(str);
+        String edadd = helper.searchedad(str);
+        String emaild = helper.searchemail(str);
+        String teld = helper.searchtel(str);
+        String cont1d = helper.searchcont1(str);
+        String cont2d = helper.searchcont2(str);
+        String gend = helper.searchgen(str);
+        String appd = helper.searchapp(str);
+        String apmd = helper.searchapm(str);
+        String numpacd = helper.searchnumpac(str);
+
+        Intent i = new Intent(Fast2.this, Usuario.class);
+        i.putExtra("Username", str);
+        i.putExtra("Name", named);
+        i.putExtra("App", appd);
+        i.putExtra("Apm", apmd);
+        i.putExtra("Edad", edadd);
+        i.putExtra("Email", emaild);
+        i.putExtra("Tel", teld);
+        i.putExtra("Cont1", cont1d);
+        i.putExtra("Cont2", cont2d);
+        i.putExtra("Gen", gend);
+
+        i.putExtra("Numpac", numpacd);
+        startActivity(i);
+        finish();
+    }
 }
