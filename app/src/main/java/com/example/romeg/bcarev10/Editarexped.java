@@ -94,13 +94,14 @@ public class Editarexped extends AppCompatActivity {
             int edadnumero = Integer.parseInt(edadee);
             int presurenumero = Integer.parseInt(presure);
 
-            int numa = (int)(Math.random()*999)+1;
+           /* int numa = (int)(Math.random()*999)+1;
             String numastr = String.valueOf(numa);
             String nomS = namee.substring(0,1);
             String appS = appe.substring(0,1);
             String apmS = apme.substring(0,1);
 
-            String  numPac = nomS + appS + apmS + edadee +numastr;
+            String  numPac = nomS + appS + apmS + edadee +numastr;*/
+            String  numPac = helper.searchnumpac(usernamed2);
 
 
             if (namee.isEmpty() || appe.isEmpty() || apme.isEmpty() || edadee.isEmpty() || emaile.isEmpty() || presure.isEmpty() ||gene.equals("-seleccione-") || fum.equals("-seleccione-") || med.equals("-seleccione-") || colesterol.equals("-seleccione-") || colesteHDL.equals("-seleccione-"))
@@ -164,7 +165,7 @@ public class Editarexped extends AppCompatActivity {
                                 Toast.makeText(this, "Sexo: Masculino " + "Puntos: " + riesgo + "Porcentaje: " + porcentaje + " %", Toast.LENGTH_LONG).show();
 
                                 DBHelper db = new DBHelper(getApplicationContext());
-                                String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol, colesteHDL, riesgo, porcentaje, numPac);
+                                String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol, colesteHDL, riesgo, porcentaje);
                                 Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
 
                                 notificación = new NotificationCompat.Builder(this);
@@ -202,7 +203,7 @@ public class Editarexped extends AppCompatActivity {
                                 Toast.makeText(this, "Sexo: Femenino " + "Puntos: " + riesgo + "Porcentaje: " + porcentaje + " %", Toast.LENGTH_LONG).show();
 
                                 DBHelper db = new DBHelper(getApplicationContext());
-                                String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol, colesteHDL, riesgo, porcentaje, numPac);
+                                String Mensaje = db.actualizarExpediente(usernamed2, namee, appe, apme, edadnumero, emaile, presurenumero, gene, fum, med, colesterol, colesteHDL, riesgo, porcentaje);
                                 Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
 
                                 notificación = new NotificationCompat.Builder(this);

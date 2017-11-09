@@ -594,7 +594,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return Mensaje;
     }
 
-    public String actualizarExpediente (String use, String name, String app, String apm,  int age, String email, int presure, String genero, String fum, String med, String colt, String colh, int punt, int risk, String numpac)
+    public String actualizarExpediente (String use, String name, String app, String apm,  int age, String email, int presure, String genero, String fum, String med, String colt, String colh, int punt, int risk)
     {
         String Mensaje = "";
         SQLiteDatabase database = this.getWritableDatabase();
@@ -612,7 +612,6 @@ public class DBHelper extends SQLiteOpenHelper {
         contenedor.put("presu",presure);
         contenedor.put("punt",punt);
         contenedor.put("risk",risk);
-        contenedor.put("numpac",numpac);
         int cantidad = database.update("contacts", contenedor,"uname='"+use+"'",null);
         if (cantidad != 0){
             Mensaje="La operacion se ha realizado exitosamente";
@@ -625,7 +624,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return Mensaje;
     }
 
-    public String actualizarData(String use, String uname, String name, String app, String apm,  int edad, String email, int tel, int cont1, int cont2,String gener, String numpac)
+    public String actualizarData(String use, String uname, String name, String app, String apm,  int edad, String email, int tel, int cont1, int cont2,String gener)
     {
         String Mensaje = "";
         SQLiteDatabase database = this.getWritableDatabase();
@@ -640,7 +639,6 @@ public class DBHelper extends SQLiteOpenHelper {
         contenedor.put("cont1",cont1);
         contenedor.put("cont2",cont2);
         contenedor.put("gen",gener);
-        contenedor.put("numpac",numpac);
         int cantidad = database.update("contacts", contenedor,"uname='"+use+"'",null);
         if (cantidad != 0){
             Mensaje="La operacion se ha realizado exitosamente";

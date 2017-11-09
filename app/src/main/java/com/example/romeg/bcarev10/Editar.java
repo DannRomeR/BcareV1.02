@@ -83,13 +83,14 @@ public class Editar extends AppCompatActivity {
             int edadnumero = Integer.parseInt(edadee);
             String genero = (spGeneroE.getSelectedItem().toString());
 
-            int numa = (int)(Math.random()*999)+1;
+           /* int numa = (int)(Math.random()*999)+1;
             String numastr = String.valueOf(numa);
             String nomS = namee.substring(0,1);
             String appS = appe.substring(0,1);
             String apmS = apme.substring(0,1);
 
-            String  numPac = nomS + appS + apmS + edadee +numastr;
+            String  numPac = nomS + appS + apmS + edadee +numastr;*/
+            String  numPac = helper.searchnumpac(usernamed2);
 
 
             if (namee.isEmpty() || appe.isEmpty() || apme.isEmpty() || emaile.isEmpty() || usere.isEmpty() || edadee.isEmpty() || tele.isEmpty() || !validarNom(namee) || !ValidacionEmail(emaile) || edadnumero > 90 || edadnumero <= 18 || tele.length()<8 || cont1e.length()<8 || cont2e.length()<8 || genero.equals("-seleccione-")) {
@@ -142,7 +143,7 @@ public class Editar extends AppCompatActivity {
                     int cont1inte = Integer.parseInt(cont1e);
                     int cont2inte = Integer.parseInt(cont2e);
                     DBHelper db = new DBHelper(getApplicationContext());
-                    String Mensaje = db.actualizarData(usernamed2, usere, namee, appe, apme, edadinte, emaile, telinte, cont1inte, cont2inte, genero, numPac);
+                    String Mensaje = db.actualizarData(usernamed2, usere, namee, appe, apme, edadinte, emaile, telinte, cont1inte, cont2inte, genero);
                     Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_LONG).show();
 
                     if (!Mensaje.isEmpty()) {
