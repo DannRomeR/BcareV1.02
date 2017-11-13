@@ -62,30 +62,20 @@ public class Registro extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String namestr = etnombre.getText().toString();
-                if (etnombre.getText().length() != 0)
-                {
-                    if(!validarNom(namestr))
-                    {
-                        etnombre.setError( "Formato del nombre invalido");
 
-                    }
+                if(!validarNom(namestr))
+                {
+                    etnombre.setError( "Formato incorrecto");
+
                 }
+
             }
         });
 
         etapp.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                String namestr = etnombre.getText().toString();
-                if (namestr.isEmpty()) {
-                    etnombre.setError("Campo Nombre obligatorio");
-                    etnombre.requestFocus();
-                }
-                else if (!validarNom(namestr))
-                {
-                    etnombre.setError("Formato del nombre invalido");
-                    etnombre.requestFocus();
-                }
+
             }
 
             @Override
@@ -97,14 +87,13 @@ public class Registro extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String appstr = etapp.getText().toString();
-                if (etapp.getText().length()!=0)
-                {
-                    if (!validarNom(appstr))
-                    {
-                        etapp.setError( "Formato del nombre invalido");
 
-                    }
+                if (!validarNom(appstr))
+                {
+                    etapp.setError( "Formato incorrecto");
+
                 }
+
             }
         });
 
@@ -116,26 +105,7 @@ public class Registro extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String namestr = etnombre.getText().toString();
-                String appstr = etapp.getText().toString();
-                if (namestr.isEmpty()) {
-                    etnombre.setError("Campo Nombre obligatorio");
-                    etnombre.requestFocus();
-                }
-                else if (!validarNom(namestr))
-                {
-                    etnombre.setError("Formato de Nombre Invalido");
-                    etnombre.requestFocus();
-                }
-                else if (appstr.isEmpty()) {
-                    etapp.setError("Campo Nombre obligatorio");
-                    etapp.requestFocus();
-                }
-                else if (!validarNom(appstr))
-                {
-                    etapp.setError("Formato de Apellido Invalido");
-                    etapp.requestFocus();
-                }
+
 
             }
 
@@ -146,7 +116,7 @@ public class Registro extends AppCompatActivity {
                 {
                     if (!validarNom(apmstr))
                     {
-                        etapm.setError( "Formato del nombre invalido");
+                        etapm.setError( "Formato incorrecto");
 
                     }
                 }
@@ -161,50 +131,26 @@ public class Registro extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String namestr = etnombre.getText().toString();
-                String appstr = etapp.getText().toString();
-                String apmstr = etapm.getText().toString();
-                if (namestr.isEmpty()) {
-                    etnombre.setError("Campo Nombre obligatorio");
-                    etnombre.requestFocus();
-                }
-                else if (!validarNom(namestr))
-                {
-                    etnombre.setError("Formato de Nombre Invalido");
-                    etnombre.requestFocus();
-                }
-                else if (appstr.isEmpty()) {
-                    etapp.setError("Campo Nombre obligatorio");
-                    etapp.requestFocus();
-                }
-                else if (!validarNom(appstr))
-                {
-                    etapp.setError("Formato de Apellido Invalido");
-                    etapp.requestFocus();
-                }
-                else if (apmstr.isEmpty()) {
-                    etapm.setError("Campo Nombre obligatorio");
-                    etapm.requestFocus();
-                }
-
-                else if (!validarNom(apmstr))
-                {
-                    etapm.setError("Formato deApellido Invalido");
-                    etapm.requestFocus();
-                }
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 String edadstr = etedad.getText().toString();
-                if (edadstr.equals("0"))
-                {
-                    etedad.setError( "Edad invalida");
+                switch (edadstr) {
+                    case "0":
+                        etedad.setError("Formato incorrecto");
+
+                        break;
+                    case "00":
+                        etedad.setError("Formato incorrecto");
+
+                        break;
                 }
-                else if (edadstr.equals("00"))
+                if (etedad.getText().length() ==1)
                 {
-                    etedad.setError( "Edad invalida");
+                    etedad.setError( "Formato incorrecto");
+
                 }
             }
         });
@@ -212,55 +158,7 @@ public class Registro extends AppCompatActivity {
         etemail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                String namestr = etnombre.getText().toString();
-                String appstr = etapp.getText().toString();
-                String apmstr = etapm.getText().toString();
-                String edadstr = etedad.getText().toString();
-                if (namestr.isEmpty()) {
-                    etnombre.setError("Campo Nombre obligatorio");
-                    etnombre.requestFocus();
-                }
-                else if (!validarNom(namestr))
-                {
-                    etnombre.setError("Formato de Nombre Invalido");
-                    etnombre.requestFocus();
-                }
-                else if (appstr.isEmpty()) {
-                    etapp.setError("Campo Nombre obligatorio");
-                    etapp.requestFocus();
-                }
-                else if (!validarNom(appstr))
-                {
-                    etapp.setError("Formato de Apellido Invalido");
-                    etapp.requestFocus();
-                }
-                else if (apmstr.isEmpty()) {
-                    etapm.setError("Campo Nombre obligatorio");
-                    etapm.requestFocus();
-                }
 
-                else if (!validarNom(apmstr))
-                {
-                    etapm.setError("Formato de Apellido Invalido");
-                    etapm.requestFocus();
-                }
-                else if (edadstr.isEmpty())
-                {
-                    etedad.setError( "Campo vacío");
-                    etedad.requestFocus();
-                }
-
-                else if (edadstr.isEmpty())
-                {
-                    etedad.setError( "Campo vacío");
-                    etedad.requestFocus();
-                }
-
-                else if (etedad.getText().length() ==1)
-                {
-                    etedad.setError( "Formato de Edad invalida");
-                    etedad.requestFocus();
-                }
             }
 
             @Override
@@ -272,10 +170,14 @@ public class Registro extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String emailstr = etemail.getText().toString();
-                String unamestr = etusuario.getText().toString();
                 String em = helper.searchownemail(emailstr);
-                if (em.equals(emailstr)) {
-                    etemail.setError("El email ya esta siendo usado");
+
+                if(!ValidacionEmail(emailstr)) {
+                    etemail.setError("Formato de correo electrónico incorrecto");
+
+                }
+                else if (em.equals(emailstr)) {
+                    etemail.setError("Ya existe un usuario con este email");
                     etemail.requestFocus();
                 }
             }
@@ -289,69 +191,7 @@ public class Registro extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String namestr = etnombre.getText().toString();
-                String appstr = etapp.getText().toString();
-                String apmstr = etapm.getText().toString();
-                String edadstr = etedad.getText().toString();
-                String emailstr = etemail.getText().toString();
 
-
-                if (namestr.isEmpty()) {
-                    etnombre.setError("Campo Nombre obligatorio");
-                    etnombre.requestFocus();
-                }
-                else if (!validarNom(namestr))
-                {
-                    etnombre.setError("Formato de Nombre Invalido");
-                    etnombre.requestFocus();
-                }
-                else if (appstr.isEmpty()) {
-                    etapp.setError("Campo Nombre obligatorio");
-                    etapp.requestFocus();
-                }
-                else if (!validarNom(appstr))
-                {
-                    etapp.setError("Formato de Apellido Invalido");
-                    etapp.requestFocus();
-                }
-                else if (apmstr.isEmpty()) {
-                    etapm.setError("Campo Nombre obligatorio");
-                    etapm.requestFocus();
-                }
-
-                else if (!validarNom(apmstr))
-                {
-                    etapm.setError("Formato de Apellido Invalido");
-                    etapm.requestFocus();
-                }
-               else if (edadstr.isEmpty())
-                {
-                    etedad.setError( "Campo vacío");
-                    etedad.requestFocus();
-                }
-
-                else if (edadstr.isEmpty())
-                {
-                    etedad.setError( "Campo vacío");
-                    etedad.requestFocus();
-                }
-               else if (etedad.getText().length() ==1)
-                {
-                    etedad.setError( "Formato de Edad invalida");
-                    etemail.requestFocus();
-                }
-
-                else if (emailstr.isEmpty())
-                {
-                    etemail.setError( "Campo Email obligatorio");
-                    etemail.requestFocus();
-                }
-
-                else if (!ValidacionEmail(emailstr))
-                    {
-                        etemail.setError("Formato de email invalido");
-                        etemail.requestFocus();
-                    }
 
 
             }
@@ -361,7 +201,7 @@ public class Registro extends AppCompatActivity {
                 String unamestr = etusuario.getText().toString();
                 String us = helper.searchUse(unamestr);
                 if (us.equals(unamestr)) {
-                    etusuario.setError("El nombre de usuario ya existe");
+                    etusuario.setError("Ya existe un usuario con este nombre");
 
                 }
             }
@@ -375,71 +215,7 @@ public class Registro extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String namestr = etnombre.getText().toString();
-                String appstr = etapp.getText().toString();
-                String apmstr = etapm.getText().toString();
-                String edadstr = etedad.getText().toString();
-                String emailstr = etemail.getText().toString();
-                String unamestr = etusuario.getText().toString();
 
-
-                if (namestr.isEmpty()) {
-                    etnombre.setError("Campo Nombre obligatorio");
-                    etnombre.requestFocus();
-                }
-                else if (!validarNom(namestr))
-                {
-                    etnombre.setError("Formato de Nombre Invalido");
-                    etnombre.requestFocus();
-                }
-                else if (appstr.isEmpty()) {
-                    etapp.setError("Campo Nombre obligatorio");
-                    etapp.requestFocus();
-                }
-                else if (!validarNom(appstr))
-                {
-                    etapp.setError("Formato de Apellido Invalido");
-                    etapp.requestFocus();
-                }
-                else if (apmstr.isEmpty()) {
-                    etapm.setError("Campo Nombre obligatorio");
-                    etapm.requestFocus();
-                }
-
-                else if (!validarNom(apmstr))
-                {
-                    etapm.setError("Formato deApellido Invalido");
-                    etapm.requestFocus();
-                }
-                else if (edadstr.isEmpty())
-                {
-                    etedad.setError( "Campo vacío");
-                    etedad.requestFocus();
-                }
-
-                else if (etedad.getText().length() ==1)
-                {
-                    etedad.setError( "Formato de Edad invalida");
-                    etedad.requestFocus();
-                }
-
-                else if (emailstr.isEmpty())
-                {
-                    etemail.setError( "Campo Email obligatorio");
-                    etemail.requestFocus();
-                }
-
-                else if (!ValidacionEmail(emailstr))
-                {
-                    etemail.setError("Formato de email invalido");
-                    etemail.requestFocus();
-                }
-
-                else if (unamestr.isEmpty())
-                {
-                    etusuario.setError( "Campo Usuario obligatorio");
-                    etusuario.requestFocus();
-                }
             }
 
             @Override
@@ -449,71 +225,76 @@ public class Registro extends AppCompatActivity {
                 switch (telstr)
                 {
                     case "0":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "00000000":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case"0000000000":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "000":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "11111111":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "1111111111":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "22222222":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "2222222222":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "33333333":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "3333333333":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "44444444":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "4444444444":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "55555555":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "5555555555":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "66666666":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "6666666666":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "77777777":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "7777777777":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "88888888":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "8888888888":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "99999999":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
                     case "9999999999":
-                        etTel.setError("El numero de teléfeno no existe");
+                        etTel.setError("Formato incorrecto");
                         break;
+                }
+                if (telstr.length()<3 || telstr.length()>10)
+                {
+                    etTel.setError("Formato incorrecto");
+                    etTel.requestFocus();
                 }
 
             }
@@ -527,82 +308,7 @@ public class Registro extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String namestr = etnombre.getText().toString();
-                String appstr = etapp.getText().toString();
-                String apmstr = etapm.getText().toString();
-                String edadstr = etedad.getText().toString();
-                String emailstr = etemail.getText().toString();
-                String unamestr = etusuario.getText().toString();
-                String telstr = etTel.getText().toString();
-                if (namestr.isEmpty()) {
-                    etnombre.setError("Campo Nombre obligatorio");
-                    etnombre.requestFocus();
-                }
-                else if (!validarNom(namestr))
-                {
-                    etnombre.setError("Formato de Nombre Invalido");
-                    etnombre.requestFocus();
-                }
-                else if (appstr.isEmpty()) {
-                    etapp.setError("Campo Nombre obligatorio");
-                    etapp.requestFocus();
-                }
-                else if (!validarNom(appstr))
-                {
-                    etapp.setError("Formato de Apellido Invalido");
-                    etapp.requestFocus();
-                }
-                else if (apmstr.isEmpty()) {
-                    etapm.setError("Campo Nombre obligatorio");
-                    etapm.requestFocus();
-                }
 
-                else if (!validarNom(apmstr))
-                {
-                    etapm.setError("Formato de Apellido Invalido");
-                    etapm.requestFocus();
-                }
-                else if (edadstr.isEmpty())
-                {
-                    etedad.setError( "Campo vacío");
-                    etedad.requestFocus();
-                }
-
-                else if (etedad.getText().length() ==1)
-                {
-                    etedad.setError( "Formato de Edad invalida");
-                    etedad.requestFocus();
-                }
-
-                else if (emailstr.isEmpty())
-                {
-                    etemail.setError( "Campo Email obligatorio");
-                    etemail.requestFocus();
-                }
-
-                else if (!ValidacionEmail(emailstr))
-                {
-                    etemail.setError("Formato de email invalido");
-                    etemail.requestFocus();
-                }
-
-                else if (unamestr.isEmpty())
-                {
-                    etusuario.setError( "Campo Usuario obligatorio");
-                    etusuario.requestFocus();
-                }
-
-                else if (telstr.isEmpty())
-                {
-                    etTel.setError( "Campo Teléfono obligatorio");
-                    etTel.requestFocus();
-                }
-
-                else if (telstr.length()<3 || telstr.length()>10)
-                    {
-                        etTel.setError("El numero de teléfeno no existe");
-                        etTel.requestFocus();
-                    }
                 }
             @Override
             public void afterTextChanged(Editable s) {
@@ -610,17 +316,22 @@ public class Registro extends AppCompatActivity {
                 switch (cont1str)
                 {
                     case "0":
-                        etcont1.setError("El numero de teléfeno no existe");
+                        etcont1.setError("Formato incorrecto");
                         break;
                     case "00000000":
-                        etcont1.setError("El numero de teléfeno no existe");
+                        etcont1.setError("Formato incorrecto");
                         break;
                     case"0000000000":
-                        etcont1.setError("El numero de teléfeno no existe");
+                        etcont1.setError("Formato incorrecto");
                         break;
                     case "000":
-                        etcont1.setError("El numero de teléfeno no existe");
+                        etcont1.setError("Formato incorrecto");
                         break;
+                }
+                if (cont1str.length()<8)
+                {
+                    etcont1.setError("Formato incorrecto");
+                    etcont1.requestFocus();
                 }
             }
         });
@@ -633,95 +344,6 @@ public class Registro extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String namestr = etnombre.getText().toString();
-                String appstr = etapp.getText().toString();
-                String apmstr = etapm.getText().toString();
-                String edadstr = etedad.getText().toString();
-                String emailstr = etemail.getText().toString();
-                String unamestr = etusuario.getText().toString();
-
-                String telstr = etTel.getText().toString();
-                String cont1str = etcont1.getText().toString();
-                if (namestr.isEmpty()) {
-                    etnombre.setError("Campo Nombre obligatorio");
-                    etnombre.requestFocus();
-                }
-                else if (!validarNom(namestr))
-                {
-                    etnombre.setError("Formato de Nombre Invalido");
-                    etnombre.requestFocus();
-                }
-                else if (appstr.isEmpty()) {
-                    etapp.setError("Campo Nombre obligatorio");
-                    etapp.requestFocus();
-                }
-                else if (!validarNom(appstr))
-                {
-                    etapp.setError("Formato de Apellido Invalido");
-                    etapp.requestFocus();
-                }
-                else if (apmstr.isEmpty()) {
-                    etapm.setError("Campo Nombre obligatorio");
-                    etapm.requestFocus();
-                }
-
-                else if (!validarNom(apmstr))
-                {
-                    etapm.setError("Formato de Apellido Invalido");
-                    etapm.requestFocus();
-                }
-                else if (edadstr.isEmpty())
-                {
-                    etedad.setError( "Campo vacío");
-                    etedad.requestFocus();
-                }
-
-                else if (etedad.getText().length() ==1)
-                {
-                    etedad.setError( "Formato de Edad invalida");
-                    etedad.requestFocus();
-                }
-
-                else if (emailstr.isEmpty())
-                {
-                    etemail.setError( "Campo Email obligatorio");
-                    etemail.requestFocus();
-                }
-
-                else if (!ValidacionEmail(emailstr))
-                {
-                    etemail.setError("Formato de email invalido");
-                    etemail.requestFocus();
-                }
-
-                else if (unamestr.isEmpty())
-                {
-                    etusuario.setError( "Campo Usuario obligatorio");
-                    etusuario.requestFocus();
-                }
-
-                else if (telstr.isEmpty())
-                {
-                    etTel.setError( "Campo Teléfono obligatorio");
-                    etTel.requestFocus();
-                }
-
-                else if (telstr.length()<3 || telstr.length()>10)
-                {
-                    etTel.setError("El numero de teléfeno no existe");
-                    etTel.requestFocus();
-
-                }
-                else if (cont1str.isEmpty())
-                {
-                    etcont1.setError( "Campo Contacto 1 obligatorio");
-                    etcont1.requestFocus();
-                }
-                else if (cont1str.length()<8)
-                {
-                    etcont1.setError("El numero de teléfeno no existe");
-                    etcont1.requestFocus();
-                }
 
             }
 
@@ -731,17 +353,23 @@ public class Registro extends AppCompatActivity {
                 switch (cont2str)
                 {
                     case "0":
-                        etcont2.setError("El numero de teléfeno no existe");
+                        etcont2.setError("Formato incorrecto");
                         break;
                     case "00000000":
-                        etcont2.setError("El numero de teléfeno no existe");
+                        etcont2.setError("Formato incorrecto");
                         break;
                     case"0000000000":
-                        etcont2.setError("El numero de teléfeno no existe");
+                        etcont2.setError("Formato incorrecto");
                         break;
                     case "000":
-                        etcont2.setError("El numero de teléfeno no existe");
+                        etcont2.setError("Formato incorrecto");
                         break;
+                }
+                if (cont2str.length()<8)
+                {
+                    etcont2.setError("Formato incorrecto");
+                    etcont2.requestFocus();
+
                 }
 
             }
@@ -755,108 +383,7 @@ public class Registro extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String namestr = etnombre.getText().toString();
-                String appstr = etapp.getText().toString();
-                String apmstr = etapm.getText().toString();
-                String edadstr = etedad.getText().toString();
-                String emailstr = etemail.getText().toString();
-                String unamestr = etusuario.getText().toString();
-                String telstr = etTel.getText().toString();
-                String cont1str = etcont1.getText().toString();
-                String cont2str = etcont2.getText().toString();
 
-                if (namestr.isEmpty()) {
-                    etnombre.setError("Campo Nombre obligatorio");
-                    etnombre.requestFocus();
-                }
-                else if (!validarNom(namestr))
-                {
-                    etnombre.setError("Formato de Nombre Invalido");
-                    etnombre.requestFocus();
-                }
-                else if (appstr.isEmpty()) {
-                    etapp.setError("Campo Nombre obligatorio");
-                    etapp.requestFocus();
-                }
-                else if (!validarNom(appstr))
-                {
-                    etapp.setError("Formato de Apellido Invalido");
-                    etapp.requestFocus();
-                }
-                else if (apmstr.isEmpty()) {
-                    etapm.setError("Campo Nombre obligatorio");
-                    etapm.requestFocus();
-                }
-
-                else if (!validarNom(apmstr))
-                {
-                    etapm.setError("Formato de Apellido Invalido");
-                    etapm.requestFocus();
-                }
-                else if (edadstr.isEmpty())
-                {
-                    etedad.setError( "Campo vacío");
-                    etedad.requestFocus();
-                }
-
-                else if (etedad.getText().length() ==1)
-                {
-                    etedad.setError( "Formato de Edad invalida");
-                    etedad.requestFocus();
-                }
-
-                else if (emailstr.isEmpty())
-                {
-                    etemail.setError( "Campo Email obligatorio");
-                    etemail.requestFocus();
-                }
-
-                else if (!ValidacionEmail(emailstr))
-                {
-                    etemail.setError("Formato de email invalido");
-                    etemail.requestFocus();
-                }
-
-                else if (unamestr.isEmpty())
-                {
-                    etusuario.setError( "Campo Usuario obligatorio");
-                    etusuario.requestFocus();
-                }
-
-                else if (telstr.isEmpty())
-                {
-                    etTel.setError( "Campo Teléfono obligatorio");
-                    etTel.requestFocus();
-                }
-
-                else if (telstr.length()<3 || telstr.length()>10)
-                {
-                    etTel.setError("El numero de teléfeno no existe");
-                    etTel.requestFocus();
-
-                }
-                else if (cont1str.isEmpty())
-                {
-                    etcont1.setError( "Campo Contacto 1 obligatorio");
-                    etcont1.requestFocus();
-                }
-                else if (cont1str.length()<8)
-                {
-                    etcont1.setError("El numero de teléfeno no existe");
-                    etcont1.requestFocus();
-
-                }
-                else if (cont2str.isEmpty())
-                {
-                    etcont2.setError( "Campo Contacto 1 obligatorio");
-                    etcont2.requestFocus();
-                }
-                else if (cont2str.length()<8)
-                {
-                    etcont2.setError("El numero de teléfeno no existe");
-                    etcont2.requestFocus();
-
-                }
             }
 
             @Override
@@ -880,118 +407,7 @@ public class Registro extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String namestr = etnombre.getText().toString();
-                String appstr = etapp.getText().toString();
-                String apmstr = etapm.getText().toString();
 
-                String edadstr = etedad.getText().toString();
-                String emailstr = etemail.getText().toString();
-                String unamestr = etusuario.getText().toString();
-                String em = helper.searchemail(unamestr);
-                String us = helper.searchUse(unamestr);
-                String telstr = etTel.getText().toString();
-                String cont1str = etcont1.getText().toString();
-                String cont2str = etcont2.getText().toString();
-                String pass1str = etcontraseña.getText().toString();
-                if (namestr.isEmpty()) {
-                    etnombre.setError("Campo Nombre obligatorio");
-                    etnombre.requestFocus();
-                }
-                else if (!validarNom(namestr))
-                {
-                    etnombre.setError("Formato de Nombre Invalido");
-                    etnombre.requestFocus();
-                }
-                else if (appstr.isEmpty()) {
-                    etapp.setError("Campo Nombre obligatorio");
-                    etapp.requestFocus();
-                }
-                else if (!validarNom(appstr))
-                {
-                    etapp.setError("Formato de Apellido Invalido");
-                    etapp.requestFocus();
-                }
-                else if (apmstr.isEmpty()) {
-                    etapm.setError("Campo Nombre obligatorio");
-                    etapm.requestFocus();
-                }
-
-                else if (!validarNom(apmstr))
-                {
-                    etapm.setError("Formato de Apellido Invalido");
-                    etapm.requestFocus();
-                }
-
-                else if (etedad.getText().length() ==1)
-                {
-                    etedad.setError( "Formato de Edad invalida");
-                    etedad.requestFocus();
-                }
-
-                else if (emailstr.isEmpty())
-                {
-                    etemail.setError( "Campo Email obligatorio");
-                    etemail.requestFocus();
-                }
-
-                else if (!ValidacionEmail(emailstr))
-                {
-                    etemail.setError("Formato de email invalido");
-                    etemail.requestFocus();
-                }
-                else if (em.equals(emailstr)) {
-                    etemail.setError("El email ya esta siendo usado");
-                    etemail.requestFocus();
-                }
-                else if (unamestr.isEmpty())
-                {
-                    etusuario.setError( "Campo Usuario obligatorio");
-                    etusuario.requestFocus();
-                }
-                else if (us.equals(unamestr)) {
-                    etusuario.setError("El nombre de usuario ya existe");
-                    etusuario.requestFocus();
-
-                }
-                else if (telstr.isEmpty())
-                {
-                    etTel.setError( "Campo Teléfono obligatorio");
-                    etTel.requestFocus();
-                }
-
-                else if (telstr.length()<3 || telstr.length()>10)
-                {
-                    etTel.setError("El numero de teléfeno no existe");
-                    etTel.requestFocus();
-
-                }
-                else if (cont1str.isEmpty())
-                {
-                    etcont1.setError( "Campo Contacto 1 obligatorio");
-                    etcont1.requestFocus();
-                }
-                else if (cont1str.length()<8)
-                {
-                    etcont1.setError("El numero de teléfeno no existe");
-                    etcont1.requestFocus();
-
-                }
-                else if (cont2str.isEmpty())
-                {
-                    etcont2.setError( "Campo Contacto 1 obligatorio");
-                    etcont2.requestFocus();
-                }
-                else if (cont2str.length()<8)
-                {
-                    etcont2.setError("El numero de teléfeno no existe");
-                    etcont2.requestFocus();
-
-                }
-                else if (pass1str.isEmpty())
-                {
-                    etcontraseña.setError( "Campo Contraseña obligatorio");
-                    etcontraseña.requestFocus();
-                }
 
             }
 
@@ -1013,111 +429,212 @@ public class Registro extends AppCompatActivity {
 
     public void onSignUpClick(View v)
     {
-
-        etnombre = (EditText) findViewById(R.id.txtnombrereg);
-        etapp = (EditText) findViewById(R.id.txtappreg);
-        etapm = (EditText) findViewById(R.id.txtapmreg);
-        etemail = (EditText) findViewById(R.id.txtemailreg);
-        etusuario = (EditText) findViewById(R.id.txtusuarioreg);
-        etedad = (EditText) findViewById(R.id.txtedadreg);
-        etTel = (EditText) findViewById(R.id.txtelefonoreg);
-        etcont1 = (EditText) findViewById(R.id.txcont1reg);
-        etcont2 = (EditText) findViewById(R.id.txcont2reg);
-        etcontraseña = (EditText) findViewById(R.id.txtprimerpassreg);
-        etconfirmar = (EditText) findViewById(R.id.txtsegundopassreg);
-
-
-        String namestr = etnombre.getText().toString();
-        String appstr = etapp.getText().toString();
-        String apmstr = etapm.getText().toString();
-
-        String edadstr = etedad.getText().toString();
-        String emailstr = etemail.getText().toString();
-        String unamestr = etusuario.getText().toString();
-        String em = helper.searchownemail(emailstr);
-        String us = helper.searchUse(unamestr);
-        String telstr = etTel.getText().toString();
-        String cont1str = etcont1.getText().toString();
-        String cont2str = etcont2.getText().toString();
-        String pass1str = etcontraseña.getText().toString();
-        String pass2str = etconfirmar.getText().toString();
-
-
-        String genero = (spGeneroR.getSelectedItem().toString());
-
-        if (v.getId() == R.id.btnregistrarreg)
+        try
         {
+            String namestr = etnombre.getText().toString();
+            String appstr = etapp.getText().toString();
+            String apmstr = etapm.getText().toString();
 
-            if (!pass2str.equals(pass1str) || pass2str.isEmpty() || pass1str.isEmpty() || pass1str.length()<6
-                    || !validarPass(pass1str) || cont2str.length() < 8 || cont1str.length() < 8
-                    || telstr.length() < 3 || telstr.length() > 10 || us.equals(unamestr) || unamestr.isEmpty()
-                    || em.equals(emailstr) || !ValidacionEmail(emailstr) || emailstr.isEmpty() || etedad.getText().length() == 1
-                    || edadstr.equals("00") || edadstr.equals("0") || edadstr.equals("000") || edadstr.isEmpty() || apmstr.isEmpty() || !validarNom(apmstr)
-                    || appstr.isEmpty() || namestr.isEmpty() || !validarNom(namestr) || !validarNom(appstr) || genero.equals("-seleccione-") || pass1str.length()<6)
+            String edadstr = etedad.getText().toString();
+            String emailstr = etemail.getText().toString();
+            String unamestr = etusuario.getText().toString();
+            String em = helper.searchownemail(emailstr);
+            String us = helper.searchUse(unamestr);
+            String telstr = etTel.getText().toString();
+            String cont1str = etcont1.getText().toString();
+            String cont2str = etcont2.getText().toString();
+            String pass1str = etcontraseña.getText().toString();
+            String pass2str = etconfirmar.getText().toString();
+
+            String genero = (spGeneroR.getSelectedItem().toString());
+
+            if (v.getId() == R.id.btnregistrarreg)
             {
-                Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
-                        Toast.LENGTH_LONG).show();
 
-            }
-
-            else {
-                int edadnumero = Integer.parseInt(edadstr);
-
-                if(edadnumero > 90 || edadnumero <= 18 )
+                if (namestr.isEmpty() || appstr.isEmpty() || apmstr.isEmpty() || emailstr.isEmpty() || unamestr.isEmpty() || pass1str.isEmpty() || pass2str.isEmpty() || edadstr.isEmpty() || telstr.isEmpty() || genero.equals("-seleccione-"))
                 {
-                        etedad.setError( "Edad invalida");
-                        etedad.requestFocus();
-                }
-                else//***********************************REGISTRO****************************/
-                {
+                    Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
+                            Toast.LENGTH_SHORT).show();
+                    if(namestr.isEmpty())
+                    {
+                        etnombre.setError("Complete este campo");
+                    }
+                    if(appstr.isEmpty())
+                    {
+                        etapp.setError("Complete este campo");
+                    }
+                    if (apmstr.isEmpty())
+                    {
+                        etapm.setError("Complete este campo");
+                    }
 
-                        int edadint = Integer.parseInt(edadstr);
-                        int telint = Integer.parseInt(telstr);
-                        int cont1int = Integer.parseInt(cont1str);
-                        int cont2int = Integer.parseInt(cont2str);
-                        int numa = (int)(Math.random()*999)+1;
-                        String numastr = String.valueOf(numa);
-                        String nomS = namestr.substring(0,1);
-                        String appS = appstr.substring(0,1);
-                        String apmS = apmstr.substring(0,1);
-
-                        String  numPac = nomS + appS + apmS + edadstr +numastr;
-
-                        //insert the details in database
-                        Contact c = new Contact();
-                        c.setName(namestr);
-                        c.setApp(appstr);
-                        c.setApm(apmstr);
-                        c.setEmail(emailstr);
-                        c.setUname(unamestr);
-                        c.setPass(pass1str);
-                        c.setEdad(edadint);
-                        c.setTel(telint);
-                        c.setCont1(cont1int);
-                        c.setCont2(cont2int);
-                        c.setGenero(genero);
-
-                        c.setFum("Sin dato");
-                        c.setMed("Sin dato");
-                        c.setColt("Sin dato");
-                        c.setColh("Sin dato");
-                        c.setPresu(120);
-                        c.setPunt(120);
-                        c.setRisk(120);
-                        c.setNumPac(numPac);
-                        helper.insertContact(c);
-
-                        Toast pass = Toast.makeText(Registro.this, "Registro exitoso", Toast.LENGTH_LONG);
-                        pass.show();
-
-                        Intent i = new Intent(Registro.this, Bienvenido.class);
-                        startActivity(i);
+                    if (edadstr.isEmpty())
+                    {
+                        etedad.setError("Complete este campo");
+                    }
+                    if (emailstr.isEmpty())
+                    {
+                        etemail.setError("Complete este campo");
+                    }
+                    if (unamestr.isEmpty())
+                    {
+                        etusuario.setError("Complete este campo");
+                    }
+                    if (telstr.isEmpty())
+                    {
+                        etTel.setError("Complete este campo");
+                    }
+                    if (cont1str.isEmpty())
+                    {
+                        etcont1.setError("Complete este campo");
+                    }
+                    if (cont2str.isEmpty())
+                    {
+                        etcont2.setError("Complete este campo");
+                    }
+                    if (pass1str.isEmpty())
+                    {
+                        etcontraseña.setError("Complete este campo");
+                    }
+                    if (pass2str.isEmpty())
+                    {
+                        etconfirmar.setError("Complete este campo");
                     }
 
                 }
-            }
-            }
 
+                else {
+
+                    int edadnumero = Integer.parseInt(edadstr);
+                    if( !validarNom(namestr) || !validarNom(appstr) || !validarNom(apmstr)
+                            || !ValidacionEmail(emailstr) || telstr.length()<3
+                            || telstr.length()>10 || cont1str.length()<8 || cont2str.length()<8 || pass1str.length()<6
+                            || !validarPass(pass1str) || !pass2str.equals(pass1str)|| edadnumero > 90 || edadnumero <= 18)
+                    {
+
+                        if (edadnumero > 90 || edadnumero <= 18)
+                        {
+                            etedad.setError( "Formato incorrecto");
+                            etedad.requestFocus();
+
+                        }
+                        if (!validarNom(namestr))
+                        {
+                            etnombre.setError( "Formato incorrecto");
+                        }
+                        if (!validarNom(appstr))
+                        {
+                            etapp.setError( "Formato incorrecto");
+                        }
+                        if (!validarNom(apmstr))
+                        {
+                            etapm.setError( "Formato incorrecto");
+                        }
+                        if (!ValidacionEmail(emailstr) || em.equals(emailstr))
+                        {
+                            etemail.setError( "Formato incorrecto");
+                        }
+                        if (us.equals(unamestr))
+                        {
+                            etusuario.setError( "Formato incorrecto");
+                        }
+                        if (telstr.length()<3 || telstr.length()>10)
+                        {
+                            etTel.setError( "Formato incorrecto");
+                        }
+                        if (cont1str.length()<8)
+                        {
+                            etcont1.setError( "Formato incorrecto");
+                        }
+                        if (cont2str.length()<8)
+                        {
+                            etcont2.setError( "Formato incorrecto");
+                        }
+                        if (pass1str.length()<6 || !validarPass(pass1str))
+                        {
+                            etcontraseña.setError( "Formato incorrecto");
+                        }
+                        if (!pass2str.equals(pass1str))
+                        {
+                            etconfirmar.setError( "Formato incorrecto");
+                        }
+
+                    }
+                    else//***********************************REGISTRO****************************/
+                    {
+
+                        if(em.equals(emailstr) || us.equals(unamestr))
+                        {
+                            if (em.equals(emailstr)) {
+                                etemail.setError("El email ya esta siendo usado");
+                                Toast.makeText(this, "Este email ya esta siendo usado",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                            if (us.equals(unamestr)) {
+                                etusuario.setError("El nombre de usuario ya existe");
+                                Toast.makeText(this, "El usuario ya existe",
+                                        Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+                        else {
+                            int edadint = Integer.parseInt(edadstr);
+                            int telint = Integer.parseInt(telstr);
+                            int cont1int = Integer.parseInt(cont1str);
+                            int cont2int = Integer.parseInt(cont2str);
+                            int numa = (int)(Math.random()*999)+1;
+                            String numastr = String.valueOf(numa);
+                            String nomS = namestr.substring(0,1);
+                            String appS = appstr.substring(0,1);
+                            String apmS = apmstr.substring(0,1);
+
+                            String  numPac = nomS + appS + apmS + edadstr +numastr;
+
+                            //insert the details in database
+                            Contact c = new Contact();
+                            c.setName(namestr);
+                            c.setApp(appstr);
+                            c.setApm(apmstr);
+                            c.setEmail(emailstr);
+                            c.setUname(unamestr);
+                            c.setPass(pass1str);
+                            c.setEdad(edadint);
+                            c.setTel(telint);
+                            c.setCont1(cont1int);
+                            c.setCont2(cont2int);
+                            c.setGenero(genero);
+
+                            c.setFum("Sin dato");
+                            c.setMed("Sin dato");
+                            c.setColt("Sin dato");
+                            c.setColh("Sin dato");
+                            c.setPresu(120);
+                            c.setPunt(120);
+                            c.setRisk(120);
+                            c.setNumPac(numPac);
+                            helper.insertContact(c);
+
+                            Toast pass = Toast.makeText(Registro.this, "Registro exitoso", Toast.LENGTH_LONG);
+                            pass.show();
+
+                            Intent i = new Intent(Registro.this, Bienvenido.class);
+                            startActivity(i);
+
+                        }
+
+                    }
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            Toast pass = Toast.makeText(Registro.this, "Ocurrio un error, registre nuevamente los datos ", Toast.LENGTH_LONG);
+            pass.show();
+            finish();
+        }
+
+
+    }
 
         public boolean ValidacionEmail(String email)
         {
@@ -1133,7 +650,7 @@ public class Registro extends AppCompatActivity {
         {
             Pattern pattern;
             Matcher matcher;
-            final String NOMBRE_PATTERN = "^[a-zA-Z]+$";
+            final String NOMBRE_PATTERN = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$";
             pattern = Pattern.compile(NOMBRE_PATTERN);
             matcher = pattern.matcher(name);
 
@@ -1145,7 +662,7 @@ public class Registro extends AppCompatActivity {
             // ^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$
             Pattern pattern;
             Matcher matcher;
-            final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+            final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!.-_])(?=\\S+$).{4,}$";
             pattern = Pattern.compile(PASSWORD_PATTERN);
             matcher = pattern.matcher(pass);
 

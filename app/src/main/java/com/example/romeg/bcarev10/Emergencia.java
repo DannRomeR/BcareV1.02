@@ -67,7 +67,7 @@ public class Emergencia extends AppCompatActivity {
 
             switch (state) {
                 case TelephonyManager.CALL_STATE_IDLE:
-                    Toast.makeText(Emergencia.this, "CALL_STATE_IDLE", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Emergencia.this, "Activando Llamada", Toast.LENGTH_SHORT).show();
                     break;
                 case TelephonyManager.CALL_STATE_RINGING:
                     Toast.makeText(Emergencia.this, "CALL_STATE_RINGING", Toast.LENGTH_SHORT).show();

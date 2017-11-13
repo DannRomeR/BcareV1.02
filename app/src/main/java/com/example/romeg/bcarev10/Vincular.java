@@ -113,9 +113,8 @@ public class Vincular extends AppCompatActivity {
 
     }
 
-    public void onEnviarClick(View v)
-    {
-        int riesgo,porcentaje;
+    public void onEnviarClick(View v) {
+        int riesgo, porcentaje;
         String username = etuse.getText().toString();
         String named = helper.searchname(username);
         String edadd = helper.searchedad(username);
@@ -136,21 +135,15 @@ public class Vincular extends AppCompatActivity {
         String numpacd = helper.searchnumpac(username);
 
 
-
         bpsistolica = (EditText) findViewById(R.id.etpresionVin);
         String presion = bpsistolica.getText().toString();
         int Ipresion2 = Integer.parseInt(presion);
 
-        if (v.getId() == R.id.Calcular)
-        {
-            if (presion.isEmpty())
-            {
+        if (v.getId() == R.id.Calcular) {
+            if (presion.isEmpty()) {
                 Toast.makeText(this, "El campo de presion está vacío", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                if(fum.equals("Sin dato") && med.equals("Sin dato") && colt.equals("Sin dato") && colh.equals("Sin dato"))
-                {
+            } else {
+                if (fum.equals("Sin dato") && med.equals("Sin dato") && colt.equals("Sin dato") && colh.equals("Sin dato")) {
                     Toast.makeText(this, "No ha realizado el calculo de riesgo, llene el formulario que se le pide", Toast.LENGTH_SHORT).show();
 
                     Intent i = new Intent(Vincular.this, Riesgo.class);
@@ -167,24 +160,19 @@ public class Vincular extends AppCompatActivity {
                     i.putExtra("Numpac", numpacd);
                     startActivity(i);
                     finish();
-                }
-                else
-                {
-                    if (gend.equals("Masculino"))
-                    {
-                        if (Ipresion2 < 50 || Ipresion2 > 300)
-                        {
+                } else {
+                    if (gend.equals("Masculino")) {
+                        if (Ipresion2 < 50 || Ipresion2 > 300) {
                             Toast.makeText(this, "Numero de presión invalido", Toast.LENGTH_LONG).show();
                             bpsistolica.setError("Numero de presión invalido");
-                        }
-                        else {
+                        } else {
                             riesgo = calcularHombre();
                             porcentaje = calcularPorcentajeHombre(riesgo);
-                            Toast.makeText(this, "Sexo: Masculino " + "Puntos: " + riesgo + "Porcentaje: " + porcentaje + " %", Toast.LENGTH_LONG).show();
 
                             DBHelper db = new DBHelper(getApplicationContext());
                             String Mensaje = db.insertCalcu(username, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
                             Toast.makeText(getApplicationContext(), Mensaje, Toast.LENGTH_SHORT).show();
+
 
                             notificación = new NotificationCompat.Builder(this);
                             notificación.setAutoCancel(true);
@@ -194,36 +182,71 @@ public class Vincular extends AppCompatActivity {
                                 notificación.setWhen(System.currentTimeMillis());
                                 notificación.setContentTitle("Bcare");
                                 notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
-
-
                                 NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
                                 nm.notify(idUnica, notificación.build());
-                                Toast.makeText(this, "Su porcentaje a ha salido alto realice el siguiente Test", Toast.LENGTH_LONG).show();
                                 String str = etuse.getText().toString();
-
                                 new PreferenceManager(this).clearPreference();
-                                Intent i = new Intent(Vincular.this, Fast2.class);
-                                i.putExtra("Username", str);
 
-                                startActivity(i);
-                                finish();
+
+                                AlertDialog.Builder dialogo2 = new AlertDialog.Builder(this);
+                                dialogo2.setTitle("Importante");
+                                dialogo2.setMessage("Sexo: Masculino " + "Puntos: " + riesgo + " " + "Porcentaje: " + porcentaje + " % Su porcentaje a ha salido alto realice el siguiente Test");
+                                dialogo2.setCancelable(false);
+                                dialogo2.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogo1, int id) {
+                                        String username = etuse.getText().toString();
+                                        Intent i = new Intent(Vincular.this, Fast2.class);
+                                        i.putExtra("Username", username);
+
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                });
+
+                                dialogo2.show();
+
                             } else {
-                                Toast.makeText(this, "Tus niveles de riesgo son normales, no olvides realizar el calculo de riesgo todos los días", Toast.LENGTH_LONG).show();
+
+                                AlertDialog.Builder dialogo3 = new AlertDialog.Builder(this);
+                                dialogo3.setTitle("Importante");
+                                dialogo3.setMessage("Sexo: Masculino " + "Puntos: " + riesgo + " " + "Porcentaje: " + porcentaje + " % Tus niveles de riesgo son normales, no olvides realizar el calculo de riesgo todos los días");
+                                dialogo3.setCancelable(false);
+                                dialogo3.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogo1, int id) {
+                                        String str = etuse.getText().toString();
+                                        String userna = helper.searchPass(str);
+                                        String named = helper.searchname(str);
+                                        String edadd = helper.searchedad(str);
+                                        String emaild = helper.searchemail(str);
+                                        String teld = helper.searchtel(str);
+                                        String cont1d = helper.searchcont1(str);
+                                        String cont2d = helper.searchcont2(str);
+                                        String gend = helper.searchgen(str);
+
+                                        Intent i = new Intent(Vincular.this, Usuario.class);
+                                        i.putExtra("Username", str);
+                                        i.putExtra("Name", named);
+                                        i.putExtra("Edad", edadd);
+                                        i.putExtra("Email", emaild);
+                                        i.putExtra("Tel", teld);
+                                        i.putExtra("Cont1", cont1d);
+                                        i.putExtra("Cont2", cont2d);
+                                        i.putExtra("Gen", gend);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                });
+
+                                dialogo3.show();
                             }
                         }
-                    }
-                    else if (gend.equals("Femenino"))
-                    {
-                        if (Ipresion2 < 50 || Ipresion2 > 300)
-                        {
+                    } else if (gend.equals("Femenino")) {
+                        if (Ipresion2 < 50 || Ipresion2 > 300) {
                             Toast.makeText(this, "Numero de presión invalido", Toast.LENGTH_LONG).show();
                             bpsistolica.setError("Numero de presión invalido");
-                        }
-                        else {
+                        } else {
                             riesgo = calcularMujer();
                             porcentaje = calcularPorcentajeMujer(riesgo);
-                            Toast.makeText(this, "Sexo: Femenino " + "Puntos: " + riesgo + "Porcentaje: " + porcentaje + " %", Toast.LENGTH_LONG).show();
 
                             DBHelper db = new DBHelper(getApplicationContext());
                             String Mensaje = db.insertCalcu(username, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
@@ -237,28 +260,68 @@ public class Vincular extends AppCompatActivity {
                                 notificación.setWhen(System.currentTimeMillis());
                                 notificación.setContentTitle("Bcare");
                                 notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
-
-
                                 NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
                                 nm.notify(idUnica, notificación.build());
-                                Toast.makeText(this, "Su porcentaje a ha salido alto realice el siguiente Test", Toast.LENGTH_LONG).show();
                                 String str = etuse.getText().toString();
-
                                 new PreferenceManager(this).clearPreference();
-                                Intent i = new Intent(Vincular.this, Fast2.class);
-                                i.putExtra("Username", str);
 
-                                startActivity(i);
-                                finish();
+
+                                AlertDialog.Builder dialogo2 = new AlertDialog.Builder(this);
+                                dialogo2.setTitle("Importante");
+                                dialogo2.setMessage("Sexo: Femenino " + "Puntos: " + riesgo + " " + "Porcentaje: " + porcentaje + " % Su porcentaje a ha salido alto realice el siguiente Test");
+                                dialogo2.setCancelable(false);
+                                dialogo2.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogo1, int id) {
+                                        String username = etuse.getText().toString();
+                                        Intent i = new Intent(Vincular.this, Fast2.class);
+                                        i.putExtra("Username", username);
+
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                });
+
+                                dialogo2.show();
+
                             } else {
-                                Toast.makeText(this, "Tus niveles de riesgo son normales, no olvides realizar el calculo de riesgo todos los días", Toast.LENGTH_LONG).show();
+
+                                AlertDialog.Builder dialogo3 = new AlertDialog.Builder(this);
+                                dialogo3.setTitle("Importante");
+                                dialogo3.setMessage("Sexo: Femenino " + "Puntos: " + riesgo + " " + "Porcentaje: " + porcentaje + " % Tus niveles de riesgo son normales, no olvides realizar el calculo de riesgo todos los días");
+                                dialogo3.setCancelable(false);
+                                dialogo3.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogo1, int id) {
+                                        String str = etuse.getText().toString();
+                                        String userna = helper.searchPass(str);
+                                        String named = helper.searchname(str);
+                                        String edadd = helper.searchedad(str);
+                                        String emaild = helper.searchemail(str);
+                                        String teld = helper.searchtel(str);
+                                        String cont1d = helper.searchcont1(str);
+                                        String cont2d = helper.searchcont2(str);
+                                        String gend = helper.searchgen(str);
+
+                                        Intent i = new Intent(Vincular.this, Usuario.class);
+                                        i.putExtra("Username", str);
+                                        i.putExtra("Name", named);
+                                        i.putExtra("Edad", edadd);
+                                        i.putExtra("Email", emaild);
+                                        i.putExtra("Tel", teld);
+                                        i.putExtra("Cont1", cont1d);
+                                        i.putExtra("Cont2", cont2d);
+                                        i.putExtra("Gen", gend);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                });
+
+                                dialogo3.show();
                             }
                         }
                     }
                 }
-            }
 
+            }
         }
     }
 

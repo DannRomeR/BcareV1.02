@@ -154,6 +154,18 @@
             android:textColor="#ffff"
             />
 
+        <TextView
+            android:id="@+id/tvindc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingrese un número de al menos 3 digitos, puede ser de algún servicio de emergencia."
+            android:textColor="#ffff"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            />
+
         <EditText
             android:id="@+id/txtelefonoreg"
             android:layout_width="match_parent"
@@ -168,6 +180,18 @@
             android:textColor="#ffff"
             android:textColorHint="#ffff"
             android:maxLength="10"/>
+
+        <TextView
+            android:id="@+id/tvindcont1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingrese un número de al menos 8 digitos en los siguientes campos."
+            android:textColor="#ffff"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            />
 
         <EditText
             android:id="@+id/txcont1reg"

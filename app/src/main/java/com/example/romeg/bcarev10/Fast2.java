@@ -1,5 +1,7 @@
 package com.example.romeg.bcarev10;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +27,7 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
     private ImageView[] dots;
     private Button BnNext,BnSkip;
     DBHelper helper = new DBHelper(this);
+    TextView usi;
 
 
     @Override
@@ -46,6 +50,9 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
 
         setContentView(R.layout.activity_fast2);
 
+        String username = getIntent().getStringExtra("Username");
+        usi = (TextView) findViewById(R.id.UserEm);
+        usi.setText(username);
         mPager = (ViewPager) findViewById(R.id.viewPager);
         mpagerAdapter = new MpagerAdapter(layouts, this);
         mPager.setAdapter(mpagerAdapter);
@@ -166,61 +173,82 @@ public class Fast2 extends AppCompatActivity  implements View.OnClickListener{
         {
             String usestr = getIntent().getStringExtra("Username");
             String risk = helper.searchrisk(usestr);
+            String fum = helper.searchfum(usestr);
             int riesgo = Integer.parseInt(risk);
             if(riesgo > 10 && riesgo < 50){
                 loadEmergencia();
                 new PreferenceManager(this).writePreference();
-            }else if (riesgo == 120)
+            }else if (riesgo == 120 || fum.equals("Sin dato"))
             {
-                Toast.makeText(this, "No ha realizado el cálculo de riesgo para realizar una llamada",
-                        Toast.LENGTH_LONG).show();
-                String str = getIntent().getStringExtra("Username");
-                String userna = helper.searchPass(str);
-                String named = helper.searchname(str);
-                String edadd = helper.searchedad(str);
-                String emaild = helper.searchemail(str);
-                String teld = helper.searchtel(str);
-                String cont1d = helper.searchcont1(str);
-                String cont2d = helper.searchcont2(str);
-                String gend = helper.searchgen(str);
 
-                Intent i = new Intent(Fast2.this, Usuario.class);
-                i.putExtra("Username", str);
-                i.putExtra("Name", named);
-                i.putExtra("Edad", edadd);
-                i.putExtra("Email", emaild);
-                i.putExtra("Tel", teld);
-                i.putExtra("Cont1", cont1d);
-                i.putExtra("Cont2", cont2d);
-                i.putExtra("Gen", gend);
-                startActivity(i);
-                finish();
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+                dialogo1.setTitle("Importante");
+                dialogo1.setMessage("No ha realizado el cálculo de riesgo para realizar una llamada");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+
+                        String str = usi.getText().toString();
+                        String named = helper.searchname(str);
+                        String edadd = helper.searchedad(str);
+                        String emaild = helper.searchemail(str);
+                        String teld = helper.searchtel(str);
+                        String cont1d = helper.searchcont1(str);
+                        String cont2d = helper.searchcont2(str);
+                        String gend = helper.searchgen(str);
+
+                        Intent i = new Intent(Fast2.this, Usuario.class);
+                        i.putExtra("Username", str);
+                        i.putExtra("Name", named);
+                        i.putExtra("Edad", edadd);
+                        i.putExtra("Email", emaild);
+                        i.putExtra("Tel", teld);
+                        i.putExtra("Cont1", cont1d);
+                        i.putExtra("Cont2", cont2d);
+                        i.putExtra("Gen", gend);
+                        startActivity(i);
+                        finish();
+                    }
+                });
+
+                dialogo1.show();
+
+
+
+
             }
             else
             {
-                Toast.makeText(this, "Su puntaje de riesgo es bajo, no hay necesidad de una Emergencia",
-                        Toast.LENGTH_LONG).show();
-                String str = getIntent().getStringExtra("Username");
-                String userna = helper.searchPass(str);
-                String named = helper.searchname(str);
-                String edadd = helper.searchedad(str);
-                String emaild = helper.searchemail(str);
-                String teld = helper.searchtel(str);
-                String cont1d = helper.searchcont1(str);
-                String cont2d = helper.searchcont2(str);
-                String gend = helper.searchgen(str);
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+                dialogo1.setTitle("Importante");
+                dialogo1.setMessage("Su puntaje de riesgo es bajo, no hay necesidad de una Emergencia");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        String str = usi.getText().toString();
+                        String named = helper.searchname(str);
+                        String edadd = helper.searchedad(str);
+                        String emaild = helper.searchemail(str);
+                        String teld = helper.searchtel(str);
+                        String cont1d = helper.searchcont1(str);
+                        String cont2d = helper.searchcont2(str);
+                        String gend = helper.searchgen(str);
 
-                Intent i = new Intent(Fast2.this, Usuario.class);
-                i.putExtra("Username", str);
-                i.putExtra("Name", named);
-                i.putExtra("Edad", edadd);
-                i.putExtra("Email", emaild);
-                i.putExtra("Tel", teld);
-                i.putExtra("Cont1", cont1d);
-                i.putExtra("Cont2", cont2d);
-                i.putExtra("Gen", gend);
-                startActivity(i);
-                finish();
+                        Intent i = new Intent(Fast2.this, Usuario.class);
+                        i.putExtra("Username", str);
+                        i.putExtra("Name", named);
+                        i.putExtra("Edad", edadd);
+                        i.putExtra("Email", emaild);
+                        i.putExtra("Tel", teld);
+                        i.putExtra("Cont1", cont1d);
+                        i.putExtra("Cont2", cont2d);
+                        i.putExtra("Gen", gend);
+                        startActivity(i);
+                        finish();
+                    }
+                });
+                dialogo1.show();
+
             }
 
         }

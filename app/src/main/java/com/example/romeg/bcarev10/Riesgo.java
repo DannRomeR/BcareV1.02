@@ -1,7 +1,9 @@
 package com.example.romeg.bcarev10;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -124,7 +126,6 @@ public class Riesgo extends AppCompatActivity {
                 } else {
                     riesgo = calcularHombre();
                     porcentaje = calcularPorcentajeHombre(riesgo);
-                    Toast.makeText(this, "Sexo: Masculino " + "Puntos: " + riesgo + "Porcentaje: " + porcentaje + " %", Toast.LENGTH_LONG).show();
 
                     DBHelper db = new DBHelper(getApplicationContext());
                     String Mensaje = db.insertCalcu(str, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
@@ -149,36 +150,51 @@ public class Riesgo extends AppCompatActivity {
                         nm.notify(idUnica, notificación.build());
 
                     }
+                    AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+                    dialogo1.setTitle("Resultado");
+                    dialogo1.setMessage("Sexo: Masculino " + "Puntos: " + riesgo + " " + "Porcentaje: " + porcentaje + " %");
+                    dialogo1.setCancelable(false);
+                    dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialogo1, int id) {
+                            String str = usercalcul.getText().toString();
+                            String named = helper.searchname(str);
+                            String edadd = helper.searchedad(str);
+                            String emaild = helper.searchemail(str);
+                            String teld = helper.searchtel(str);
+                            String cont1d = helper.searchcont1(str);
+                            String cont2d = helper.searchcont2(str);
+                            String presu = helper.searchpresure(str);
+                            String punt = helper.searchpunt(str);
+                            String risk = helper.searchrisk(str);
+                            String gend = helper.searchgen(str);
+                            String fum = helper.searchfum(str);
+                            String med = helper.searchmed(str);
+                            String colt  = helper.searchcolt(str);
+                            String colh = helper.searchcolh(str);
 
-                    String named = helper.searchname(str);
-                    String edadd = helper.searchedad(str);
-                    String emaild = helper.searchemail(str);
-                    String teld = helper.searchtel(str);
-                    String cont1d = helper.searchcont1(str);
-                    String cont2d = helper.searchcont2(str);
-                    String presu = helper.searchpresure(str);
-                    String punt = helper.searchpunt(str);
-                    String risk = helper.searchrisk(str);
+                            Intent i = new Intent(Riesgo.this, Expediente.class);
+                            i.putExtra("Username", str);
+                            i.putExtra("Name", named);
+                            i.putExtra("Edad", edadd);
+                            i.putExtra("Email", emaild);
+                            i.putExtra("Tel", teld);
+                            i.putExtra("Cont1", cont1d);
+                            i.putExtra("Cont2", cont2d);
+                            i.putExtra("Gen", gend);
 
-                    Intent i = new Intent(Riesgo.this, Expediente.class);
-                    i.putExtra("Username", str);
-                    i.putExtra("Name", named);
-                    i.putExtra("Edad", edadd);
-                    i.putExtra("Email", emaild);
-                    i.putExtra("Tel", teld);
-                    i.putExtra("Cont1", cont1d);
-                    i.putExtra("Cont2", cont2d);
-                    i.putExtra("Gen", gend);
+                            i.putExtra("Fum", fum);
+                            i.putExtra("Med", med);
+                            i.putExtra("Colt", colt);
+                            i.putExtra("Colh", colh);
+                            i.putExtra("Presu", presu);
+                            i.putExtra("Punt", punt);
+                            i.putExtra("Risk", risk);
+                            startActivity(i);
+                            finish();
+                        }
+                    });
 
-                    i.putExtra("Fum", fum);
-                    i.putExtra("Med", med);
-                    i.putExtra("Colt", colt);
-                    i.putExtra("Colh", colh);
-                    i.putExtra("Presu", presu);
-                    i.putExtra("Punt", punt);
-                    i.putExtra("Risk", risk);
-                    startActivity(i);
-                    finish();
+                    dialogo1.show();
                 }
 
 
@@ -193,7 +209,7 @@ public class Riesgo extends AppCompatActivity {
                     } else {
                         riesgo = calcularMujer();
                         porcentaje = calcularPorcentajeMujer(riesgo);
-                        Toast.makeText(this, "Sexo: Femenino " + "Puntos: " + riesgo + " Porcentaje: " + porcentaje + "%", Toast.LENGTH_LONG).show();
+
 
                         DBHelper db = new DBHelper(getApplicationContext());
                         String Mensaje = db.insertCalcu(usern2, fum, med, colt, colh, Ipresion2, riesgo, porcentaje);
@@ -219,36 +235,52 @@ public class Riesgo extends AppCompatActivity {
                             nm.notify(idUnica, notificación.build());
 
                         }
+                        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+                        dialogo1.setTitle("Resultado");
+                        dialogo1.setMessage("Sexo: Femenino " + "Puntos: " + riesgo + " " + " Porcentaje: " + porcentaje + "%");
+                        dialogo1.setCancelable(false);
+                        dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogo1, int id) {
+                                String str = usercalcul.getText().toString();
+                                String named = helper.searchname(str);
+                                String edadd = helper.searchedad(str);
+                                String emaild = helper.searchemail(str);
+                                String teld = helper.searchtel(str);
+                                String cont1d = helper.searchcont1(str);
+                                String cont2d = helper.searchcont2(str);
+                                String presu = helper.searchpresure(str);
+                                String punt = helper.searchpunt(str);
+                                String risk = helper.searchrisk(str);
+                                String gend = helper.searchgen(str);
+                                String fum = helper.searchfum(str);
+                                String med = helper.searchmed(str);
+                                String colt  = helper.searchcolt(str);
+                                String colh = helper.searchcolh(str);
 
-                        String named = helper.searchname(str);
-                        String edadd = helper.searchedad(str);
-                        String emaild = helper.searchemail(str);
-                        String teld = helper.searchtel(str);
-                        String cont1d = helper.searchcont1(str);
-                        String cont2d = helper.searchcont2(str);
-                        String presu = helper.searchpresure(str);
-                        String punt = helper.searchpunt(str);
-                        String risk = helper.searchrisk(str);
+                                Intent i = new Intent(Riesgo.this, Expediente.class);
+                                i.putExtra("Username", str);
+                                i.putExtra("Name", named);
+                                i.putExtra("Edad", edadd);
+                                i.putExtra("Email", emaild);
+                                i.putExtra("Tel", teld);
+                                i.putExtra("Cont1", cont1d);
+                                i.putExtra("Cont2", cont2d);
+                                i.putExtra("Gen", gend);
 
-                        Intent i = new Intent(Riesgo.this, Expediente.class);
-                        i.putExtra("Username", str);
-                        i.putExtra("Name", named);
-                        i.putExtra("Edad", edadd);
-                        i.putExtra("Email", emaild);
-                        i.putExtra("Tel", teld);
-                        i.putExtra("Cont1", cont1d);
-                        i.putExtra("Cont2", cont2d);
-                        i.putExtra("Gen", gend);
+                                i.putExtra("Fum", fum);
+                                i.putExtra("Med", med);
+                                i.putExtra("Colt", colt);
+                                i.putExtra("Colh", colh);
+                                i.putExtra("Presu", presu);
+                                i.putExtra("Punt", punt);
+                                i.putExtra("Risk", risk);
+                                startActivity(i);
+                                finish();
+                            }
+                        });
 
-                        i.putExtra("Fum", fum);
-                        i.putExtra("Med", med);
-                        i.putExtra("Colt", colt);
-                        i.putExtra("Colh", colh);
-                        i.putExtra("Presu", presu);
-                        i.putExtra("Punt", punt);
-                        i.putExtra("Risk", risk);
-                        startActivity(i);
-                        finish();
+                        dialogo1.show();
+
                     }
                 }
 

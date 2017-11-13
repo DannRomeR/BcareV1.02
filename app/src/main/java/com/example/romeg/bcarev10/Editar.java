@@ -93,46 +93,46 @@ public class Editar extends AppCompatActivity {
             String  numPac = helper.searchnumpac(usernamed2);
 
 
-            if (namee.isEmpty() || appe.isEmpty() || apme.isEmpty() || emaile.isEmpty() || usere.isEmpty() || edadee.isEmpty() || tele.isEmpty() || !validarNom(namee) || !ValidacionEmail(emaile) || edadnumero > 90 || edadnumero <= 18 || tele.length()<8 || cont1e.length()<8 || cont2e.length()<8 || genero.equals("-seleccione-")) {
+            if (namee.isEmpty() || appe.isEmpty() || apme.isEmpty() || emaile.isEmpty() || usere.isEmpty() || edadee.isEmpty() || tele.isEmpty() || !validarNom(namee) || !ValidacionEmail(emaile) || edadnumero > 90 || edadnumero <= 18 || tele.length()<3 || cont1e.length()<8 || cont2e.length()<8 || genero.equals("-seleccione-")) {
                 Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
                         Toast.LENGTH_SHORT).show();
                 if (namee.isEmpty()) {
-                    etnombree.setError("Campo Nombre obligatorio");
+                    etnombree.setError("Campo obligatorio");
                 }if (appe.isEmpty()){
-                    etappe.setError("Campo Nombre obligatorio");
+                    etappe.setError("Campo obligatorio");
                 }if (apme.isEmpty()){
-                    etapme.setError("Campo Nombre obligatorio");
+                    etapme.setError("Campo obligatorio");
                 }if (edadee.isEmpty()) {
-                    etedad.setError("Campo Edad obligatorio");
+                    etedad.setError("Campo obligatorio");
                 } if (emaile.isEmpty()) {
-                    etemaile.setError("Campo Email obligatorio");
+                    etemaile.setError("Campo obligatorio");
                 } if (usere.isEmpty()) {
-                    etusuarioe.setError("Campo Usuario obligatorio");
+                    etusuarioe.setError("Campo obligatorio");
                 } if (tele.isEmpty()) {
-                    ettel.setError("Campo Telefono obligatorio");
+                    ettel.setError("Campo obligatorio");
                 } if (!validarNom(namee)){
-                    etnombree.setError("Formato del nombre invalido");
+                    etnombree.setError("Formato incorrecto");
                     etnombree.requestFocus();
                 } if (!validarNom(appe)){
-                    etappe.setError("Formato del nombre invalido");
+                    etappe.setError("Formato incorrecto");
                     etappe.requestFocus();
                 } if (!validarNom(apme)){
-                    etapme.setError("Formato del nombre invalido");
+                    etapme.setError("Formato incorrecto");
                     etapme.requestFocus();
                 } if (!ValidacionEmail(emaile)){
-                    etemaile.setError("Formato del email invalido");
+                    etemaile.setError("Formato incorrecto");
                     etemaile.requestFocus();
-                } if(edadnumero > 90 || edadnumero <= 18) {
-                    etedad.setError( "Edad invalida");
+                } if(edadnumero > 90 || edadnumero < 20) {
+                    etedad.setError( "Formato incorrecto");
                     etedad.requestFocus();
-                } if (tele.length()<8){
-                    ettel.setError("El numero de telefeno no existe");
+                } if (tele.length()<3){
+                    ettel.setError("Formato incorrecto");
                     ettel.requestFocus();
                 } if (cont1e.length()<8){
-                    etcont1.setError("El numero de telefeno no existe");
+                    etcont1.setError("Formato incorrecto");
                     etcont1.requestFocus();
                 } if (cont2e.length()<8){
-                    etcont2.setError("El numero de telefeno no existe");
+                    etcont2.setError("Formato incorrecto");
                     etcont2.requestFocus();
                 }
 
@@ -152,6 +152,8 @@ public class Editar extends AppCompatActivity {
                         String cont1E = String.valueOf(cont1inte);
                         String Cont2E = String.valueOf(cont2inte);
 
+                        Toast.makeText(this, "La operación exitosa",
+                                Toast.LENGTH_LONG).show();
                         Intent i = new Intent(Editar.this, DatosP.class);
                         i.putExtra("Username", usere);
                         i.putExtra("Name", namee);
@@ -191,7 +193,7 @@ public class Editar extends AppCompatActivity {
     {
         Pattern pattern;
         Matcher matcher;
-        final String NOMBRE_PATTERN = "^[a-zA-Z]+$";
+        final String NOMBRE_PATTERN = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$";
         pattern = Pattern.compile(NOMBRE_PATTERN);
         matcher = pattern.matcher(name);
 
