@@ -146,12 +146,96 @@ public class Registro extends AppCompatActivity {
                         etedad.setError("Formato incorrecto");
 
                         break;
-                }
-                if (etedad.getText().length() ==1)
-                {
-                    etedad.setError( "Formato incorrecto");
+                    case "1":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "2":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "3":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "4":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "5":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "6":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "7":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "8":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "9":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "10":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "11":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "12":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "13":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "14":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "15":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "16":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "17":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "18":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "19":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "20":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "21":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "22":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "23":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "24":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "25":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "26":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "27":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "28":
+                        etedad.setError("Formato incorrecto");
+                        break;
+                    case "29":
+                        etedad.setError("Formato incorrecto");
+                        break;
 
                 }
+
             }
         });
 
@@ -178,7 +262,6 @@ public class Registro extends AppCompatActivity {
                 }
                 else if (em.equals(emailstr)) {
                     etemail.setError("Ya existe un usuario con este email");
-                    etemail.requestFocus();
                 }
             }
         });
@@ -294,7 +377,6 @@ public class Registro extends AppCompatActivity {
                 if (telstr.length()<3 || telstr.length()>10)
                 {
                     etTel.setError("Formato incorrecto");
-                    etTel.requestFocus();
                 }
 
             }
@@ -331,7 +413,6 @@ public class Registro extends AppCompatActivity {
                 if (cont1str.length()<8)
                 {
                     etcont1.setError("Formato incorrecto");
-                    etcont1.requestFocus();
                 }
             }
         });
@@ -368,7 +449,6 @@ public class Registro extends AppCompatActivity {
                 if (cont2str.length()<8)
                 {
                     etcont2.setError("Formato incorrecto");
-                    etcont2.requestFocus();
 
                 }
 
@@ -389,13 +469,12 @@ public class Registro extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String pass1str = etcontraseña.getText().toString();
-                if (etcontraseña.getText().length() != 0)
-                {
+
                     if (pass1str.length()<6 || !validarPass(pass1str))
                     {
                         etcontraseña.setError("Formato de contraseña incorrecto");
                     }
-                }
+
             }
         });
 
@@ -415,13 +494,12 @@ public class Registro extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String pass1str = etcontraseña.getText().toString();
                 String pass2str = etconfirmar.getText().toString();
-                if (etconfirmar.getText().length() != 0)
-                {
+
                     if (!pass2str.equals(pass1str))
                     {
                         etconfirmar.setError("Las contraseñas no coinciden");
                     }
-                }
+
 
             }
         });
@@ -429,166 +507,90 @@ public class Registro extends AppCompatActivity {
 
     public void onSignUpClick(View v)
     {
-        try
-        {
-            String namestr = etnombre.getText().toString();
-            String appstr = etapp.getText().toString();
-            String apmstr = etapm.getText().toString();
+
+        etnombre = (EditText) findViewById(R.id.txtnombrereg);
+        etapp = (EditText) findViewById(R.id.txtappreg);
+        etapm = (EditText) findViewById(R.id.txtapmreg);
+        etemail = (EditText) findViewById(R.id.txtemailreg);
+        etusuario = (EditText) findViewById(R.id.txtusuarioreg);
+        etedad = (EditText) findViewById(R.id.txtedadreg);
+        etTel = (EditText) findViewById(R.id.txtelefonoreg);
+        etcont1 = (EditText) findViewById(R.id.txcont1reg);
+        etcont2 = (EditText) findViewById(R.id.txcont2reg);
+        etcontraseña = (EditText) findViewById(R.id.txtprimerpassreg);
+        etconfirmar = (EditText) findViewById(R.id.txtsegundopassreg);
+
+
+        String namestr = etnombre.getText().toString();
+        String appstr = etapp.getText().toString();
+        String apmstr = etapm.getText().toString();
 
             String edadstr = etedad.getText().toString();
             String emailstr = etemail.getText().toString();
             String unamestr = etusuario.getText().toString();
-            String em = helper.searchownemail(emailstr);
-            String us = helper.searchUse(unamestr);
+            /*String em = helper.searchownemail(emailstr);
+            String us = helper.searchUse(unamestr);*/
             String telstr = etTel.getText().toString();
             String cont1str = etcont1.getText().toString();
             String cont2str = etcont2.getText().toString();
             String pass1str = etcontraseña.getText().toString();
             String pass2str = etconfirmar.getText().toString();
 
-            String genero = (spGeneroR.getSelectedItem().toString());
+           String genero = (spGeneroR.getSelectedItem().toString());
 
             if (v.getId() == R.id.btnregistrarreg)
             {
-
-                if (namestr.isEmpty() || appstr.isEmpty() || apmstr.isEmpty() || emailstr.isEmpty() || unamestr.isEmpty() || pass1str.isEmpty() || pass2str.isEmpty() || edadstr.isEmpty() || telstr.isEmpty() || genero.equals("-seleccione-"))
-                {
-                    Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
-                            Toast.LENGTH_SHORT).show();
-                    if(namestr.isEmpty())
-                    {
-                        etnombre.setError("Complete este campo");
-                    }
-                    if(appstr.isEmpty())
-                    {
-                        etapp.setError("Complete este campo");
-                    }
-                    if (apmstr.isEmpty())
-                    {
-                        etapm.setError("Complete este campo");
-                    }
-
-                    if (edadstr.isEmpty())
-                    {
-                        etedad.setError("Complete este campo");
-                    }
-                    if (emailstr.isEmpty())
-                    {
-                        etemail.setError("Complete este campo");
-                    }
-                    if (unamestr.isEmpty())
-                    {
-                        etusuario.setError("Complete este campo");
-                    }
-                    if (telstr.isEmpty())
-                    {
-                        etTel.setError("Complete este campo");
-                    }
-                    if (cont1str.isEmpty())
-                    {
-                        etcont1.setError("Complete este campo");
-                    }
-                    if (cont2str.isEmpty())
-                    {
-                        etcont2.setError("Complete este campo");
-                    }
-                    if (pass1str.isEmpty())
-                    {
-                        etcontraseña.setError("Complete este campo");
-                    }
-                    if (pass2str.isEmpty())
-                    {
-                        etconfirmar.setError("Complete este campo");
-                    }
-
-                }
-
-                else {
-
-                    int edadnumero = Integer.parseInt(edadstr);
-                    if( !validarNom(namestr) || !validarNom(appstr) || !validarNom(apmstr)
-                            || !ValidacionEmail(emailstr) || telstr.length()<3
-                            || telstr.length()>10 || cont1str.length()<8 || cont2str.length()<8 || pass1str.length()<6
-                            || !validarPass(pass1str) || !pass2str.equals(pass1str)|| edadnumero > 90 || edadnumero <= 18)
-                    {
-
-                        if (edadnumero > 90 || edadnumero <= 18)
-                        {
-                            etedad.setError( "Formato incorrecto");
-                            etedad.requestFocus();
-
+                try {
+                    if (namestr.isEmpty() || appstr.isEmpty() || apmstr.isEmpty() || emailstr.isEmpty() || unamestr.isEmpty() || pass1str.isEmpty() || pass2str.isEmpty() || edadstr.isEmpty() || telstr.isEmpty()) {
+                        Toast.makeText(this, "Los campos marcados con '*' son obligatorios ",
+                                Toast.LENGTH_SHORT).show();
+                        if (namestr.isEmpty()) {
+                            etnombre.setError("Complete este campo");
                         }
-                        if (!validarNom(namestr))
-                        {
-                            etnombre.setError( "Formato incorrecto");
+                        if (appstr.isEmpty()) {
+                            etapp.setError("Complete este campo");
                         }
-                        if (!validarNom(appstr))
-                        {
-                            etapp.setError( "Formato incorrecto");
+                        if (apmstr.isEmpty()) {
+                            etapm.setError("Complete este campo");
                         }
-                        if (!validarNom(apmstr))
-                        {
-                            etapm.setError( "Formato incorrecto");
+                        if (edadstr.isEmpty()) {
+                            etedad.setError("Complete este campo");
                         }
-                        if (!ValidacionEmail(emailstr) || em.equals(emailstr))
-                        {
-                            etemail.setError( "Formato incorrecto");
+                        if (emailstr.isEmpty()) {
+                            etemail.setError("Complete este campo");
                         }
-                        if (us.equals(unamestr))
-                        {
-                            etusuario.setError( "Formato incorrecto");
+                        if (unamestr.isEmpty()) {
+                            etusuario.setError("Complete este campo");
                         }
-                        if (telstr.length()<3 || telstr.length()>10)
-                        {
-                            etTel.setError( "Formato incorrecto");
+                        if (telstr.isEmpty()) {
+                            etTel.setError("Complete este campo");
                         }
-                        if (cont1str.length()<8)
-                        {
-                            etcont1.setError( "Formato incorrecto");
+                        if (cont1str.isEmpty()) {
+                            etcont1.setError("Complete este campo");
                         }
-                        if (cont2str.length()<8)
-                        {
-                            etcont2.setError( "Formato incorrecto");
+                        if (cont2str.isEmpty()) {
+                            etcont2.setError("Complete este campo");
                         }
-                        if (pass1str.length()<6 || !validarPass(pass1str))
-                        {
-                            etcontraseña.setError( "Formato incorrecto");
+                        if (pass1str.isEmpty()) {
+                            etcontraseña.setError("Complete este campo");
                         }
-                        if (!pass2str.equals(pass1str))
-                        {
-                            etconfirmar.setError( "Formato incorrecto");
+                        if (pass2str.isEmpty()) {
+                            etconfirmar.setError("Complete este campo");
                         }
 
-                    }
-                    else//***********************************REGISTRO****************************/
-                    {
-
-                        if(em.equals(emailstr) || us.equals(unamestr))
+                    } else//***********************************REGISTRO****************************/
                         {
-                            if (em.equals(emailstr)) {
-                                etemail.setError("El email ya esta siendo usado");
-                                Toast.makeText(this, "Este email ya esta siendo usado",
-                                        Toast.LENGTH_LONG).show();
-                            }
-                            if (us.equals(unamestr)) {
-                                etusuario.setError("El nombre de usuario ya existe");
-                                Toast.makeText(this, "El usuario ya existe",
-                                        Toast.LENGTH_LONG).show();
-                            }
 
-                        }
-                        else {
+                            String nomS = namestr.substring(0, 1);
+                            String appS = appstr.substring(0, 1);
+                            String apmS = apmstr.substring(0, 1);
                             int edadint = Integer.parseInt(edadstr);
                             int telint = Integer.parseInt(telstr);
                             int cont1int = Integer.parseInt(cont1str);
                             int cont2int = Integer.parseInt(cont2str);
-                            int numa = (int)(Math.random()*999)+1;
+                            int numa = (int) (Math.random() * 999) + 1;
                             String numastr = String.valueOf(numa);
-                            String nomS = namestr.substring(0,1);
-                            String appS = appstr.substring(0,1);
-                            String apmS = apmstr.substring(0,1);
-
-                            String  numPac = nomS + appS + apmS + edadstr +numastr;
+                            String numPac = nomS + appS + apmS + edadstr + numastr;
 
                             //insert the details in database
                             Contact c = new Contact();
@@ -619,22 +621,22 @@ public class Registro extends AppCompatActivity {
 
                             Intent i = new Intent(Registro.this, Bienvenido.class);
                             startActivity(i);
-
                         }
 
-                    }
                 }
+                catch (Exception e) {
+                            Toast pass = Toast.makeText(Registro.this, "Operacion no exitosa", Toast.LENGTH_LONG);
+                            pass.show();
+                    finish();
+                }
+
             }
-        }
-        catch(Exception e)
-        {
-            Toast pass = Toast.makeText(Registro.this, "Ocurrio un error, registre nuevamente los datos ", Toast.LENGTH_LONG);
-            pass.show();
-            finish();
-        }
-
-
     }
+
+
+
+
+
 
         public boolean ValidacionEmail(String email)
         {
