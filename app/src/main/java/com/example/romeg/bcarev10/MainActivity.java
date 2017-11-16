@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
             String password = helper.searchPass(str);
             String userp = helper.searchUse(str);
             String emailp = helper.searchPass(str);
+            String email = helper.searchownemail(str);
+            String password2 = helper.searchPassbyEmail(email);
 
             if(str.isEmpty() || pass.isEmpty())
             {
@@ -64,9 +66,8 @@ public class MainActivity extends AppCompatActivity {
             }
             else
             {
-                if(pass.equals(password))
+                if(pass.equals(password) || pass.equals(password2))
                 {
-
                     session.createLoginSession(userp, emailp);
 
                     Intent i = new Intent(MainActivity.this, Usuario.class);

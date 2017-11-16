@@ -35,25 +35,25 @@
         android:gravity="center"
         android:layout_margin="30dp"
         />
-    <EditText
-        android:id="@+id/user"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="  Usuario"
-        android:inputType="text"
-        android:drawableLeft="@drawable/ic_person_white_24dp"
-        android:paddingLeft="10dp"
-        android:textColorHint="#ffff"
-        android:padding="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/borde"
-        android:textColor="#ffff"
-        >
 
-    </EditText>
+       <EditText
+           android:id="@+id/user"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:layout_centerInParent="true"
+           android:layout_marginBottom="10dp"
+           android:layout_marginLeft="10dp"
+           android:layout_marginRight="10dp"
+           android:background="@drawable/borde"
+           android:drawableLeft="@drawable/ic_person_white_24dp"
+           android:hint="  Usuario o Correo electrónico"
+           android:inputType="text"
+           android:padding="10dp"
+           android:paddingLeft="10dp"
+           android:textColor="#ffff"
+           android:textColorHint="#ffff">
+
+       </EditText>
     <EditText
         android:id="@+id/contraseña"
         android:layout_width="match_parent"

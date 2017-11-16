@@ -137,7 +137,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public String searchPass(String uname)
     {
         db = this.getReadableDatabase();
-        String query = "select uname, pass from contacts";
+        String query = "select email, pass from contacts";
         Cursor cursor = db.rawQuery(query, null);
         String a, b;
         b = "not found";
@@ -150,6 +150,28 @@ public class DBHelper extends SQLiteOpenHelper {
                 {
                     b = cursor.getString(1);
                             break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return b;
+    }
+    public String searchPassbyEmail(String email)
+    {
+        db = this.getReadableDatabase();
+        String query = "select uname, pass from contacts";
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do {
+                a = cursor.getString(0);
+
+                if (a.equals(email))
+                {
+                    b = cursor.getString(1);
+                    break;
                 }
             }
             while (cursor.moveToNext());
