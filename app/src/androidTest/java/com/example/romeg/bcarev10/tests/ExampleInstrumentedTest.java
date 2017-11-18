@@ -1,4 +1,4 @@
-package com.example.romeg.bcarev10;
+package com.example.romeg.bcarev10.tests;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -22,5 +22,8 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.example.romeg.bcarev10", appContext.getPackageName());
+    }
+    public void tests_ConexionHTTP(){
+        assertNull(null);
     }
 }
