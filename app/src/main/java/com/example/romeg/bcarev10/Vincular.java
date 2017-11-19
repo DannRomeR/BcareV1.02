@@ -348,8 +348,6 @@ public class Vincular extends AppCompatActivity {
             riesgo=6;
         }else if(edad>70){
             riesgo=7;
-        }else{
-            Toast.makeText(this, "Edad no valida", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -456,8 +454,6 @@ public class Vincular extends AppCompatActivity {
             riesgo=8;
         }else if(edad>=70){
             riesgo=8;
-        }else{
-            Toast.makeText(this, "Edad no valida", Toast.LENGTH_SHORT).show();
         }
 
 
