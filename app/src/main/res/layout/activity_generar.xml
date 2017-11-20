@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.romeg.bcarev10.Generar"
-    android:background="@drawable/b4">
+    android:background="@drawable/d13">
 
     <ImageView
         android:id="@+id/imgcambiar"

@@ -1,8 +1,10 @@
 package com.example.romeg.bcarev10;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,26 +26,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.html.WebColors;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import static android.R.attr.path;
 
 public class Riesgo extends AppCompatActivity {
     DBHelper helper = new DBHelper(this);
@@ -53,7 +37,6 @@ public class Riesgo extends AppCompatActivity {
 
     public Spinner jspfumador,jspdiabetes, spcolesterolTot, spcolesterolHDL;
     TextView edadCal, generCal, usercalcul;
-
 
     public EditText jgenero,jedad,jcolesterolt,jcolesterolh,jpresion;
 
@@ -134,12 +117,15 @@ public class Riesgo extends AppCompatActivity {
 
                     notificación = new NotificationCompat.Builder(this);
                     notificación.setAutoCancel(true);
-                    if (porcentaje > 10 && porcentaje < 50) {
+                    if (porcentaje > 10 && porcentaje < 60) {
+
                         notificación.setSmallIcon(R.drawable.doctor);
                         notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
                         notificación.setWhen(System.currentTimeMillis());
                         notificación.setContentTitle("Bcare");
                         notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
+                        notificación.setVibrate(new long[] {100, 250, 100, 500});
+
 
                         Intent i = new Intent(Riesgo.this, Vincular.class);
                         PendingIntent pendingIntent = PendingIntent.getActivity(Riesgo.this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -150,6 +136,7 @@ public class Riesgo extends AppCompatActivity {
                         nm.notify(idUnica, notificación.build());
 
                     }
+
                     AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
                     dialogo1.setTitle("Resultado");
                     dialogo1.setMessage("Sexo: Masculino " + "Puntos: " + riesgo + " " + "Porcentaje: " + porcentaje + " %");
@@ -219,13 +206,13 @@ public class Riesgo extends AppCompatActivity {
                         notificación = new NotificationCompat.Builder(this);
                         notificación.setAutoCancel(true);
 
-                        if (porcentaje > 10 && porcentaje < 50) {
+                        if (porcentaje > 10 && porcentaje < 60) {
                             notificación.setSmallIcon(R.drawable.doctor);
                             notificación.setTicker("Su nivel de riesgo es alto no olvide revisar su presión");
                             notificación.setWhen(System.currentTimeMillis());
                             notificación.setContentTitle("Bcare");
                             notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
-
+                            notificación.setVibrate(new long[] {100, 250, 100, 500});
                             Intent i = new Intent(Riesgo.this, Vincular.class);
                             PendingIntent pendingIntent = PendingIntent.getActivity(Riesgo.this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
                             notificación.setContentIntent(pendingIntent);
@@ -583,6 +570,9 @@ public class Riesgo extends AppCompatActivity {
 
     }
 
+
+
+
     public void onBackPressed()
     {
         String str = getIntent().getStringExtra("Username");
@@ -622,8 +612,5 @@ public class Riesgo extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-
-
-
 
 }

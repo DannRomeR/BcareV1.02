@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/b4"
+    android:background="@drawable/d13"
     tools:context="com.example.romeg.bcarev10.Registro">
 
 
@@ -102,13 +102,14 @@
             android:id="@+id/spgeneroR"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            style="?android:attr/spinnerDropDownItemStyle"
             android:textColorHint="#ffff"
             android:hint="-Seleccione-"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/borde"
-            android:textColor="#ffff"/>
+            android:textColor="#FFFFFF"/>
 
 
         <EditText

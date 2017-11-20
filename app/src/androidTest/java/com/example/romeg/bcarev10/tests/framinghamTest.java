@@ -9,18 +9,6 @@ import junit.framework.TestCase;
 public class framinghamTest extends TestCase {
 
     public void test_Framingham(){
-
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertTrue(5<1);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertTrue(5<1);
         assertNull(null);
         assertNull(null);
         assertNull(null);
@@ -29,22 +17,8 @@ public class framinghamTest extends TestCase {
         assertNull(null);
         assertNull(null);
         assertTrue(5<1);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
         assertTrue(5<1);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-        assertNull(null);
-
+        assertTrue(5<1);
 
     }
 }

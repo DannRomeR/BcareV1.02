@@ -3,11 +3,13 @@ package com.example.romeg.bcarev10;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +27,7 @@ public class Registro extends AppCompatActivity {
     TextView gen;
     Spinner spGeneroR;
     Button btnreg;
+
 
 
     @Override
@@ -48,6 +51,7 @@ public class Registro extends AppCompatActivity {
         etcontraseña = (EditText) findViewById(R.id.txtprimerpassreg);
         etconfirmar = (EditText) findViewById(R.id.txtsegundopassreg);
         gen = (TextView) findViewById(R.id.textView2);
+
 
 
         etnombre.addTextChangedListener(new TextWatcher() {
@@ -507,6 +511,7 @@ public class Registro extends AppCompatActivity {
         });
     }
 
+
     public void onSignUpClick(View v)
     {
 
@@ -787,6 +792,12 @@ public void datos(String namestr, String appstr, String apmstr, String edadstr, 
 
             return matcher.matches();
         }
+
+    public void onBackPressed()
+    {
+        Intent i = new Intent(Registro.this, MainActivity.class);
+        startActivity(i);
+    }
 
     }
 

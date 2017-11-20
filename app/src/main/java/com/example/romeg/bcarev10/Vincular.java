@@ -184,7 +184,6 @@ public class Vincular extends AppCompatActivity {
                                 notificación.setContentText("Su nivel de riesgo es alto no olvide revisar su presión");
                                 NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                                 nm.notify(idUnica, notificación.build());
-                                String str = etuse.getText().toString();
                                 new PreferenceManager(this).clearPreference();
 
 
@@ -690,6 +689,7 @@ public class Vincular extends AppCompatActivity {
             }
         });
     }
+
 
 
     public void onBackPressed()

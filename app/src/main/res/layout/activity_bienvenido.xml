@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.romeg.bcarev10.Bienvenido"
-    android:background="@drawable/b4">
+    android:background="@drawable/d13">
 
 
     <LinearLayout
@@ -22,7 +22,11 @@
             android:textStyle="bold"
             android:textColor="#ffff"
             android:gravity="center"
-            android:layout_margin="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="30dp"
+
             />
 
         <ImageView
@@ -46,7 +50,9 @@
             android:background="@drawable/borde"
             android:onClick="onWelcomeClick"
             android:text="Iniciar Sesión"
-            android:textColor="#ffff" />
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+             />
 
         <Button
             android:id="@+id/btnregistrarseB"
@@ -59,7 +65,9 @@
             android:background="@drawable/borde"
             android:onClick="onWelcomeClick"
             android:text="Crear Cuenta"
-            android:textColor="#ffff" />
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+             />
 
 
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.romeg.bcarev10.Recuperar"
-    android:background="@drawable/b4">
+    android:background="@drawable/d13">
 
     <ImageView
         android:id="@+id/imgrecuperar"

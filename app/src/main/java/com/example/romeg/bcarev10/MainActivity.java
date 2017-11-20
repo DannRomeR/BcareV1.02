@@ -105,4 +105,10 @@ public class MainActivity extends AppCompatActivity {
         return onOptionsItemSelected(item);
     }
 
+    public void onBackPressed()
+    {
+        Intent i = new Intent(MainActivity.this, Bienvenido.class);
+        startActivity(i);
+    }
+
 }

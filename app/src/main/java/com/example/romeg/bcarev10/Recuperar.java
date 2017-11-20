@@ -45,4 +45,10 @@ public class Recuperar extends AppCompatActivity {
             }
         }
     }
+
+    public void onBackPressed()
+    {
+        Intent i = new Intent(Recuperar.this, MainActivity.class);
+        startActivity(i);
+    }
 }
